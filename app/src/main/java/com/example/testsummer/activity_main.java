@@ -7,7 +7,7 @@ import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+public class activity_main extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
