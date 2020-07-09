@@ -22,9 +22,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".acticity_setting"></activity>
-        <activity android:name=".activity_main" />
+        <activity android:name=".activity_play"></activity>
         <activity
-            android:name=".activity_play"
+            android:name=".activity_main"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
