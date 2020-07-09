@@ -113,7 +113,7 @@ public class activity_play extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play);
-        currentSong = activity_main.currentSong;;
+        currentSong = activity_main.currentSong;
 
         mainImageButton = findViewById(R.id.mainImageButton);
         settingImageButton = findViewById(R.id.settingImageButton);

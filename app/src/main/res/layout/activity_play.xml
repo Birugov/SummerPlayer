@@ -1,69 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity_play"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".activity_play">
+
+    <RelativeLayout
+        android:id="@+id/exit_and_settings_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/primary_dark">
+
+
+        <ImageButton
+            android:id="@+id/mainImageButton"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_alignParentStart="true"
+            android:background="@color/primary_dark"
+            android:contentDescription="@string/exit_button"
+            android:src="@drawable/abc_vector_test" />
+
+        <ImageButton
+            android:id="@+id/settingImageButton"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_alignParentEnd="true"
+            android:background="@color/primary_dark"
+            android:src="@drawable/ic_settings" />
+    </RelativeLayout>
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="131dp"
-        android:layout_height="131dp"
-        android:layout_x="139dp"
-        android:layout_y="109dp"
-        app:srcCompat="@drawable/ic_launcher_background"
-        tools:layout_editor_absoluteX="151dp"
-        tools:layout_editor_absoluteY="83dp" />
+        android:layout_width="match_parent"
+        android:layout_height="285dp"
+        android:background="@color/icons"
+        app:srcCompat="@drawable/baseline_music_note_24" />
+
+    <TextView
+        android:id="@+id/name_song"
+        style="@style/Widget.AppCompat.TextView.SpinnerItem"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:layout_marginStart="10dp"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:foregroundTint="@color/secondary_text"
+        android:text="@string/song_name"
+        android:textColor="@color/secondary_text"
+        android:textColorHighlight="@color/secondary_text"
+        android:textColorHint="@color/secondary_text"
+        android:textColorLink="@color/secondary_text"
+        app:drawableTint="@color/secondary_text" />
+
+    <TextView
+        android:id="@+id/author_song"
+        style="@style/Widget.AppCompat.TextView.SpinnerItem"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="10dp"
+        android:text="@string/song_author"
+        android:textColor="@color/divider"
+        android:textColorHighlight="@color/divider"
+        android:textSize="16sp" />
 
     <SeekBar
-        android:id="@+id/seekBar"
-        android:layout_width="226dp"
-        android:layout_height="110dp"
-        android:layout_weight="1"
-        android:layout_x="87dp"
-        android:layout_y="364dp" />
+        android:id="@+id/seekBar2"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:id="@+id/leftImageButton"
-        android:layout_width="76dp"
-        android:layout_height="72dp"
-        android:layout_x="59dp"
-        android:layout_y="507dp"
-        app:srcCompat="@drawable/abc_vector_test" />
+    <LinearLayout
+        android:id="@+id/work_with_song_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/icons"
+        android:orientation="horizontal">
 
-    <ImageButton
-        android:id="@+id/playImageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_x="169dp"
-        android:layout_y="507dp"
-        app:srcCompat="@android:drawable/alert_light_frame" />
+        <ImageButton
+            android:id="@+id/leftImageButton"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="30dp"
+            android:background="@color/icons"
+            android:contentDescription="@string/left_button"
+            android:src="@drawable/baseline_skip_previous_24" />
 
-    <ImageButton
-        android:id="@+id/rightImageButton"
-        android:layout_width="67dp"
-        android:layout_height="70dp"
-        android:layout_x="286dp"
-        android:layout_y="512dp"
-        app:srcCompat="@android:drawable/arrow_up_float" />
+        <ImageButton
+            android:id="@+id/playImageButton"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="40dp"
+            android:background="@color/icons"
+            android:contentDescription="@string/play_button"
+            android:src="@drawable/baseline_play_arrow_24"
+            tools:src="@drawable/baseline_play_arrow_24" />
 
-    <ImageButton
-        android:id="@+id/settingImageButton"
-        android:layout_width="84dp"
-        android:layout_height="76dp"
-        android:layout_x="324dp"
-        android:layout_y="6dp"
-        app:srcCompat="@android:drawable/btn_dialog" />
-
-    <ImageButton
-        android:id="@+id/mainImageButton"
-        android:layout_width="80dp"
-        android:layout_height="76dp"
-        android:layout_x="219dp"
-        android:layout_y="3dp"
-        app:srcCompat="@android:drawable/gallery_thumb" />
+        <ImageButton
+            android:id="@+id/rightImageButton"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="50dp"
+            android:background="@android:color/white"
+            android:contentDescription="@string/right_button"
+            android:src="@drawable/baseline_skip_next_24" />
+    </LinearLayout>
 
 
-</AbsoluteLayout>
+</LinearLayout>
