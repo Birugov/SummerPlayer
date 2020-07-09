@@ -42,7 +42,7 @@ public class activity_main extends AppCompatActivity {
 //    boolean prepared = false;
 
     private Button toPlay;
-    static MediaPlayer mediaPlayer;
+    static MediaPlayer mediaPlayer = null;
     private ListView listOfSongs;
     private static String stream = null;
     private String title;
@@ -63,7 +63,9 @@ public class activity_main extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mediaPlayer = new MediaPlayer();
+        if (mediaPlayer == null) {
+            mediaPlayer = new MediaPlayer();
+        }
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         setContentView(R.layout.activity_main);
         toPlay = findViewById(R.id.toPlay);
