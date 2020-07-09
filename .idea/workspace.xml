@@ -10,7 +10,9 @@
     <option name="TOOL_WINDOW_REGEXP_FILTER" value="false" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="689912bb-895a-480c-876f-2c033ea9b7b7" name="Default Changelist" comment="" />
+    <list default="true" id="689912bb-895a-480c-876f-2c033ea9b7b7" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -246,7 +248,14 @@
       <option name="project" value="LOCAL" />
       <updated>1594303933538</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="// Created bad notification. Fix buttons. Fix double music">
+      <created>1594304142760</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1594304142760</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -298,10 +307,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="314" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1280.680@0.0.1280.680" timestamp="1594237904995" />
-    <state x="297" y="0" key="CommitChangelistDialog2" timestamp="1594304123575">
+    <state x="297" y="0" key="CommitChangelistDialog2" timestamp="1594304141250">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="297" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1594304123575" />
+    <state x="297" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1594304141250" />
     <state x="421" y="96" key="FileChooserDialogImpl" timestamp="1594232254284">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -354,10 +363,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="442" y="131" key="git4idea.merge.GitMergeDialog/0.0.1280.680@0.0.1280.680" timestamp="1594303974261" />
-    <state x="369" y="132" key="git4idea.merge.GitPullDialog" timestamp="1594304116518">
+    <state x="369" y="132" key="git4idea.merge.GitPullDialog" timestamp="1594304323967">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="369" y="132" key="git4idea.merge.GitPullDialog/0.0.1280.680@0.0.1280.680" timestamp="1594304116518" />
+    <state x="369" y="132" key="git4idea.merge.GitPullDialog/0.0.1280.680@0.0.1280.680" timestamp="1594304323967" />
     <state x="267" y="84" key="psd.add.library.dependency.panel.dimension" timestamp="1594293263308">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
