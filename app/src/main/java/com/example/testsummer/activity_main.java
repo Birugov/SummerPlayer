@@ -19,6 +19,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -39,9 +41,11 @@ public class activity_main extends AppCompatActivity {
     private static final int REQUEST_PERMISSIONS = 12345;
     private static final int PERMISSION_COUNT = 1;
 
+    private LinearLayout ll;
+    private ImageButton b_next, b_play, b_prev, b_open;
+
 //    boolean prepared = false;
 
-    private Button toPlay;
     static MediaPlayer mediaPlayer;
     private ListView listOfSongs;
     private static String stream = null;
@@ -55,10 +59,6 @@ public class activity_main extends AppCompatActivity {
     ArrayAdapter<String> adapter;
     static ArrayList<Track> arrayTracks;
 
-    public static String getStream() {
-        return stream;
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,15 +66,20 @@ public class activity_main extends AppCompatActivity {
         mediaPlayer = new MediaPlayer();
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         setContentView(R.layout.activity_main);
-        toPlay = findViewById(R.id.toPlay);
-        toPlay.setOnClickListener(new View.OnClickListener() {
+
+        ll = findViewById(R.id.QuickMenu);
+        b_next = findViewById(R.id.QuickNext);
+        b_play = findViewById(R.id.QuickPlay);
+        b_prev = findViewById(R.id.QuickPrev);
+        b_open = findViewById(R.id.QuickOpen);
+        b_open.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(activity_main.this, activity_play.class);
                 startActivity(intent);
-                //setContentView(R.layout.activity_play);
             }
         });
+
         if (ContextCompat.checkSelfPermission(activity_main.this,
                 Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(activity_main.this,
@@ -88,6 +93,10 @@ public class activity_main extends AppCompatActivity {
         } else {
             doStuff();
         }
+    }
+
+    public static String getStream() {
+        return stream;
     }
 
 
@@ -155,6 +164,7 @@ public class activity_main extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 stream = arrayTracks.get((int) id).file;
+                title = arrayList.get(position).substring(arrayList.get(position).indexOf("Title: ")+6, arrayList.get(position).indexOf("Artist: "));
                 currentSong = (int) id;
                 while (mediaPlayer.isPlaying() == true) {
                     mediaPlayer.stop();
