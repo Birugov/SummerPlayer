@@ -33,13 +33,7 @@ import java.util.ArrayList;
 
 public class activity_main extends AppCompatActivity {
 
-    private static final String[] PERMISSION = {
-            Manifest.permission.READ_EXTERNAL_STORAGE
-    };
     private static final int REQUEST_PERMISSIONS = 12345;
-    private static final int PERMISSION_COUNT = 1;
-
-//    boolean prepared = false;
 
     private Button toPlay;
     static MediaPlayer mediaPlayer = null;
@@ -74,7 +68,6 @@ public class activity_main extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(activity_main.this, activity_play.class);
                 startActivity(intent);
-                //setContentView(R.layout.activity_play);
             }
         });
         if (ContextCompat.checkSelfPermission(activity_main.this,
@@ -93,7 +86,7 @@ public class activity_main extends AppCompatActivity {
     }
 
 
-    public void getMusic() throws IOException {
+    public void getMusic() {
         ContentResolver contentResolver = getContentResolver();
         Uri uriSong = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
 
@@ -128,7 +121,6 @@ public class activity_main extends AppCompatActivity {
                     if (ContextCompat.checkSelfPermission(activity_main.this,
                             Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                         Toast.makeText(this, "Permission granted!", Toast.LENGTH_SHORT).show();
-
                         doStuff();
                     }
                 } else {
@@ -145,11 +137,9 @@ public class activity_main extends AppCompatActivity {
         listOfSongs = findViewById(R.id.listOfSongs);
         arrayList = new ArrayList<>();
         arrayTracks = new ArrayList<>();
-        try {
-            getMusic();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+        getMusic();
+
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, arrayList);
         listOfSongs.setAdapter(adapter);
 
@@ -159,17 +149,9 @@ public class activity_main extends AppCompatActivity {
                 stream = arrayTracks.get((int) id).file;
                 title = arrayList.get(position).substring(arrayList.get(position).indexOf("Title: ")+6, arrayList.get(position).indexOf("Artist: "));
                 currentSong = (int) id;
-                while (mediaPlayer.isPlaying() == true) {
+                if (mediaPlayer.isPlaying() == true) {
                     mediaPlayer.stop();
                     mediaPlayer.reset();
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-                if (playerTask != null) {
-                    playerTask.stopMusic();
                 }
                 playerTask = new PLayerTask();
                 playerTask.execute(stream);
@@ -203,10 +185,6 @@ public class activity_main extends AppCompatActivity {
             Toast.makeText(activity_main.this, "Playing..  " + title, Toast.LENGTH_SHORT).show();
         }
 
-        public void stopMusic() {
-            mediaPlayer.stop();
-            mediaPlayer.reset();
-        }
     }
 
 }

@@ -97,12 +97,6 @@ public class activity_play extends AppCompatActivity {
                 }
 
 
-//            if (mediaPlayer. != null)
-//                mediaPlayer.start();
-//            else {
-//                mediaPlayer = MediaPlayer.create(activity_play.this, Uri.parse(activity_main.arrayTracks.get(currentSong).file));
-//                mediaPlayer.start();
-//            }
             playImageButton.setImageResource(R.drawable.baseline_pause_24);
             CreateNotification.createNotification(getApplicationContext(), activity_main.arrayTracks.get(currentSong),
                     R.drawable.baseline_pause_24, currentSong, activity_main.arrayTracks.size() - 1);
