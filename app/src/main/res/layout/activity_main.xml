@@ -36,6 +36,48 @@
         android:layout_width="match_parent"
         android:layout_height="570dp"
         android:layout_x="-5dp"
-        android:layout_y="142dp" />
+        android:layout_y="142dp" >
+
+    </ListView>
+
+    <LinearLayout
+        android:id="@+id/QuickMenu"
+        android:layout_width="100dp"
+        android:layout_height="300dp"
+        android:layout_x="320dp"
+        android:layout_y="200dp"
+        android:background="#673AB7"
+        android:orientation="vertical"
+        tools:visibility="visible">
+
+        <ImageButton
+            android:id="@+id/QuickNext"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/baseline_skip_next_24" />
+
+        <ImageButton
+            android:id="@+id/QuickPlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/baseline_play_arrow_24" />
+
+        <ImageButton
+            android:id="@+id/QuickPrev"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/baseline_skip_previous_24" />
+
+        <ImageButton
+            android:id="@+id/QuickOpen"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/ic_launcher_foreground" />
+
+    </LinearLayout>
 
 </AbsoluteLayout>

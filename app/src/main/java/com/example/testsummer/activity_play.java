@@ -81,14 +81,16 @@ public class activity_play extends AppCompatActivity {
         Log.d("CLICK", "cc");
         if (mediaPlayer.isPlaying()){
             mediaPlayer.pause();
+            playImageButton.setImageResource(R.drawable.baseline_play_arrow_24);
             Log.d("CLICK", "cc2");
         }
         else{
             mediaPlayer.start();
+            playImageButton.setImageResource(R.drawable.baseline_pause_24);
             Log.d("CLICK", "cc3");
         }
         CreateNotification.createNotification(getApplicationContext(), activity_main.arrayTracks.get(currentSong),
-                R.id.playImageButton, currentSong, activity_main.arrayTracks.size() - 1);
+                R.drawable.baseline_play_arrow_24, currentSong, activity_main.arrayTracks.size() - 1);
     }
 
     @Override
@@ -131,8 +133,7 @@ public class activity_play extends AppCompatActivity {
         mainImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(activity_play.this, activity_main.class);
-                startActivity(intent);
+                activity_main.mediaPlayer = mediaPlayer;
                 finish();
             }
         });
