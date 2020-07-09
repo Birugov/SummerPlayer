@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_x="133dp"
         android:layout_y="8dp"
-        android:text="Button" />
+        android:text="toPlayActivity" />
 
     <Button
         android:id="@+id/settings"

@@ -140,6 +140,7 @@ public class activity_main extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 stream = arrayTracks.get((int) id).file;
+                title = arrayList.get(position).substring(arrayList.get(position).indexOf("Title: ")+6, arrayList.get(position).indexOf("Artist: "));
                 if (mediaPlayer.isPlaying() == true) {
                     mediaPlayer.stop();
                     mediaPlayer.reset();
