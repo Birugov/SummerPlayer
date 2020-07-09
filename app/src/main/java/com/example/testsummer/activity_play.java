@@ -19,7 +19,6 @@ import android.widget.ImageButton;
 
 import com.example.testsummer.Services.OnClearFromRecentService;
 
-import java.util.ArrayList;
 
 public class activity_play extends AppCompatActivity {
 
