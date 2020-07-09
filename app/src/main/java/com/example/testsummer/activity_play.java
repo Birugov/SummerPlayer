@@ -101,6 +101,7 @@ public class activity_play extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        mediaPlayer = activity_main.mediaPlayer;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             createChannel();
         }
