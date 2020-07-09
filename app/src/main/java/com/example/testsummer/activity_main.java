@@ -39,7 +39,7 @@ public class activity_main extends AppCompatActivity {
     private static final int REQUEST_PERMISSIONS = 12345;
     private static final int PERMISSION_COUNT = 1;
 
-    boolean prepared = false;
+//    boolean prepared = false;
 
     private Button toPlay;
     static MediaPlayer mediaPlayer;
@@ -47,6 +47,7 @@ public class activity_main extends AppCompatActivity {
     private static String stream = null;
     private String title;
     protected static Integer currentSong;
+    protected static PLayerTask playerTask = null;
 
 
 
@@ -155,11 +156,20 @@ public class activity_main extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 stream = arrayTracks.get((int) id).file;
                 currentSong = (int) id;
-                if (mediaPlayer.isPlaying() == true) {
+                while (mediaPlayer.isPlaying() == true) {
                     mediaPlayer.stop();
                     mediaPlayer.reset();
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
-                new PLayerTask().execute(stream);
+                if (playerTask != null) {
+                    playerTask.stopMusic();
+                }
+                playerTask = new PLayerTask();
+                playerTask.execute(stream);
                 CreateNotification.createNotification(activity_main.this, arrayTracks.get((int) id), 0, position, arrayTracks.size() - 1);
             }
         });
@@ -170,6 +180,7 @@ public class activity_main extends AppCompatActivity {
 
 
     private class PLayerTask extends AsyncTask<String, Void, Boolean> {
+        protected boolean prepared = false;
         @Override
         protected Boolean doInBackground(String... strings) {
             try {
@@ -179,7 +190,6 @@ public class activity_main extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
             return prepared;
         }
 
@@ -188,6 +198,11 @@ public class activity_main extends AppCompatActivity {
             super.onPostExecute(aBoolean);
             mediaPlayer.start();
             Toast.makeText(activity_main.this, "Playing..  " + title, Toast.LENGTH_SHORT).show();
+        }
+
+        public void stopMusic() {
+            mediaPlayer.stop();
+            mediaPlayer.reset();
         }
     }
 
