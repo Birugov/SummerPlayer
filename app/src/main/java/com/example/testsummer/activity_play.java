@@ -41,8 +41,15 @@ public class activity_play extends AppCompatActivity {
 
     }
 
+    private void stopIfPlaying() {
+        if (mediaPlayer.isPlaying()) {
+            mediaPlayer.stop();
+            mediaPlayer.reset();
+        }
+    }
     private boolean firstTime = true;
     private void playPrevios() {
+        stopIfPlaying();
         currentSong = activity_main.currentSong;
         if (currentSong > 0){
             if (firstTime) {
@@ -65,6 +72,7 @@ public class activity_play extends AppCompatActivity {
 
     }
     private void playNext() {
+        stopIfPlaying();
         currentSong = activity_main.currentSong;
         if (currentSong < activity_main.arrayTracks.size() - 1){
             activity_main.currentSong++;
