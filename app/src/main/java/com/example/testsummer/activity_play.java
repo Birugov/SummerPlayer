@@ -25,7 +25,6 @@ public class activity_play extends AppCompatActivity {
 
     ImageButton mainImageButton, settingImageButton, playImageButton, leftImageButton, rightImageButton;
     int currentSong = 0;
-    private ArrayList<Integer> listSong = new ArrayList<>();
     MediaPlayer mediaPlayer = activity_main.mediaPlayer;
 
     NotificationManager notificationManager;
@@ -41,15 +40,8 @@ public class activity_play extends AppCompatActivity {
 
     }
 
-    private void stopIfPlaying() {
-        if (mediaPlayer.isPlaying()) {
-            mediaPlayer.stop();
-            mediaPlayer.reset();
-        }
-    }
     private boolean firstTime = true;
     private void playPrevios() {
-        stopIfPlaying();
         currentSong = activity_main.currentSong;
         if (currentSong > 0){
             if (firstTime) {
@@ -66,13 +58,13 @@ public class activity_play extends AppCompatActivity {
                 mediaPlayer.start();
                 firstTime = true;
             }
+            playImageButton.setImageResource(R.drawable.baseline_pause_24);
         }
         CreateNotification.createNotification(getApplicationContext(), activity_main.arrayTracks.get(currentSong),
-                R.drawable.baseline_skip_previous_24, currentSong, activity_main.arrayTracks.size() - 1);
+                R.drawable.baseline_pause_24, currentSong, activity_main.arrayTracks.size() - 1);
 
     }
     private void playNext() {
-        stopIfPlaying();
         currentSong = activity_main.currentSong;
         if (currentSong < activity_main.arrayTracks.size() - 1){
             activity_main.currentSong++;
@@ -80,36 +72,50 @@ public class activity_play extends AppCompatActivity {
             mediaPlayer.stop();
             mediaPlayer = MediaPlayer.create(activity_play.this, Uri.parse(activity_main.arrayTracks.get(currentSong).file));
             mediaPlayer.start();
+            playImageButton.setImageResource(R.drawable.baseline_pause_24);
         }
         CreateNotification.createNotification(getApplicationContext(), activity_main.arrayTracks.get(currentSong),
-                R.drawable.baseline_skip_next_24, currentSong, activity_main.arrayTracks.size() - 1);
+                R.drawable.baseline_pause_24, currentSong, activity_main.arrayTracks.size() - 1);
     }
     private void pausePlay() {
         currentSong = activity_main.currentSong;
         Log.d("CLICK", "cc");
         if (mediaPlayer.isPlaying()){
+            playImageButton.setImageResource(R.drawable.baseline_play_arrow_24);
             mediaPlayer.pause();
+            CreateNotification.createNotification(getApplicationContext(), activity_main.arrayTracks.get(currentSong),
+                    R.drawable.baseline_play_arrow_24, currentSong, activity_main.arrayTracks.size() - 1);
             Log.d("CLICK", "cc2");
         }
         else{
-            mediaPlayer.start();
+                try{
+                    mediaPlayer.getTrackInfo();
+                    mediaPlayer.start();
+                } catch (Exception ex) {
+                    mediaPlayer = MediaPlayer.create(activity_play.this, Uri.parse(activity_main.arrayTracks.get(currentSong).file));
+                    mediaPlayer.start();
+                }
+
+
+//            if (mediaPlayer. != null)
+//                mediaPlayer.start();
+//            else {
+//                mediaPlayer = MediaPlayer.create(activity_play.this, Uri.parse(activity_main.arrayTracks.get(currentSong).file));
+//                mediaPlayer.start();
+//            }
+            playImageButton.setImageResource(R.drawable.baseline_pause_24);
+            CreateNotification.createNotification(getApplicationContext(), activity_main.arrayTracks.get(currentSong),
+                    R.drawable.baseline_pause_24, currentSong, activity_main.arrayTracks.size() - 1);
             Log.d("CLICK", "cc3");
         }
-        CreateNotification.createNotification(getApplicationContext(), activity_main.arrayTracks.get(currentSong),
-                R.drawable.baseline_play_arrow_24, currentSong, activity_main.arrayTracks.size() - 1);
+
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        mediaPlayer = activity_main.mediaPlayer;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             createChannel();
         }
-
-//        mediaPlayer = new MediaPlayer();
-//        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-//        mediaPlayer = MediaPlayer.create(activity_play.this, Uri.parse(activity_main.getStream()));
-//        mediaPlayer.start();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play);
@@ -120,6 +126,9 @@ public class activity_play extends AppCompatActivity {
         playImageButton = findViewById(R.id.playImageButton);
         leftImageButton = findViewById(R.id.leftImageButton);
         rightImageButton = findViewById(R.id.rightImageButton);
+
+        if (!mediaPlayer.isPlaying())
+            playImageButton.setImageResource(R.drawable.baseline_play_arrow_24);
 
         leftImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,14 +149,17 @@ public class activity_play extends AppCompatActivity {
         mainImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setContentView(R.layout.activity_main);
+                activity_main.mediaPlayer = mediaPlayer;
+                finish();
             }
         });
 
         settingImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                setContentView(R.layout.activity_acticity_setting);
+            public void onClick(View v){
+                Intent intent = new Intent(activity_play.this, acticity_setting.class);
+                startActivity(intent);
+                finish();
             }
         });
 
