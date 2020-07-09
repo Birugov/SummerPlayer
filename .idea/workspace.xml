@@ -173,7 +173,14 @@
       <option name="project" value="LOCAL" />
       <updated>1594246504598</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="// some part of playing songs">
+      <created>1594278832023</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1594278832024</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -194,7 +201,8 @@
     <MESSAGE value="init" />
     <MESSAGE value="for Leha" />
     <MESSAGE value="// list of songs ready" />
-    <option name="LAST_COMMIT_MESSAGE" value="// list of songs ready" />
+    <MESSAGE value="// some part of playing songs" />
+    <option name="LAST_COMMIT_MESSAGE" value="// some part of playing songs" />
   </component>
   <component name="WindowStateProjectService">
     <state x="158" y="73" key="#PSD" timestamp="1594241195567">
@@ -214,10 +222,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="314" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1280.680@0.0.1280.680" timestamp="1594237904995" />
-    <state x="297" y="0" key="CommitChangelistDialog2" timestamp="1594246503121">
+    <state x="297" y="0" key="CommitChangelistDialog2" timestamp="1594278830452">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="297" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1594246503121" />
+    <state x="297" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1594278830452" />
     <state x="421" y="96" key="FileChooserDialogImpl" timestamp="1594232254284">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -242,10 +250,10 @@
     </state>
     <state width="1236" height="153" key="GridCell.Tab.0.right/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1594274602296" />
     <state width="1236" height="30" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1594277776387" />
-    <state x="233" y="74" key="Vcs.Push.Dialog.v2" timestamp="1594246512816">
+    <state x="233" y="74" key="Vcs.Push.Dialog.v2" timestamp="1594278835116">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="233" y="74" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1594246512816" />
+    <state x="233" y="74" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1594278835116" />
     <state x="93" y="93" width="1095" height="495" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1594275720129">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
