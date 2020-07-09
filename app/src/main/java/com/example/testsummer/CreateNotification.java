@@ -43,12 +43,12 @@ public class CreateNotification {
                 Intent intentPrevious = new Intent(context, NotificationActionService.class)
                         .setAction(ACTION_PREVIOUS);
                 pendingIntentPrevious = PendingIntent.getBroadcast(context, 0, intentPrevious, PendingIntent.FLAG_UPDATE_CURRENT);
-                drw_previos = R.id.leftImageButton;
+                drw_previos = R.drawable.baseline_skip_previous_24;
             }
             Intent intentPlay = new Intent(context, NotificationActionService.class)
                     .setAction(ACTION_PLAY);
             PendingIntent pendingIntentPlay = PendingIntent.getBroadcast(context, 0, intentPlay, PendingIntent.FLAG_UPDATE_CURRENT);
-            drw_previos = R.id.leftImageButton;
+            playbutton = R.drawable.baseline_play_arrow_24;
 
 
 
@@ -61,11 +61,11 @@ public class CreateNotification {
                 Intent intentNext = new Intent(context, NotificationActionService.class)
                         .setAction(ACTION_NEXT);
                 pendingIntentNext = PendingIntent.getBroadcast(context, 0, intentNext, PendingIntent.FLAG_UPDATE_CURRENT);
-                drw_next = R.id.rightImageButton;
+                drw_next = R.drawable.baseline_skip_next_24;
             }
 
             notification = new NotificationCompat.Builder(context, CHANNEL_ID)
-                    .setSmallIcon(R.id.playImageButton)
+                    .setSmallIcon(R.drawable.baseline_music_note_24)
                     .setContentTitle(track.title)
                     .setContentText(track.artist)
                     .setOnlyAlertOnce(true)

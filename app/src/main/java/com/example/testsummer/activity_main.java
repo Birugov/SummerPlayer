@@ -196,8 +196,6 @@ public class activity_main extends AppCompatActivity {
         @Override
         protected void onPostExecute(Boolean aBoolean) {
             super.onPostExecute(aBoolean);
-            if (!prepared)
-                doInBackground();
             mediaPlayer.start();
             Toast.makeText(activity_main.this, "Playing..  " + title, Toast.LENGTH_SHORT).show();
         }
