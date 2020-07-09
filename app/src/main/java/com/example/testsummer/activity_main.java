@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.view.contentcapture.ContentCaptureCondition;
 import android.widget.AdapterView;
@@ -49,7 +50,7 @@ public class activity_main extends AppCompatActivity {
 
     ArrayList<String> arrayList;
     ArrayAdapter<String> adapter;
-    ArrayList<String> arrayStreams;
+    ArrayList<Track> arrayTracks;
 
 
     @Override
@@ -66,17 +67,19 @@ public class activity_main extends AppCompatActivity {
                 setContentView(R.layout.activity_play);
             }
         });
-        if (ContextCompat.checkSelfPermission(activity_main.this,
-                Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(activity_main.this,
-                    Manifest.permission.READ_EXTERNAL_STORAGE)) {
-                ActivityCompat.requestPermissions(activity_main.this,
-                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_PERMISSIONS);
-            } else {
+        if(ContextCompat.checkSelfPermission(activity_main.this,
+                Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+            if(ActivityCompat.shouldShowRequestPermissionRationale(activity_main.this,
+                    Manifest.permission.READ_EXTERNAL_STORAGE)){
                 ActivityCompat.requestPermissions(activity_main.this,
                         new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_PERMISSIONS);
             }
-        } else {
+            else{
+                ActivityCompat.requestPermissions(activity_main.this,
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_PERMISSIONS);
+            }
+        }
+        else{
             doStuff();
         }
     }
@@ -84,22 +87,24 @@ public class activity_main extends AppCompatActivity {
     public void getMusic() throws IOException {
         ContentResolver contentResolver = getContentResolver();
         Uri uriSong = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
-        Cursor songCursor = contentResolver.query(uriSong, null, null, null, null);
 
-        if (songCursor != null && songCursor.moveToFirst()) {
+        Cursor songCursor = contentResolver.query(uriSong, null, null,null, null);
+
+        if(songCursor !=null && songCursor.moveToFirst()){
+
             int songTitle = songCursor.getColumnIndex(MediaStore.Audio.Media.TITLE);
             int songArtist = songCursor.getColumnIndex(MediaStore.Audio.Media.ARTIST);
             int songLocation = songCursor.getColumnIndex(MediaStore.Audio.Media.DATA);
-
-            do {
+            do{
                 String currentTitle = songCursor.getString(songTitle);
                 title = currentTitle;
                 String currentArtist = songCursor.getString(songArtist);
                 String currentLocation = songCursor.getString(songLocation);
                 stream = currentLocation;
-
-                arrayList.add("Title: " + currentTitle + "\n"
-                        + "Artist: " + currentArtist + "\n" + "Location: " + currentLocation);
+                Track track = new Track(currentTitle, currentArtist, currentLocation);
+                arrayTracks.add(track);
+                arrayList.add("Title: " + track.title + "\n"
+                        + "Artist: " + track.artist);
             } while (songCursor.moveToNext());
         }
     }
@@ -107,16 +112,17 @@ public class activity_main extends AppCompatActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        switch (requestCode) {
-            case REQUEST_PERMISSIONS: {
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    if (ContextCompat.checkSelfPermission(activity_main.this,
-                            Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                        Toast.makeText(this, "Permission granted!", Toast.LENGTH_SHORT).show();
+        switch (requestCode){
+            case REQUEST_PERMISSIONS:{
+                if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    if(ContextCompat.checkSelfPermission(activity_main.this,
+                            Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
+                        Toast.makeText(this,"Permission granted!", Toast.LENGTH_SHORT).show();
 
                         doStuff();
                     }
-                } else {
+                }
+                else {
                     Toast.makeText(this, "No permission granted", Toast.LENGTH_SHORT).show();
                     finish();
                 }
@@ -125,10 +131,10 @@ public class activity_main extends AppCompatActivity {
         }
 
     }
-
-    public void doStuff() {
+    public void doStuff(){
         listOfSongs = findViewById(R.id.listOfSongs);
         arrayList = new ArrayList<>();
+        arrayTracks = new ArrayList<>();
         try {
             getMusic();
         } catch (IOException e) {
@@ -140,15 +146,12 @@ public class activity_main extends AppCompatActivity {
         listOfSongs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                stream = arrayList.get(position);
-                int val = stream.indexOf("Location: ");
-                stream = stream.substring(val + 10);
-                title = arrayList.get(position);
-                val = title.indexOf("Title: ");
-                int val2 = title.indexOf("Artist: ");
-                title = title.substring(val + 6, val2);
+                stream = arrayTracks.get((int) id).file;
+                if (mediaPlayer.isPlaying() == true) {
+                    mediaPlayer.stop();
+                    mediaPlayer.reset();
+                }
                 new PLayerTask().execute(stream);
-
 
             }
         });
