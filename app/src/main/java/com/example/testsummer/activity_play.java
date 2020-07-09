@@ -131,14 +131,18 @@ public class activity_play extends AppCompatActivity {
         mainImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setContentView(R.layout.activity_main);
+                Intent intent = new Intent(activity_play.this, activity_main.class);
+                startActivity(intent);
+                finish();
             }
         });
 
         settingImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                setContentView(R.layout.activity_acticity_setting);
+            public void onClick(View v){
+                Intent intent = new Intent(activity_play.this, acticity_setting.class);
+                startActivity(intent);
+                finish();
             }
         });
 
