@@ -7,10 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="689912bb-895a-480c-876f-2c033ea9b7b7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/testsummer/activity_main.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/testsummer/activity_main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,6 +68,7 @@
       <recent name="com.example.testsummer" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Xiaomi\StudioProjects\SummerPlayer\app\src\main\java\com\example\testsummer" />
       <recent name="C:\Users\Xiaomi\StudioProjects\SummerPlayer\app\src\main\res\raw" />
       <recent name="C:\Users\Xiaomi\StudioProjects\SummerPlayer\app\src\main\java\com\example\testsummer\songs" />
     </key>
@@ -188,7 +186,14 @@
       <option name="project" value="LOCAL" />
       <updated>1594280432356</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="// Songs are playing from the list. Fixed">
+      <created>1594282707932</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1594282707932</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -211,7 +216,8 @@
     <MESSAGE value="// list of songs ready" />
     <MESSAGE value="// some part of playing songs" />
     <MESSAGE value="// Songs are playing from the list. Ready" />
-    <option name="LAST_COMMIT_MESSAGE" value="// Songs are playing from the list. Ready" />
+    <MESSAGE value="// Songs are playing from the list. Fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="// Songs are playing from the list. Fixed" />
   </component>
   <component name="WindowStateProjectService">
     <state x="158" y="73" key="#PSD" timestamp="1594241195567">
@@ -271,10 +277,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="450" y="258" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.680@0.0.1280.680" timestamp="1594226076486" />
-    <state x="419" y="54" key="git4idea.branch.GitSmartOperationDialog" timestamp="1594226034332">
+    <state x="419" y="54" key="git4idea.branch.GitSmartOperationDialog" timestamp="1594282935176">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="419" y="54" key="git4idea.branch.GitSmartOperationDialog/0.0.1280.680@0.0.1280.680" timestamp="1594226034332" />
+    <state x="419" y="54" key="git4idea.branch.GitSmartOperationDialog/0.0.1280.680@0.0.1280.680" timestamp="1594282935176" />
     <state x="369" y="132" key="git4idea.merge.GitPullDialog" timestamp="1594226258455">
       <screen x="0" y="0" width="1280" height="680" />
     </state>

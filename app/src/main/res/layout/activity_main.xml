@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_x="167dp"
         android:layout_y="8dp"
-        android:text="Button" />
+        android:text="toPlayActivity" />
 
     <Button
         android:id="@+id/settings"
@@ -30,22 +30,6 @@
         android:layout_y="78dp"
         android:gravity="center_horizontal"
         android:text="settings" />
-
-    <Button
-        android:id="@+id/b_stop"
-        android:layout_width="119dp"
-        android:layout_height="36dp"
-        android:layout_x="120dp"
-        android:layout_y="86dp"
-        android:text="STOP" />
-
-    <Button
-        android:id="@+id/exit"
-        android:layout_width="140dp"
-        android:layout_height="56dp"
-        android:layout_x="268dp"
-        android:layout_y="67dp"
-        android:text="Exit" />
 
     <ListView
         android:id="@+id/listOfSongs"
