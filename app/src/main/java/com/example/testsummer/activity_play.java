@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.example.testsummer.Services.OnClearFromRecentService;
 
@@ -24,6 +25,7 @@ import java.util.ArrayList;
 public class activity_play extends AppCompatActivity {
 
     ImageButton mainImageButton, settingImageButton, playImageButton, leftImageButton, rightImageButton;
+    TextView nameSong, authorSong;
     int currentSong = 0;
     MediaPlayer mediaPlayer = activity_main.mediaPlayer;
 
@@ -49,6 +51,7 @@ public class activity_play extends AppCompatActivity {
                 mediaPlayer = MediaPlayer.create(activity_play.this, Uri.parse(activity_main.arrayTracks.get(currentSong).file));
                 mediaPlayer.start();
                 firstTime = false;
+                changeInfo(currentSong);
             }
             else {
                 activity_main.currentSong--;
@@ -57,6 +60,7 @@ public class activity_play extends AppCompatActivity {
                 mediaPlayer = MediaPlayer.create(activity_play.this, Uri.parse(activity_main.arrayTracks.get(currentSong).file));
                 mediaPlayer.start();
                 firstTime = true;
+                changeInfo(currentSong);
             }
             playImageButton.setImageResource(R.drawable.baseline_pause_24);
         }
@@ -73,6 +77,7 @@ public class activity_play extends AppCompatActivity {
             mediaPlayer = MediaPlayer.create(activity_play.this, Uri.parse(activity_main.arrayTracks.get(currentSong).file));
             mediaPlayer.start();
             playImageButton.setImageResource(R.drawable.baseline_pause_24);
+            changeInfo(currentSong);
         }
         CreateNotification.createNotification(getApplicationContext(), activity_main.arrayTracks.get(currentSong),
                 R.drawable.baseline_pause_24, currentSong, activity_main.arrayTracks.size() - 1);
@@ -127,6 +132,16 @@ public class activity_play extends AppCompatActivity {
         leftImageButton = findViewById(R.id.leftImageButton);
         rightImageButton = findViewById(R.id.rightImageButton);
 
+        nameSong = findViewById(R.id.name_song);
+        authorSong = findViewById(R.id.author_song);
+
+        nameSong.setText(activity_main.nameS);
+        authorSong.setText(activity_main.authorS);
+
+
+
+
+
         if (!mediaPlayer.isPlaying())
             playImageButton.setImageResource(R.drawable.baseline_play_arrow_24);
 
@@ -174,6 +189,12 @@ public class activity_play extends AppCompatActivity {
             startService(new Intent(getBaseContext(), OnClearFromRecentService.class));
         }
     }
+
+    public void changeInfo(int index){
+        nameSong.setText(activity_main.arrayTracks.get(index).getTitle());
+        authorSong.setText(activity_main.arrayTracks.get(index).getArtist());
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -201,7 +222,6 @@ public class activity_play extends AppCompatActivity {
             }
         }
     };
-
 
 
 }

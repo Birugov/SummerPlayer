@@ -1,9 +1,6 @@
 package com.example.testsummer;
 
 import android.Manifest;
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -12,21 +9,19 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 
 import java.io.IOException;
@@ -53,7 +48,7 @@ public class activity_main extends AppCompatActivity {
     protected static Integer currentSong;
     protected static PLayerTask playerTask = null;
 
-
+    public static String nameS = "name", authorS = "actor";
 
     ArrayList<String> arrayList;
     ArrayAdapter<String> adapter;
@@ -180,6 +175,8 @@ public class activity_main extends AppCompatActivity {
                 }
                 playerTask = new PLayerTask();
                 playerTask.execute(stream);
+                changeInfo(position);
+
                 CreateNotification.createNotification(activity_main.this, arrayTracks.get((int) id), 0, position, arrayTracks.size() - 1);
             }
         });
@@ -214,6 +211,10 @@ public class activity_main extends AppCompatActivity {
             mediaPlayer.stop();
             mediaPlayer.reset();
         }
+    }
+    public void changeInfo(int index){
+        nameS = arrayTracks.get(index).getTitle();
+        authorS = arrayTracks.get(index).getArtist();
     }
 
 }

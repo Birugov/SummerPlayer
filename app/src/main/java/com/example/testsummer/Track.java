@@ -12,4 +12,18 @@ public class Track {
         this.file = file;
         this.image = image;
     }
+
+    public String getTitle(){
+        return title;
+    }
+
+    public String getArtist(){
+        return artist;
+    }
+    public String getFile(){
+        return file;
+    }
+    public int getImage(){
+        return image;
+    }
 }
