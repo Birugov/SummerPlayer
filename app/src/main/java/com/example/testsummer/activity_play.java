@@ -41,15 +41,8 @@ public class activity_play extends AppCompatActivity {
 
     }
 
-    private void stopIfPlaying() {
-        if (mediaPlayer.isPlaying()) {
-            mediaPlayer.stop();
-            mediaPlayer.reset();
-        }
-    }
     private boolean firstTime = true;
     private void playPrevios() {
-        stopIfPlaying();
         currentSong = activity_main.currentSong;
         if (currentSong > 0){
             if (firstTime) {
@@ -68,11 +61,10 @@ public class activity_play extends AppCompatActivity {
             }
         }
         CreateNotification.createNotification(getApplicationContext(), activity_main.arrayTracks.get(currentSong),
-                R.drawable.baseline_skip_previous_24, currentSong, activity_main.arrayTracks.size() - 1);
+                R.id.leftImageButton, currentSong, activity_main.arrayTracks.size() - 1);
 
     }
     private void playNext() {
-        stopIfPlaying();
         currentSong = activity_main.currentSong;
         if (currentSong < activity_main.arrayTracks.size() - 1){
             activity_main.currentSong++;
@@ -82,7 +74,7 @@ public class activity_play extends AppCompatActivity {
             mediaPlayer.start();
         }
         CreateNotification.createNotification(getApplicationContext(), activity_main.arrayTracks.get(currentSong),
-                R.drawable.baseline_skip_next_24, currentSong, activity_main.arrayTracks.size() - 1);
+                R.id.rightImageButton, currentSong, activity_main.arrayTracks.size() - 1);
     }
     private void pausePlay() {
         currentSong = activity_main.currentSong;
@@ -96,12 +88,11 @@ public class activity_play extends AppCompatActivity {
             Log.d("CLICK", "cc3");
         }
         CreateNotification.createNotification(getApplicationContext(), activity_main.arrayTracks.get(currentSong),
-                R.drawable.baseline_play_arrow_24, currentSong, activity_main.arrayTracks.size() - 1);
+                R.id.playImageButton, currentSong, activity_main.arrayTracks.size() - 1);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        mediaPlayer = activity_main.mediaPlayer;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             createChannel();
         }
@@ -141,7 +132,6 @@ public class activity_play extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(activity_play.this, activity_main.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 finish();
             }
