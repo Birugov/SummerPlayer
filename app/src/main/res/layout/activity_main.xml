@@ -1,41 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="clip_horizontal"
-    android:orientation="vertical"
-    tools:context=".activity_main" >
+    tools:context=".MainActivity"
+    android:gravity="center_horizontal">
 
     <TextView
-        android:id="@+id/Project_Name"
-        android:layout_width="104dp"
-        android:layout_height="56dp"
-        android:text="SP" />
-
-    <Button
-        android:id="@+id/toPlay"
-        android:layout_width="158dp"
-        android:layout_height="wrap_content"
-        android:layout_x="167dp"
-        android:layout_y="8dp"
-        android:text="toPlayActivity" />
-
-    <Button
-        android:id="@+id/settings"
+        android:id="@+id/listView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_x="8dp"
-        android:layout_y="78dp"
-        android:gravity="center_horizontal"
-        android:text="settings" />
+        android:text="Hello World!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <ListView
-        android:id="@+id/listOfSongs"
-        android:layout_width="match_parent"
-        android:layout_height="570dp"
-        android:layout_x="-23dp"
-        android:layout_y="158dp" />
-
-</AbsoluteLayout>
+</LinearLayout>
