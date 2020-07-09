@@ -2,6 +2,7 @@ package com.example.testsummer;
 
 import android.Manifest;
 import android.content.ContentResolver;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.media.AudioManager;
@@ -36,15 +37,18 @@ public class activity_main extends AppCompatActivity {
     boolean prepared = false;
 
     private Button toPlay;
-    MediaPlayer mediaPlayer;
+    static MediaPlayer mediaPlayer;
     private ListView listOfSongs;
-    private String stream;
+    private static String stream = null;
     private String title;
 
     ArrayList<String> arrayList;
     ArrayAdapter<String> adapter;
-    ArrayList<Track> arrayTracks;
+    static ArrayList<Track> arrayTracks;
 
+    public static String getStream() {
+        return stream;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +61,9 @@ public class activity_main extends AppCompatActivity {
         toPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setContentView(R.layout.activity_play);
+                Intent intent = new Intent(activity_main.this, activity_play.class);
+                startActivity(intent);
+                //setContentView(R.layout.activity_play);
             }
         });
         if(ContextCompat.checkSelfPermission(activity_main.this,
