@@ -46,6 +46,7 @@ public class activity_main extends AppCompatActivity {
     private ListView listOfSongs;
     private static String stream = null;
     private String title;
+    protected static Integer currentSong;
 
 
 
@@ -105,12 +106,13 @@ public class activity_main extends AppCompatActivity {
                 title = currentTitle;
                 String currentArtist = songCursor.getString(songArtist);
                 String currentLocation = songCursor.getString(songLocation);
-                stream = currentLocation;
                 Track track = new Track(currentTitle, currentArtist, currentLocation, R.id.playImageButton);
                 arrayTracks.add(track);
                 arrayList.add("Title: " + track.title + "\n"
                         + "Artist: " + track.artist);
             } while (songCursor.moveToNext());
+            stream = arrayTracks.get(0).file;
+            currentSong = 0;
         }
     }
 
@@ -152,6 +154,7 @@ public class activity_main extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 stream = arrayTracks.get((int) id).file;
+                currentSong = (int) id;
                 if (mediaPlayer.isPlaying() == true) {
                     mediaPlayer.stop();
                     mediaPlayer.reset();
@@ -188,13 +191,4 @@ public class activity_main extends AppCompatActivity {
         }
     }
 
-      /* @SuppressLint("NewAPI")
-     private boolean arePermissionsDenied(){
-         for (int i = 0; i < PERMISSION_COUNT; i++){
-             if (checkSelfPermission(PERMISSION[i]) != PackageManager.PERMISSION_GRANTED) {
-                 return true;
-             }
-         }
-         return false;
-     }*/
 }

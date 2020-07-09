@@ -41,28 +41,43 @@ public class activity_play extends AppCompatActivity {
 
     }
 
+    private boolean firstTime = true;
     private void playPrevios() {
+        currentSong = activity_main.currentSong;
         if (currentSong > 0){
-            mediaPlayer.stop();
-            mediaPlayer= MediaPlayer.create(activity_play.this, Uri.parse(activity_main.getStream()));
-            mediaPlayer.start();
-            currentSong--;
+            if (firstTime) {
+                mediaPlayer.stop();
+                mediaPlayer = MediaPlayer.create(activity_play.this, Uri.parse(activity_main.arrayTracks.get(currentSong).file));
+                mediaPlayer.start();
+                firstTime = false;
+            }
+            else {
+                activity_main.currentSong--;
+                currentSong = activity_main.currentSong;
+                mediaPlayer.stop();
+                mediaPlayer = MediaPlayer.create(activity_play.this, Uri.parse(activity_main.arrayTracks.get(currentSong).file));
+                mediaPlayer.start();
+                firstTime = true;
+            }
         }
         CreateNotification.createNotification(getApplicationContext(), activity_main.arrayTracks.get(currentSong),
                 R.id.leftImageButton, currentSong, activity_main.arrayTracks.size() - 1);
 
     }
     private void playNext() {
+        currentSong = activity_main.currentSong;
         if (currentSong < activity_main.arrayTracks.size() - 1){
-            currentSong++;
+            activity_main.currentSong++;
+            currentSong = activity_main.currentSong;
             mediaPlayer.stop();
-            mediaPlayer = MediaPlayer.create(activity_play.this, Uri.parse(String.valueOf(activity_main.arrayTracks.get(currentSong))));
+            mediaPlayer = MediaPlayer.create(activity_play.this, Uri.parse(activity_main.arrayTracks.get(currentSong).file));
             mediaPlayer.start();
         }
         CreateNotification.createNotification(getApplicationContext(), activity_main.arrayTracks.get(currentSong),
                 R.id.rightImageButton, currentSong, activity_main.arrayTracks.size() - 1);
     }
     private void pausePlay() {
+        currentSong = activity_main.currentSong;
         Log.d("CLICK", "cc");
         if (mediaPlayer.isPlaying()){
             mediaPlayer.pause();
@@ -89,7 +104,7 @@ public class activity_play extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play);
-        currentSong = 2;
+        currentSong = activity_main.currentSong;;
 
         mainImageButton = findViewById(R.id.mainImageButton);
         settingImageButton = findViewById(R.id.settingImageButton);
