@@ -15,13 +15,10 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.view.DragEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -42,10 +39,7 @@ public class activity_main extends AppCompatActivity {
     private static final int REQUEST_PERMISSIONS = 12345;
     private static final int PERMISSION_COUNT = 1;
 
-    boolean prepared = false;
-
-    private LinearLayout ll;
-    private ImageButton b_next, b_play, b_prev, b_open;
+//    boolean prepared = false;
 
     private Button toPlay;
     static MediaPlayer mediaPlayer;
@@ -53,6 +47,7 @@ public class activity_main extends AppCompatActivity {
     private static String stream = null;
     private String title;
     protected static Integer currentSong;
+    protected static PLayerTask playerTask = null;
 
 
 
@@ -60,6 +55,9 @@ public class activity_main extends AppCompatActivity {
     ArrayAdapter<String> adapter;
     static ArrayList<Track> arrayTracks;
 
+    public static String getStream() {
+        return stream;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,21 +66,6 @@ public class activity_main extends AppCompatActivity {
         mediaPlayer = new MediaPlayer();
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         setContentView(R.layout.activity_main);
-
-        ll = findViewById(R.id.QuickMenu);
-        b_next = findViewById(R.id.QuickNext);
-        b_play = findViewById(R.id.QuickPlay);
-        b_prev = findViewById(R.id.QuickPrev);
-        b_open = findViewById(R.id.QuickOpen);
-        b_open.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(activity_main.this, activity_play.class);
-                startActivity(intent);
-            }
-        });
-
-
         toPlay = findViewById(R.id.toPlay);
         toPlay.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,10 +88,6 @@ public class activity_main extends AppCompatActivity {
         } else {
             doStuff();
         }
-    }
-
-    public static String getStream() {
-        return stream;
     }
 
 
@@ -176,13 +155,21 @@ public class activity_main extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 stream = arrayTracks.get((int) id).file;
-                title = arrayList.get(position).substring(arrayList.get(position).indexOf("Title: ")+6, arrayList.get(position).indexOf("Artist: "));
                 currentSong = (int) id;
-                if (mediaPlayer.isPlaying() == true) {
+                while (mediaPlayer.isPlaying() == true) {
                     mediaPlayer.stop();
                     mediaPlayer.reset();
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
-                new PLayerTask().execute(stream);
+                if (playerTask != null) {
+                    playerTask.stopMusic();
+                }
+                playerTask = new PLayerTask();
+                playerTask.execute(stream);
                 CreateNotification.createNotification(activity_main.this, arrayTracks.get((int) id), 0, position, arrayTracks.size() - 1);
             }
         });
@@ -193,6 +180,7 @@ public class activity_main extends AppCompatActivity {
 
 
     private class PLayerTask extends AsyncTask<String, Void, Boolean> {
+        protected boolean prepared = false;
         @Override
         protected Boolean doInBackground(String... strings) {
             try {
@@ -202,7 +190,6 @@ public class activity_main extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
             return prepared;
         }
 
@@ -211,6 +198,11 @@ public class activity_main extends AppCompatActivity {
             super.onPostExecute(aBoolean);
             mediaPlayer.start();
             Toast.makeText(activity_main.this, "Playing..  " + title, Toast.LENGTH_SHORT).show();
+        }
+
+        public void stopMusic() {
+            mediaPlayer.stop();
+            mediaPlayer.reset();
         }
     }
 
