@@ -6,17 +6,18 @@
     </shared>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fea89b51-5bcf-4790-bb95-0435475a7d54" name="Default Changelist" comment="// Songs are playing from the list. Fixed">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/testsummer/activity_main.java" afterDir="false" />
+    <list default="true" id="689912bb-895a-480c-876f-2c033ea9b7b7" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_XL_API_R" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_2_API_26" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -267,10 +268,10 @@
     </state>
     <state width="1236" height="153" key="GridCell.Tab.0.right/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1594274602296" />
     <state width="1236" height="30" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1594277776387" />
-    <state x="233" y="74" key="Vcs.Push.Dialog.v2" timestamp="1594280436966">
+    <state x="233" y="74" key="Vcs.Push.Dialog.v2" timestamp="1594286484421">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="233" y="74" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1594280436965" />
+    <state x="233" y="74" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1594286484421" />
     <state x="93" y="93" width="1095" height="495" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1594275720129">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
