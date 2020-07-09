@@ -7,17 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fea89b51-5bcf-4790-bb95-0435475a7d54" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_media_media_1_1_0_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-v24/baseline_pause_24.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/testsummer/activity_main.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/testsummer/activity_main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/testsummer/activity_play.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/testsummer/activity_play.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,6 +68,7 @@
       <recent name="com.example.testsummer" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Xiaomi\StudioProjects\SummerPlayer\app\src\main\res\drawable-v24" />
       <recent name="C:\Users\Xiaomi\StudioProjects\SummerPlayer\app\src\main\java\com\example\testsummer" />
       <recent name="C:\Users\Xiaomi\StudioProjects\SummerPlayer\app\src\main\res\raw" />
       <recent name="C:\Users\Xiaomi\StudioProjects\SummerPlayer\app\src\main\java\com\example\testsummer\songs" />
@@ -217,7 +208,14 @@
       <option name="project" value="LOCAL" />
       <updated>1594312463005</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="// Some buttons in quickMenu">
+      <created>1594316030764</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1594316030765</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -242,7 +240,8 @@
     <MESSAGE value="// Songs are playing from the list. Ready" />
     <MESSAGE value="// Songs are playing from the list. Fixed" />
     <MESSAGE value="// full code for 09.07" />
-    <option name="LAST_COMMIT_MESSAGE" value="// full code for 09.07" />
+    <MESSAGE value="// Some buttons in quickMenu" />
+    <option name="LAST_COMMIT_MESSAGE" value="// Some buttons in quickMenu" />
   </component>
   <component name="WindowStateProjectService">
     <state x="158" y="73" key="#PSD" timestamp="1594313104589">
@@ -262,10 +261,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="314" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1280.680@0.0.1280.680" timestamp="1594237904995" />
-    <state x="297" y="0" key="CommitChangelistDialog2" timestamp="1594312461669">
+    <state x="297" y="0" key="CommitChangelistDialog2" timestamp="1594316217682">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="297" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1594312461669" />
+    <state x="297" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1594316217682" />
     <state x="421" y="96" key="FileChooserDialogImpl" timestamp="1594314168569">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -290,10 +289,10 @@
     </state>
     <state width="1236" height="153" key="GridCell.Tab.0.right/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1594274602296" />
     <state width="1236" height="30" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1594277776387" />
-    <state x="233" y="74" key="Vcs.Push.Dialog.v2" timestamp="1594312474276">
+    <state x="233" y="74" key="Vcs.Push.Dialog.v2" timestamp="1594316146335">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="233" y="74" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1594312474276" />
+    <state x="233" y="74" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1594316146335" />
     <state x="93" y="93" width="1095" height="495" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1594275720129">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -306,10 +305,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="419" y="54" key="git4idea.branch.GitSmartOperationDialog/0.0.1280.680@0.0.1280.680" timestamp="1594282935176" />
-    <state x="420" y="132" key="git4idea.merge.GitMergeDialog" timestamp="1594315997667">
+    <state x="420" y="132" key="git4idea.merge.GitMergeDialog" timestamp="1594316157647">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="420" y="132" key="git4idea.merge.GitMergeDialog/0.0.1280.680@0.0.1280.680" timestamp="1594315997667" />
+    <state x="420" y="132" key="git4idea.merge.GitMergeDialog/0.0.1280.680@0.0.1280.680" timestamp="1594316157647" />
     <state x="369" y="132" key="git4idea.merge.GitPullDialog" timestamp="1594226258455">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
