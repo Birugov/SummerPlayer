@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">Summer Player</string>
+    <string name="app_name">TestSummer</string>
+    <string name="exit_button">Exit button</string>
+    <string name="song_name">Song Name</string>
+    <string name="song_author">Song author</string>
+    <string name="left_button">left_button</string>
+    <string name="play_button">play_button</string>
+    <string name="right_button">right_button</string>
 </resources>
