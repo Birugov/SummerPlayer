@@ -39,6 +39,9 @@ import com.example.testsummer.Services.WiFiDirectBroadcastReceiver;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -274,32 +277,29 @@ public class activity_p2p extends AppCompatActivity {
                 Log.d("CLOS2", "CIRCLE3");
                 MediaPlayer mediaPlayer = new MediaPlayer();
                 ByteArrayMediaDataSource po = new ByteArrayMediaDataSource();
-                mediaPlayer.setDataSource(po);
+
                 int num = 0;
                 byte[] buffer = new byte[1024];
                 int bytes;
                 boolean started = false;
-                while (booled) {
-
-                    Log.d("CLOS2", "CIRCLE");
-                    while (socket != null) {
-                        try {
-                            bytes = inputStream.read(buffer);
-                            if (bytes > 0) {
-                                po.addBytes(buffer);
-                                Log.d("ADDING", "OK");
-                                num++;
-                            }
-                            if (po.size > 20000 && !started) {
-                                Log.d("STARTING PLAY", "TR");
-                                started = true;
-                                mediaPlayer.start();
-                            }
-                        } catch (IOException e) {
-                            e.printStackTrace();
+                while (socket != null) {
+                    try {
+                        bytes = inputStream.read(buffer);
+                        if (bytes > 0) {
+                            po.addBytes(buffer);
+                            Log.d("ADDING", "OK");
+                            num++;
                         }
+                        if (bytes == -1)
+                            break;
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
                 }
+                Log.d("PLAYING", "OK " + po.size + " vs " + R.raw.sound1);
+                mediaPlayer.setDataSource(po);
+                mediaPlayer.prepare();
+                mediaPlayer.start();
                 serverSocket.close();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -379,7 +379,7 @@ public class activity_p2p extends AppCompatActivity {
             try {
                 Log.d("SENDING", "OK");
                 if (outputStream == null)
-                outputStream = socket.getOutputStream();
+                    outputStream = socket.getOutputStream();
                 Log.d("SENDING", "OK3");
                 InputStream inputStream = null;
                 inputStream = new ByteArrayInputStream(text);
@@ -394,7 +394,7 @@ public class activity_p2p extends AppCompatActivity {
                 inputStream.close();
             } catch (IOException e) {
                 Log.d("ClientSocket.TAG", e.toString());
-            } catch (Exception ex){
+            } catch (Exception ex) {
                 Log.d("SENDING", ex.getMessage());
 //                if (socket != null) {
 //                    if (socket.isConnected()) {
@@ -427,8 +427,9 @@ public class activity_p2p extends AppCompatActivity {
                 e.printStackTrace();
             }
             InputStream inputStream = getResources().openRawResource(R.raw.sound1);
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+
             int length;
+            long size = 0;
             byte[] buff = new byte[1024];
             while (true) {
                 try {
@@ -437,6 +438,13 @@ public class activity_p2p extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 write(buff);
+                size += buff.length;
+            }
+            Log.d("LEN", String.valueOf(size));
+            try {
+                outputStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
             return null;
         }

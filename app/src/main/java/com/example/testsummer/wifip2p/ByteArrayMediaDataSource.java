@@ -11,11 +11,11 @@ import java.util.ArrayList;
 @RequiresApi(api = Build.VERSION_CODES.M)
 public class ByteArrayMediaDataSource extends MediaDataSource {
 
-    private byte[] data;
+    public byte[] data;
     int size = 0;
 
     public ByteArrayMediaDataSource() {
-        this.data = new byte[900000];
+        this.data = new byte[9000000];
     }
 
     public void addBytes(byte[] data) {
