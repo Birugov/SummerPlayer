@@ -305,10 +305,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="314" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1280.680@0.0.1280.680" timestamp="1594237904995" />
-    <state x="297" y="0" key="CommitChangelistDialog2" timestamp="1594316460071">
+    <state x="297" y="0" key="CommitChangelistDialog2" timestamp="1594360581559">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="297" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1594316460071" />
+    <state x="297" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1594360581559" />
     <state x="421" y="96" key="FileChooserDialogImpl" timestamp="1594232254284">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -337,10 +337,14 @@
     <state width="1236" height="153" key="GridCell.Tab.0.right/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1594274602296" />
     <state width="1236" height="163" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1594315105322" />
     <state width="1491" height="216" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1594309740470" />
-    <state x="354" y="56" key="MultipleFileMergeDialog" timestamp="1594286612082">
+    <state x="122" y="58" key="MergeDialog" timestamp="1594360690789">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="354" y="56" key="MultipleFileMergeDialog/0.0.1280.680@0.0.1280.680" timestamp="1594286612082" />
+    <state x="122" y="58" key="MergeDialog/0.0.1280.680@0.0.1280.680" timestamp="1594360690789" />
+    <state x="354" y="70" width="572" height="554" key="MultipleFileMergeDialog" timestamp="1594360693709">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="354" y="70" width="572" height="554" key="MultipleFileMergeDialog/0.0.1280.680@0.0.1280.680" timestamp="1594360693709" />
     <state x="142" y="0" key="SettingsEditor" timestamp="1594293065480">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -368,10 +372,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="419" y="54" key="git4idea.branch.GitSmartOperationDialog/0.0.1280.680@0.0.1280.680" timestamp="1594282935176" />
-    <state x="530" y="159" key="git4idea.merge.GitMergeDialog" timestamp="1594309738635">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="442" y="131" key="git4idea.merge.GitMergeDialog" timestamp="1594360612290">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="442" y="131" key="git4idea.merge.GitMergeDialog/0.0.1280.680@0.0.1280.680" timestamp="1594288324283" />
+    <state x="442" y="131" key="git4idea.merge.GitMergeDialog/0.0.1280.680@0.0.1280.680" timestamp="1594360612290" />
     <state x="530" y="159" key="git4idea.merge.GitMergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1594309738635" />
     <state x="369" y="132" key="git4idea.merge.GitPullDialog" timestamp="1594226258455">
       <screen x="0" y="0" width="1280" height="680" />
