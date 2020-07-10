@@ -23,7 +23,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.example.testsummer.wifip2p.activity_p2p;
+//import com.example.testsummer.wifip2p.activity_p2p;
 
 import java.io.File;
 import java.io.IOException;

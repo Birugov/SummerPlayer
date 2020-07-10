@@ -12,44 +12,40 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_weight="0"
+        android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ImageButton
+            android:id="@+id/start_from_beggin_button"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_weight="1"
+            android:tint="@color/primary"
+            app:srcCompat="@drawable/baseline_play_arrow_black_48" />
 
-            <ImageButton
-                android:id="@+id/start_from_beggin_button"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:tint="@color/primary"
-                app:srcCompat="@drawable/baseline_play_arrow_black_48" />
-
-            <ImageButton
-                android:id="@+id/settings"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:tint="@color/primary"
-                app:srcCompat="@drawable/baseline_settings_white_48" />
-
-        </LinearLayout>
-
-        <ListView
-            android:id="@+id/listOfSongs"
-            style="@android:style/Widget.DeviceDefault.Light.ExpandableListView"
-            android:layout_width="match_parent"
-            android:layout_height="570dp">
-
-        </ListView>
+        <ImageButton
+            android:id="@+id/settings"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:tint="@color/primary"
+            app:srcCompat="@drawable/baseline_settings_white_48" />
 
     </LinearLayout>
 
+    <ListView
+        android:id="@+id/listOfSongs"
+        style="@android:style/Widget.DeviceDefault.Light.ExpandableListView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+    </ListView>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="68dp"
+        android:layout_weight="0"
         android:orientation="horizontal">
 
         <Button
