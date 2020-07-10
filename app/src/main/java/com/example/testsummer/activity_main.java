@@ -63,12 +63,12 @@ public class activity_main extends AppCompatActivity {
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         setContentView(R.layout.activity_main);
         toPlay = findViewById(R.id.toPlay);
-        btnSetting = findViewById(R.id.settings);
+//        btnSetting = findViewById(R.id.settings);
         btnSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(activity_main.this, activity_p2p.class);
-                startActivity(intent);
+//                Intent intent = new Intent(activity_main.this, activity_p2p.class);
+//                startActivity(intent);
             }
         });
         toPlay.setOnClickListener(new View.OnClickListener() {
