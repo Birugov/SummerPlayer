@@ -19,7 +19,6 @@ import android.widget.ImageButton;
 
 import com.example.testsummer.Services.OnClearFromRecentService;
 
-import java.util.ArrayList;
 
 public class activity_play extends AppCompatActivity {
 
@@ -41,16 +40,16 @@ public class activity_play extends AppCompatActivity {
     }
 
     private boolean firstTime = true;
+
     private void playPrevios() {
         currentSong = activity_main.currentSong;
-        if (currentSong > 0){
+        if (currentSong > 0) {
             if (firstTime) {
                 mediaPlayer.stop();
                 mediaPlayer = MediaPlayer.create(activity_play.this, Uri.parse(activity_main.arrayTracks.get(currentSong).file));
                 mediaPlayer.start();
                 firstTime = false;
-            }
-            else {
+            } else {
                 activity_main.currentSong--;
                 currentSong = activity_main.currentSong;
                 mediaPlayer.stop();
@@ -64,9 +63,10 @@ public class activity_play extends AppCompatActivity {
                 R.drawable.baseline_pause_24, currentSong, activity_main.arrayTracks.size() - 1);
 
     }
+
     private void playNext() {
         currentSong = activity_main.currentSong;
-        if (currentSong < activity_main.arrayTracks.size() - 1){
+        if (currentSong < activity_main.arrayTracks.size() - 1) {
             activity_main.currentSong++;
             currentSong = activity_main.currentSong;
             mediaPlayer.stop();
@@ -77,36 +77,26 @@ public class activity_play extends AppCompatActivity {
         CreateNotification.createNotification(getApplicationContext(), activity_main.arrayTracks.get(currentSong),
                 R.drawable.baseline_pause_24, currentSong, activity_main.arrayTracks.size() - 1);
     }
+
     private void pausePlay() {
         currentSong = activity_main.currentSong;
-        Log.d("CLICK", "cc");
-        if (mediaPlayer.isPlaying()){
+        if (mediaPlayer.isPlaying()) {
             playImageButton.setImageResource(R.drawable.baseline_play_arrow_24);
             mediaPlayer.pause();
             CreateNotification.createNotification(getApplicationContext(), activity_main.arrayTracks.get(currentSong),
                     R.drawable.baseline_play_arrow_24, currentSong, activity_main.arrayTracks.size() - 1);
-            Log.d("CLICK", "cc2");
-        }
-        else{
-                try{
-                    mediaPlayer.getTrackInfo();
-                    mediaPlayer.start();
-                } catch (Exception ex) {
-                    mediaPlayer = MediaPlayer.create(activity_play.this, Uri.parse(activity_main.arrayTracks.get(currentSong).file));
-                    mediaPlayer.start();
-                }
+        } else {
+            try {
+                mediaPlayer.getTrackInfo();
+                mediaPlayer.start();
+            } catch (Exception ex) {
+                mediaPlayer = MediaPlayer.create(activity_play.this, Uri.parse(activity_main.arrayTracks.get(currentSong).file));
+                mediaPlayer.start();
+            }
 
-
-//            if (mediaPlayer. != null)
-//                mediaPlayer.start();
-//            else {
-//                mediaPlayer = MediaPlayer.create(activity_play.this, Uri.parse(activity_main.arrayTracks.get(currentSong).file));
-//                mediaPlayer.start();
-//            }
             playImageButton.setImageResource(R.drawable.baseline_pause_24);
             CreateNotification.createNotification(getApplicationContext(), activity_main.arrayTracks.get(currentSong),
                     R.drawable.baseline_pause_24, currentSong, activity_main.arrayTracks.size() - 1);
-            Log.d("CLICK", "cc3");
         }
 
     }
@@ -145,21 +135,20 @@ public class activity_play extends AppCompatActivity {
         });
 
 
-
         mainImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 activity_main.mediaPlayer = mediaPlayer;
-                finish();
+                Intent intent = new Intent(activity_play.this, activity_main.class);
+                startActivity(intent);
             }
         });
 
         settingImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 Intent intent = new Intent(activity_play.this, acticity_setting.class);
                 startActivity(intent);
-                finish();
             }
         });
 
@@ -175,6 +164,7 @@ public class activity_play extends AppCompatActivity {
             startService(new Intent(getBaseContext(), OnClearFromRecentService.class));
         }
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -202,7 +192,6 @@ public class activity_play extends AppCompatActivity {
             }
         }
     };
-
 
 
 }

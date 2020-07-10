@@ -10,7 +10,10 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
@@ -23,6 +26,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".acticity_setting"></activity>
         <activity android:name=".activity_play"></activity>
+        <activity android:name=".wifip2p.activity_p2p"></activity>
         <activity
             android:name=".activity_main"
             android:screenOrientation="portrait">
