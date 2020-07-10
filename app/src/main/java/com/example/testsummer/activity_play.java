@@ -139,7 +139,8 @@ public class activity_play extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 activity_main.mediaPlayer = mediaPlayer;
-                finish();
+                Intent intent = new Intent(activity_play.this, activity_main.class);
+                startActivity(intent);
             }
         });
 
@@ -148,7 +149,6 @@ public class activity_play extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(activity_play.this, acticity_setting.class);
                 startActivity(intent);
-                finish();
             }
         });
 

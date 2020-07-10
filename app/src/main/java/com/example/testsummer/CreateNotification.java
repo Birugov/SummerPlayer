@@ -32,7 +32,7 @@ public class CreateNotification {
             NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
             MediaSessionCompat mediaSessionCompat = new MediaSessionCompat(context, "tag");
 
-            Bitmap icon = BitmapFactory.decodeResource(context.getResources(), track.image);
+            Bitmap icon = BitmapFactory.decodeByteArray(track.image, 0, track.image.length);
 
             PendingIntent pendingIntentPrevious;
             int drw_previos;
@@ -68,6 +68,7 @@ public class CreateNotification {
                     .setSmallIcon(R.drawable.baseline_music_note_24)
                     .setContentTitle(track.title)
                     .setContentText(track.artist)
+                    .setLargeIcon(icon)
                     .setOnlyAlertOnce(true)
                     .setShowWhen(false)
                     .addAction(drw_previos, "Previos", pendingIntentPrevious)

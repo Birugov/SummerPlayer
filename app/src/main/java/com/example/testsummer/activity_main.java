@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.media.AudioManager;
+import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -22,6 +23,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.example.testsummer.wifip2p.activity_p2p;
+
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -31,6 +35,7 @@ public class activity_main extends AppCompatActivity {
     private static final int REQUEST_PERMISSIONS = 12345;
 
     private Button toPlay;
+    private Button btnSetting;
     static MediaPlayer mediaPlayer = null;
     private ListView listOfSongs;
     private static String stream = null;
@@ -58,6 +63,14 @@ public class activity_main extends AppCompatActivity {
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         setContentView(R.layout.activity_main);
         toPlay = findViewById(R.id.toPlay);
+        btnSetting = findViewById(R.id.settings);
+        btnSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(activity_main.this, activity_p2p.class);
+                startActivity(intent);
+            }
+        });
         toPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,6 +78,8 @@ public class activity_main extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
         if (ContextCompat.checkSelfPermission(activity_main.this,
                 Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(activity_main.this,
@@ -92,12 +107,23 @@ public class activity_main extends AppCompatActivity {
             int songTitle = songCursor.getColumnIndex(MediaStore.Audio.Media.TITLE);
             int songArtist = songCursor.getColumnIndex(MediaStore.Audio.Media.ARTIST);
             int songLocation = songCursor.getColumnIndex(MediaStore.Audio.Media.DATA);
+
             do {
                 String currentTitle = songCursor.getString(songTitle);
                 title = currentTitle;
                 String currentArtist = songCursor.getString(songArtist);
                 String currentLocation = songCursor.getString(songLocation);
-                Track track = new Track(currentTitle, currentArtist, currentLocation, R.id.playImageButton);
+
+                byte[] image = null;
+                try {
+                    MediaMetadataRetriever mediaMetadataRetriever = (MediaMetadataRetriever) new MediaMetadataRetriever();
+                    Uri uri = (Uri) Uri.fromFile(new File(currentLocation));
+                    mediaMetadataRetriever.setDataSource(activity_main.this, uri);
+
+                    image = mediaMetadataRetriever.getEmbeddedPicture();
+                } catch (Exception ex) {}
+
+                Track track = new Track(currentTitle, currentArtist, currentLocation, image);
                 arrayTracks.add(track);
                 arrayList.add("Title: " + track.title + "\n"
                         + "Artist: " + track.artist);
@@ -150,7 +176,7 @@ public class activity_main extends AppCompatActivity {
                 }
                 playerTask = new PLayerTask();
                 playerTask.execute(stream);
-                CreateNotification.createNotification(activity_main.this, arrayTracks.get((int) id), 0, position, arrayTracks.size() - 1);
+                CreateNotification.createNotification(activity_main.this, arrayTracks.get((int) id), R.drawable.baseline_pause_24, position, arrayTracks.size() - 1);
             }
         });
 
