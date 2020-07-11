@@ -185,6 +185,24 @@ public class activity_play extends AppCompatActivity {
         rightImageButton = findViewById(R.id.rightImageButton);
         seekBar = findViewById(R.id.seekBar2);
 
+        Thread seekBarThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    try {
+                        seekBar.setProgress(mediaPlayer.getCurrentPosition() * 100 / mediaPlayer.getDuration());
+                    } catch (Exception ex) {
+
+                    }
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+        seekBarThread.start();
         try {
             if (!mediaPlayer.isPlaying())
                 playImageButton.setImageResource(R.drawable.baseline_play_arrow_24);
@@ -192,20 +210,21 @@ public class activity_play extends AppCompatActivity {
             playImageButton.setImageResource(R.drawable.baseline_pause_24);
         }
 
+
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                Log.d("SEEKBAR", String.valueOf(i));
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
+                mediaPlayer.seekTo(seekBar.getProgress() * mediaPlayer.getDuration() / 100);
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
+                mediaPlayer.seekTo(seekBar.getProgress() * mediaPlayer.getDuration() / 100);
             }
         });
 
