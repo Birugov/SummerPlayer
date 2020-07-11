@@ -15,14 +15,18 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.SeekBar;
 import android.widget.Toast;
 
 import com.example.testsummer.Services.OnClearFromRecentService;
 
+import net.protyposis.android.mediaplayer.FileSource;
 import net.protyposis.android.mediaplayer.MediaPlayer;
 import net.protyposis.android.mediaplayer.MediaSource;
 import net.protyposis.android.mediaplayer.dash.DashSource;
 import net.protyposis.android.mediaplayer.dash.SimpleRateBasedAdaptationLogic;
+
+import java.io.File;
 
 import wseemann.media.FFmpegMediaPlayer;
 
@@ -30,8 +34,10 @@ import wseemann.media.FFmpegMediaPlayer;
 public class activity_play extends AppCompatActivity {
 
     ImageButton mainImageButton, settingImageButton, playImageButton, leftImageButton, rightImageButton;
+    SeekBar seekBar;
     int currentSong = 0;
     MediaPlayer mediaPlayer = activity_main.mediaPlayer;
+    static Context appPlayContext;
 
     static NotificationManager notificationManager;
 
@@ -56,7 +62,7 @@ public class activity_play extends AppCompatActivity {
                 try {
                     mediaPlayer.stop();
                     mediaPlayer.reset();
-                    MediaSource mediaSource = new DashSource(activity_main.appContext, Uri.parse(activity_main.arrayTracks.get(currentSong).file), new SimpleRateBasedAdaptationLogic());
+                    FileSource mediaSource = new FileSource(new File(activity_main.arrayTracks.get(currentSong).file));
                     mediaPlayer.setDataSource(mediaSource);
                     //mediaPlayer.setDataSource(activity_main.arrayTracks.get(currentSong).file);
                     mediaPlayer.prepareAsync();
@@ -76,7 +82,7 @@ public class activity_play extends AppCompatActivity {
                 try {
                     mediaPlayer.stop();
                     mediaPlayer.reset();
-                    MediaSource mediaSource = new DashSource(activity_main.appContext, Uri.parse(activity_main.arrayTracks.get(currentSong).file), new SimpleRateBasedAdaptationLogic());
+                    FileSource mediaSource = new FileSource(new File(activity_main.arrayTracks.get(currentSong).file));
                     mediaPlayer.setDataSource(mediaSource);
                     //mediaPlayer.setDataSource(activity_main.arrayTracks.get(currentSong).file);
                     mediaPlayer.prepareAsync();
@@ -105,7 +111,7 @@ public class activity_play extends AppCompatActivity {
             try {
                 mediaPlayer.stop();
                 mediaPlayer.reset();
-                MediaSource mediaSource = new DashSource(activity_main.appContext, Uri.parse(activity_main.arrayTracks.get(currentSong).file), new SimpleRateBasedAdaptationLogic());
+                FileSource mediaSource = new FileSource(new File(activity_main.arrayTracks.get(currentSong).file));
                 mediaPlayer.setDataSource(mediaSource);
                 //mediaPlayer.setDataSource(activity_main.arrayTracks.get(currentSong).file);
                 mediaPlayer.prepareAsync();
@@ -140,7 +146,7 @@ public class activity_play extends AppCompatActivity {
                     mediaPlayer.start();
                 } catch (Exception ex) {
                     mediaPlayer.reset();
-                    MediaSource mediaSource = new DashSource(activity_main.appContext, Uri.parse(activity_main.arrayTracks.get(currentSong).file), new SimpleRateBasedAdaptationLogic());
+                    FileSource mediaSource = new FileSource(new File(activity_main.arrayTracks.get(currentSong).file));
                     mediaPlayer.setDataSource(mediaSource);
                     //mediaPlayer.setDataSource(activity_main.arrayTracks.get(currentSong).file);
                     mediaPlayer.prepareAsync();
@@ -168,6 +174,7 @@ public class activity_play extends AppCompatActivity {
         }
 
         super.onCreate(savedInstanceState);
+        appPlayContext = getApplicationContext();
         setContentView(R.layout.activity_play);
         currentSong = activity_main.currentSong;
 
@@ -176,6 +183,7 @@ public class activity_play extends AppCompatActivity {
         playImageButton = findViewById(R.id.playImageButton);
         leftImageButton = findViewById(R.id.leftImageButton);
         rightImageButton = findViewById(R.id.rightImageButton);
+        seekBar = findViewById(R.id.seekBar2);
 
         try {
             if (!mediaPlayer.isPlaying())
@@ -183,6 +191,23 @@ public class activity_play extends AppCompatActivity {
         } catch (Exception ex) {
             playImageButton.setImageResource(R.drawable.baseline_pause_24);
         }
+
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                Log.d("SEEKBAR", String.valueOf(i));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
 
         leftImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -227,8 +252,6 @@ public class activity_play extends AppCompatActivity {
                     playImageButton.setImageResource(R.drawable.baseline_pause_24);
             }
         });
-
-
     }
 
 
