@@ -18,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -29,6 +30,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import wseemann.media.FFmpegMediaPlayer;
+
 
 public class activity_main extends AppCompatActivity {
 
@@ -36,7 +39,7 @@ public class activity_main extends AppCompatActivity {
 
     private Button toPlay;
     private Button btnSetting;
-    static MediaPlayer mediaPlayer = null;
+    public static FFmpegMediaPlayer mediaPlayer = null;
     private ListView listOfSongs;
     private static String stream = null;
     private String title;
@@ -55,10 +58,11 @@ public class activity_main extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
 
         if (mediaPlayer == null) {
-            mediaPlayer = new MediaPlayer();
+            mediaPlayer = new FFmpegMediaPlayer();
         }
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         setContentView(R.layout.activity_main);

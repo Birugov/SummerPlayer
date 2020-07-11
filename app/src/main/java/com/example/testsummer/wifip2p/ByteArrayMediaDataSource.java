@@ -15,7 +15,8 @@ public class ByteArrayMediaDataSource extends MediaDataSource {
     int size = 0;
 
     public ByteArrayMediaDataSource() {
-        this.data = new byte[9000000];
+        this.data = new byte[(int) activity_p2p.getByteArraySize()];
+        //this.data = new byte[900000];
     }
 
     public void addBytes(byte[] data) {
@@ -28,6 +29,17 @@ public class ByteArrayMediaDataSource extends MediaDataSource {
     public int readAt(long position, byte[] buffer, int offset, int size) throws IOException {
         System.arraycopy(data, (int)position, buffer, offset, size);
         return size;
+    }
+
+    public int getLastInt() {
+        int number = data[size - 2] << 8 | data[size - 1];
+        return number;
+    }
+
+    public void deleteLastInt() {
+        data[size - 2] = 0;
+        data[size - 1] = 0;
+        size-=2;
     }
 
     @Override

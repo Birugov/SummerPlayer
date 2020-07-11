@@ -4,8 +4,10 @@ import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.IntentFilter;
+import android.media.AudioAttributes;
 import android.media.MediaDataSource;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.net.wifi.WpsInfo;
 import android.net.wifi.p2p.WifiP2pConfig;
@@ -36,9 +38,12 @@ import androidx.core.app.ActivityCompat;
 
 import com.example.testsummer.R;
 import com.example.testsummer.Services.WiFiDirectBroadcastReceiver;
+import com.example.testsummer.activity_main;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -51,6 +56,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+
+import wseemann.media.FFmpegMediaPlayer;
 
 public class activity_p2p extends AppCompatActivity {
 
@@ -73,6 +80,7 @@ public class activity_p2p extends AppCompatActivity {
 
     public boolean booled = true;
     static final int MESSAGE_READ = 1;
+    static int byteArraySize = 0;
 
     ServerClass serverClass;
     ClientClass clientClass;
@@ -172,7 +180,7 @@ public class activity_p2p extends AppCompatActivity {
                 String msg = writeMsg.getText().toString();
                 Log.d("WTF", msg);
                 if (msg != null)
-                    clientClass.write(msg.getBytes());
+                    clientClass.write();
             }
         });
     }
@@ -255,12 +263,81 @@ public class activity_p2p extends AppCompatActivity {
         unregisterReceiver(mReceiver);
     }
 
+    public static int getByteArraySize() {
+        return byteArraySize;
+    }
+
+    private FFmpegMediaPlayer mediaPlayer;
+
+    public class AudioPlayerClass extends AsyncTask {
+        FFmpegMediaPlayer mp = new FFmpegMediaPlayer();
+        private String source;
+        private int currentPosition;
+
+        public AudioPlayerClass(String source, int currentPosition) {
+            this.source = source;
+            this.currentPosition = currentPosition;
+        }
+
+        public void run() {
+            mp.setOnPreparedListener(new FFmpegMediaPlayer.OnPreparedListener() {
+
+                @Override
+                public void onPrepared(FFmpegMediaPlayer mp) {
+                    Log.d("7", "1");
+                    mp.seekTo(currentPosition);
+                    mp.start();
+                    if (mp.isPlaying())
+                        Log.d("Play", "true");
+                    else
+                        Log.d("Play", "false");
+                }
+            });
+            mp.setOnErrorListener(new FFmpegMediaPlayer.OnErrorListener() {
+
+                @Override
+                public boolean onError(FFmpegMediaPlayer mp, int what, int extra) {
+                    Log.d("6", "1");
+                    mp.release();
+                    return false;
+                }
+            });
+            Log.d("99", getCacheDir() + "//cacheaudio.mp3");
+            try {
+                mp.setDataSource(getCacheDir() + "//cacheaudio.mp3");
+                mp.prepareAsync();
+                Log.d("0", "1");
+            } catch (IllegalArgumentException e) {
+                Log.d("1", "1");
+                e.printStackTrace();
+            } catch (SecurityException e) {
+                Log.d("2", "1");
+                e.printStackTrace();
+            } catch (IllegalStateException e) {
+                Log.d("3", "1");
+                e.printStackTrace();
+            } catch (IOException e) {
+                Log.d("4", "1");
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        protected Object doInBackground(Object[] objects) {
+            run();
+            try {
+                Thread.sleep(8000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
     public class ServerClass extends AsyncTask {
         Socket socket;
         ServerSocket serverSocket;
 
-        private InputStream inputStream;
-
+        private DataInputStream inputStream;
 
         @RequiresApi(api = Build.VERSION_CODES.M)
         @Override
@@ -273,33 +350,82 @@ public class activity_p2p extends AppCompatActivity {
                 Log.d("CLOS2", "CIRCLE2.45");
                 socket = serverSocket.accept();
                 Log.d("CLOS2", "CIRCLE2.5");
-                inputStream = socket.getInputStream();
+                inputStream = new DataInputStream(socket.getInputStream());
                 Log.d("CLOS2", "CIRCLE3");
-                MediaPlayer mediaPlayer = new MediaPlayer();
-                ByteArrayMediaDataSource po = new ByteArrayMediaDataSource();
-
                 int num = 0;
-                byte[] buffer = new byte[1024];
+
                 int bytes;
                 boolean started = false;
-                while (socket != null) {
+                if (socket != null)
+                    byteArraySize = inputStream.readInt();
+                byte[] buffer = new byte[byteArraySize];
+                mediaPlayer = activity_main.mediaPlayer;
+                ByteArrayMediaDataSource po = new ByteArrayMediaDataSource();
+                FileOutputStream fileOut = new FileOutputStream(getCacheDir() + "//cacheaudio.mp3");
+                int currentPos = 0;
+                int tmpOld1 = inputStream.read();
+                int tmpOld2 = inputStream.read();
+               // while (socket != null) {
+                Log.d("ye", "ye");
                     try {
-                        bytes = inputStream.read(buffer);
-                        if (bytes > 0) {
-                            po.addBytes(buffer);
-                            Log.d("ADDING", "OK");
-                            num++;
+                        while (true) {
+                            int tmp = inputStream.read();
+                            if (tmp != -1) {
+                                fileOut.write(tmpOld1);
+                                tmpOld1 = tmpOld2;
+                                tmpOld2 = tmp;
+                            }
+                            else {
+                                currentPos = tmpOld1 << 8 | tmpOld2;
+                                break;
+                            }
                         }
-                        if (bytes == -1)
-                            break;
+//                        bytes = inputStream.read(buffer);
+//                        if (bytes > 0) {
+//                            po.addBytes(buffer);
+//
+//                            Log.d("ADDING", "OK");
+//                            num++;
+                            //currentPos = buffer[size - 2] << 8 | data[size - 1];
+                        //}
+//                        if (bytes == -1) {
+//                            Log.d("BREAKED", "-1");
+//                            break;
+//                        }
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                }
-                Log.d("PLAYING", "OK " + po.size + " vs " + R.raw.sound1);
-                mediaPlayer.setDataSource(po);
-                mediaPlayer.prepare();
-                mediaPlayer.start();
+                inputStream.close();
+
+                Log.d("ye", "ye");
+               // }
+                //fileOut.close();
+                //po.deleteLastInt();
+                //Log.d("PLAYING", "OK " + po.size + " vs " + R.raw.sound1);
+//                if (mediaPlayer.isPlaying()) {
+//                    mediaPlayer.stop();
+//                    mediaPlayer.reset();
+//                }
+
+                AudioPlayerClass audioPlayerClass = new AudioPlayerClass(getCacheDir() + "//cacheaudio.mp3", currentPos);
+                audioPlayerClass.execute();
+
+
+
+
+//                new File (getCacheDir() + "/cacheaudio.mp3").setReadable(true);
+//                //mediaPlayer = MediaPlayer.create(getApplicationContext(), Uri.parse(getCacheDir() + "/cacheaudio.mp3"));
+//                mediaPlayer.setAudioAttributes(
+//                        new AudioAttributes.Builder()
+//                                .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+//                                .setUsage(AudioAttributes.USAGE_MEDIA)
+//                                .build()
+//                );
+//                mediaPlayer.setDataSource(getCacheDir() + "/cacheaudio.mp3");
+//                //mediaPlayer.setDataSource(po);
+//                //mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.sound1);
+//                //mediaPlayer.seekTo(currentPos);
+//                mediaPlayer.start();
                 serverSocket.close();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -357,9 +483,10 @@ public class activity_p2p extends AppCompatActivity {
 //    }
 
     public class ClientClass extends AsyncTask {
-        private OutputStream outputStream = null;
+        private DataOutputStream outputStream = null;
         Socket socket;
         String hostAdd;
+        FFmpegMediaPlayer mediaPlayer = activity_main.mediaPlayer;
 
         public ClientClass(InetAddress hostAddress) {
             Log.d("CLOS", "FUCK3");
@@ -375,36 +502,38 @@ public class activity_p2p extends AppCompatActivity {
 
         }
 
-        public void write(byte[] text) {
+        public void write() {
+            if (mediaPlayer == null)
+                return;
             try {
+                int soundSize = (int) new File(activity_main.getStream()).length();
                 Log.d("SENDING", "OK");
                 if (outputStream == null)
-                    outputStream = socket.getOutputStream();
+                    outputStream = new DataOutputStream(socket.getOutputStream());
                 Log.d("SENDING", "OK3");
-                InputStream inputStream = null;
-                inputStream = new ByteArrayInputStream(text);
+
+                InputStream inputStream = new FileInputStream(activity_main.getStream());
                 int len;
-                while ((len = inputStream.read(text)) != -1) {
-                    Log.d("SENDING", "OK2");
-                    outputStream.write(text, 0, len);
-                }
-                Log.d("SENDINGERROR", String.valueOf(len));
+                byte[] text = new byte[soundSize];
+                outputStream.writeInt(soundSize);
+                inputStream.read(text);
+                outputStream.write(text);
+                outputStream.writeInt(activity_main.mediaPlayer.getCurrentPosition());
+//                while ((len = inputStream.read(text)) != -1) {
+//                    Log.d("SENDING", "OK2");
+//                    outputStream.write(text);
+//                }
+                //Log.d("SENDINGERROR", String.valueOf(len));
                 //outputStream.close();
+                //outputStream.writeInt(mediaPlayer.getCurrentPosition());
                 outputStream.flush();
+
                 inputStream.close();
             } catch (IOException e) {
                 Log.d("ClientSocket.TAG", e.toString());
             } catch (Exception ex) {
                 Log.d("SENDING", ex.getMessage());
-//                if (socket != null) {
-//                    if (socket.isConnected()) {
-//                        try {
-//                            socket.close();
-//                        } catch (IOException e) {
-//                            //catch logic
-//                        }
-//                    }
-//                }
+
             }
         }
 
@@ -412,7 +541,8 @@ public class activity_p2p extends AppCompatActivity {
         protected void onPostExecute(Object o) {
             super.onPostExecute(o);
             try {
-                outputStream.flush();
+                if (outputStream != null)
+                outputStream.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -420,29 +550,33 @@ public class activity_p2p extends AppCompatActivity {
 
         @Override
         protected Object doInBackground(Object[] objects) {
+            if (mediaPlayer == null && !mediaPlayer.isPlaying())
+                return null;
+            InputStream inputStream = null;
             try {
                 socket.bind(null);
                 socket.connect(new InetSocketAddress(hostAdd, 16384), 500);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            InputStream inputStream = getResources().openRawResource(R.raw.sound1);
-
-            int length;
-            long size = 0;
-            byte[] buff = new byte[1024];
-            while (true) {
-                try {
-                    if (((length = inputStream.read(buff)) == -1)) break;
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                write(buff);
-                size += buff.length;
-            }
-            Log.d("LEN", String.valueOf(size));
-            try {
-                outputStream.close();
+                //inputStream = new FileInputStream((activity_main.getStream()));
+                //inputStream = getResources().openRawResource(R.raw.sound1);
+                write();
+//                int length;
+//                long size = 0;
+//                byte[] buff = new byte[1024];
+//                while (true && inputStream != null) {
+//                    try {
+//                        if (((length = inputStream.read(buff)) == -1)) break;
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//                    write(buff);
+//                    size += buff.length;
+//                }
+//                Log.d("LEN", String.valueOf(size));
+//                try {
+//                    outputStream.close();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
             } catch (IOException e) {
                 e.printStackTrace();
             }

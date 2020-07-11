@@ -19,12 +19,14 @@ import android.widget.ImageButton;
 
 import com.example.testsummer.Services.OnClearFromRecentService;
 
+import wseemann.media.FFmpegMediaPlayer;
+
 
 public class activity_play extends AppCompatActivity {
 
     ImageButton mainImageButton, settingImageButton, playImageButton, leftImageButton, rightImageButton;
     int currentSong = 0;
-    MediaPlayer mediaPlayer = activity_main.mediaPlayer;
+    FFmpegMediaPlayer mediaPlayer = activity_main.mediaPlayer;
 
     NotificationManager notificationManager;
 
@@ -46,14 +48,14 @@ public class activity_play extends AppCompatActivity {
         if (currentSong > 0) {
             if (firstTime) {
                 mediaPlayer.stop();
-                mediaPlayer = MediaPlayer.create(activity_play.this, Uri.parse(activity_main.arrayTracks.get(currentSong).file));
+                mediaPlayer = FFmpegMediaPlayer.create(activity_play.this, Uri.parse(activity_main.arrayTracks.get(currentSong).file));
                 mediaPlayer.start();
                 firstTime = false;
             } else {
                 activity_main.currentSong--;
                 currentSong = activity_main.currentSong;
                 mediaPlayer.stop();
-                mediaPlayer = MediaPlayer.create(activity_play.this, Uri.parse(activity_main.arrayTracks.get(currentSong).file));
+                mediaPlayer = FFmpegMediaPlayer.create(activity_play.this, Uri.parse(activity_main.arrayTracks.get(currentSong).file));
                 mediaPlayer.start();
                 firstTime = true;
             }
@@ -70,7 +72,7 @@ public class activity_play extends AppCompatActivity {
             activity_main.currentSong++;
             currentSong = activity_main.currentSong;
             mediaPlayer.stop();
-            mediaPlayer = MediaPlayer.create(activity_play.this, Uri.parse(activity_main.arrayTracks.get(currentSong).file));
+            mediaPlayer = FFmpegMediaPlayer.create(activity_play.this, Uri.parse(activity_main.arrayTracks.get(currentSong).file));
             mediaPlayer.start();
             playImageButton.setImageResource(R.drawable.baseline_pause_24);
         }
@@ -87,10 +89,10 @@ public class activity_play extends AppCompatActivity {
                     R.drawable.baseline_play_arrow_24, currentSong, activity_main.arrayTracks.size() - 1);
         } else {
             try {
-                mediaPlayer.getTrackInfo();
+                //mediaPlayer.getTrackInfo();
                 mediaPlayer.start();
             } catch (Exception ex) {
-                mediaPlayer = MediaPlayer.create(activity_play.this, Uri.parse(activity_main.arrayTracks.get(currentSong).file));
+                mediaPlayer = FFmpegMediaPlayer.create(activity_play.this, Uri.parse(activity_main.arrayTracks.get(currentSong).file));
                 mediaPlayer.start();
             }
 
