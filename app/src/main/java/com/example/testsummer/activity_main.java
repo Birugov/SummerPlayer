@@ -1,6 +1,7 @@
 package com.example.testsummer;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -22,6 +23,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+
+//import com.example.testsummer.wifip2p.activity_p2p;
 
 //import com.example.testsummer.wifip2p.activity_p2p;
 
@@ -53,17 +56,18 @@ public class activity_main extends AppCompatActivity {
         return stream;
     }
 
+
+    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         if (mediaPlayer == null) {
             mediaPlayer = new MediaPlayer();
         }
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         setContentView(R.layout.activity_main);
         toPlay = findViewById(R.id.toPlay);
-//        btnSetting = findViewById(R.id.settings);
+        btnSetting = findViewById(R.id.settings);
         btnSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
