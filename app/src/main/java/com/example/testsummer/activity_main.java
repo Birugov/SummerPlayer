@@ -1,8 +1,11 @@
 package com.example.testsummer;
 
 import android.Manifest;
+import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.media.AudioManager;
@@ -10,6 +13,7 @@ import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
@@ -24,6 +28,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.example.testsummer.Services.OnClearFromRecentService;
 import com.example.testsummer.wifip2p.activity_p2p;
 
 import java.io.File;
@@ -43,10 +48,10 @@ public class activity_main extends AppCompatActivity {
     private ListView listOfSongs;
     private static String stream = null;
     private String title;
-    protected static Integer currentSong;
-    protected static PLayerTask playerTask = null;
+    protected static Integer currentSong = 0;
+    protected static PlayerTask playerTask = null;
 
-
+    public static Context appContext;
 
     ArrayList<String> arrayList;
     ArrayAdapter<String> adapter;
@@ -60,12 +65,14 @@ public class activity_main extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        appContext = getApplicationContext();
 
         if (mediaPlayer == null) {
             mediaPlayer = new FFmpegMediaPlayer();
         }
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-        setContentView(R.layout.activity_main);
         toPlay = findViewById(R.id.toPlay);
         btnSetting = findViewById(R.id.settings);
         btnSetting.setOnClickListener(new View.OnClickListener() {
@@ -83,6 +90,29 @@ public class activity_main extends AppCompatActivity {
             }
         });
 
+        BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                activity_play activityPlay = new activity_play();
+                String action = intent.getExtras().getString("actionname");
+
+                switch (action) {
+                    case CreateNotification.ACTION_PREVIOUS:
+                        activityPlay.playPrevios();
+                        break;
+                    case CreateNotification.ACTION_NEXT:
+                        activityPlay.playNext();
+                        break;
+                    case CreateNotification.ACTION_PLAY:
+                        activityPlay.pausePlay();
+                        break;
+                }
+            }
+        };
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            registerReceiver(broadcastReceiver, new IntentFilter("TRACKS_TRACKS"));
+            startService(new Intent(activity_main.appContext, OnClearFromRecentService.class));
+        }
 
         if (ContextCompat.checkSelfPermission(activity_main.this,
                 Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -174,42 +204,21 @@ public class activity_main extends AppCompatActivity {
                 stream = arrayTracks.get((int) id).file;
                 title = arrayList.get(position).substring(arrayList.get(position).indexOf("Title: ")+6, arrayList.get(position).indexOf("Artist: "));
                 currentSong = (int) id;
-                if (mediaPlayer.isPlaying() == true) {
-                    mediaPlayer.stop();
-                    mediaPlayer.reset();
+                try {
+                    if (mediaPlayer.isPlaying() == true) {
+                        mediaPlayer.stop();
+                        mediaPlayer.reset();
+                    }
+                } catch (Exception ex) {
+                    mediaPlayer = new FFmpegMediaPlayer();
                 }
-                playerTask = new PLayerTask();
+                playerTask = new PlayerTask(mediaPlayer, title);
                 playerTask.execute(stream);
-                CreateNotification.createNotification(activity_main.this, arrayTracks.get((int) id), R.drawable.baseline_pause_24, position, arrayTracks.size() - 1);
+                CreateNotification.createNotification(activity_main.appContext, arrayTracks.get((int) id), R.drawable.baseline_pause_24, position, arrayTracks.size() - 1);
             }
         });
 
-
-
     }
 
-
-    private class PLayerTask extends AsyncTask<String, Void, Boolean> {
-        protected boolean prepared = false;
-        @Override
-        protected Boolean doInBackground(String... strings) {
-            try {
-                mediaPlayer.setDataSource(stream);
-                mediaPlayer.prepare();
-                prepared = true;
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return prepared;
-        }
-
-        @Override
-        protected void onPostExecute(Boolean aBoolean) {
-            super.onPostExecute(aBoolean);
-            mediaPlayer.start();
-            Toast.makeText(activity_main.this, "Playing..  " + title, Toast.LENGTH_SHORT).show();
-        }
-
-    }
 
 }
