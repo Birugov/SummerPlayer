@@ -1,33 +1,44 @@
 package com.example.testsummer;
 
 import android.Manifest;
+import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.media.AudioManager;
 import android.media.MediaMetadataRetriever;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.example.testsummer.Services.OnClearFromRecentService;
 import com.example.testsummer.wifip2p.activity_p2p;
+
+import net.protyposis.android.mediaplayer.FileSource;
+import net.protyposis.android.mediaplayer.MediaPlayer;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import wseemann.media.FFmpegMediaPlayer;
 
 
 public class activity_main extends AppCompatActivity {
@@ -36,14 +47,14 @@ public class activity_main extends AppCompatActivity {
 
     private Button toPlay;
     private Button btnSetting;
-    static MediaPlayer mediaPlayer = null;
+    public static MediaPlayer mediaPlayer = null;
     private ListView listOfSongs;
     private static String stream = null;
     private String title;
-    protected static Integer currentSong;
-    protected static PLayerTask playerTask = null;
+    protected static Integer currentSong = 0;
+    protected static PlayerTask playerTask = null;
 
-
+    public static Context appContext;
 
     ArrayList<String> arrayList;
     ArrayAdapter<String> adapter;
@@ -55,13 +66,30 @@ public class activity_main extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.READ_PHONE_STATE,
+                Manifest.permission.FOREGROUND_SERVICE,
+                Manifest.permission.ACCESS_WIFI_STATE,
+                Manifest.permission.CHANGE_WIFI_STATE,
+                Manifest.permission.INTERNET,
+                Manifest.permission.CHANGE_NETWORK_STATE,
+                Manifest.permission.ACCESS_NETWORK_STATE,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.ACCESS_MEDIA_LOCATION,
+                Manifest.permission.MODIFY_AUDIO_SETTINGS,
+        }, 1);
+        appContext = getApplicationContext();
 
         if (mediaPlayer == null) {
             mediaPlayer = new MediaPlayer();
         }
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-        setContentView(R.layout.activity_main);
         toPlay = findViewById(R.id.toPlay);
         btnSetting = findViewById(R.id.settings);
         btnSetting.setOnClickListener(new View.OnClickListener() {
@@ -79,6 +107,29 @@ public class activity_main extends AppCompatActivity {
             }
         });
 
+        BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                activity_play activityPlay = new activity_play();
+                String action = intent.getExtras().getString("actionname");
+
+                switch (action) {
+                    case CreateNotification.ACTION_PREVIOUS:
+                        activityPlay.playPrevios();
+                        break;
+                    case CreateNotification.ACTION_NEXT:
+                        activityPlay.playNext();
+                        break;
+                    case CreateNotification.ACTION_PLAY:
+                        activityPlay.pausePlay();
+                        break;
+                }
+            }
+        };
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            registerReceiver(broadcastReceiver, new IntentFilter("TRACKS_TRACKS"));
+            startService(new Intent(activity_main.appContext, OnClearFromRecentService.class));
+        }
 
         if (ContextCompat.checkSelfPermission(activity_main.this,
                 Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -115,18 +166,27 @@ public class activity_main extends AppCompatActivity {
                 String currentLocation = songCursor.getString(songLocation);
 
                 byte[] image = null;
+                boolean isReadable = false;
                 try {
                     MediaMetadataRetriever mediaMetadataRetriever = (MediaMetadataRetriever) new MediaMetadataRetriever();
-                    Uri uri = (Uri) Uri.fromFile(new File(currentLocation));
-                    mediaMetadataRetriever.setDataSource(activity_main.this, uri);
+                    File file = new File(currentLocation);
+                    Log.d("CANREAD", String.valueOf(file.canRead()));
+                    file.setReadable(true);
+                    Log.d("CANREAD", String.valueOf(file.canRead()));
+                    if (file.canRead()) {
+                        isReadable = true;
+                        Uri uri = (Uri) Uri.fromFile(new File(currentLocation));
+                        mediaMetadataRetriever.setDataSource(activity_main.this, uri);
+                        image = mediaMetadataRetriever.getEmbeddedPicture();
+                    }
 
-                    image = mediaMetadataRetriever.getEmbeddedPicture();
                 } catch (Exception ex) {}
-
-                Track track = new Track(currentTitle, currentArtist, currentLocation, image);
-                arrayTracks.add(track);
-                arrayList.add("Title: " + track.title + "\n"
-                        + "Artist: " + track.artist);
+                if (isReadable) {
+                    Track track = new Track(currentTitle, currentArtist, currentLocation, image);
+                    arrayTracks.add(track);
+                    arrayList.add("Title: " + track.title + "\n"
+                            + "Artist: " + track.artist);
+                }
             } while (songCursor.moveToNext());
             stream = arrayTracks.get(0).file;
             currentSong = 0;
@@ -170,42 +230,21 @@ public class activity_main extends AppCompatActivity {
                 stream = arrayTracks.get((int) id).file;
                 title = arrayList.get(position).substring(arrayList.get(position).indexOf("Title: ")+6, arrayList.get(position).indexOf("Artist: "));
                 currentSong = (int) id;
-                if (mediaPlayer.isPlaying() == true) {
-                    mediaPlayer.stop();
-                    mediaPlayer.reset();
+                try {
+                    if (mediaPlayer.isPlaying() == true) {
+                        mediaPlayer.stop();
+                        mediaPlayer.reset();
+                    }
+                } catch (Exception ex) {
+                    mediaPlayer = new MediaPlayer();
                 }
-                playerTask = new PLayerTask();
+                playerTask = new PlayerTask(mediaPlayer, title);
                 playerTask.execute(stream);
-                CreateNotification.createNotification(activity_main.this, arrayTracks.get((int) id), R.drawable.baseline_pause_24, position, arrayTracks.size() - 1);
+                CreateNotification.createNotification(activity_main.appContext, arrayTracks.get((int) id), R.drawable.baseline_pause_24, position, arrayTracks.size() - 1);
             }
         });
 
-
-
     }
 
-
-    private class PLayerTask extends AsyncTask<String, Void, Boolean> {
-        protected boolean prepared = false;
-        @Override
-        protected Boolean doInBackground(String... strings) {
-            try {
-                mediaPlayer.setDataSource(stream);
-                mediaPlayer.prepare();
-                prepared = true;
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return prepared;
-        }
-
-        @Override
-        protected void onPostExecute(Boolean aBoolean) {
-            super.onPostExecute(aBoolean);
-            mediaPlayer.start();
-            Toast.makeText(activity_main.this, "Playing..  " + title, Toast.LENGTH_SHORT).show();
-        }
-
-    }
 
 }
