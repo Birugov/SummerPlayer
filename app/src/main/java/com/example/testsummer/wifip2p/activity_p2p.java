@@ -170,13 +170,29 @@ public class activity_p2p extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String msg = writeMsg.getText().toString();
-                Log.d("WTF", msg);
-                if (msg != null)
-                    clientClass.write();
+                try {
+                    int mils = Integer.valueOf(msg);
+                    delay(mils);
+                } catch (Exception ex) {
+                    Log.d("ERP", ex.getMessage());
+                    Toast.makeText(activity_main.appContext, "Enter number in milliseconds", Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
 
+    private void delay(int millisec) {
+        try {
+            if (mediaPlayer.isPlaying()) {
+                int currentPos = mediaPlayer.getCurrentPosition();
+                if (currentPos > millisec)
+                mediaPlayer.seekTo(currentPos - millisec);
+            }
+        } catch (Exception ex) {
+            Log.d("ERP2", ex.getMessage());
+            Toast.makeText(activity_main.appContext, "Can't delay", Toast.LENGTH_LONG).show();
+        }
+    }
 
     private void initialWork() {
         btnOnOff = (Button) findViewById(R.id.onOff);
@@ -259,72 +275,72 @@ public class activity_p2p extends AppCompatActivity {
         return byteArraySize;
     }
 
-    private MediaPlayer mediaPlayer;
+    public static MediaPlayer mediaPlayer;
 
-    public class AudioPlayerClass extends AsyncTask {
-        FFmpegMediaPlayer mp = new FFmpegMediaPlayer();
-        private String source;
-        private int currentPosition;
-
-        public AudioPlayerClass(String source, int currentPosition) {
-            this.source = source;
-            this.currentPosition = currentPosition;
-        }
-
-        public void run() {
-            mp.setOnPreparedListener(new FFmpegMediaPlayer.OnPreparedListener() {
-
-                @Override
-                public void onPrepared(FFmpegMediaPlayer mp) {
-                    Log.d("7", "1");
-                    mp.seekTo(currentPosition);
-                    mp.start();
-                    if (mp.isPlaying())
-                        Log.d("Play", "true");
-                    else
-                        Log.d("Play", "false");
-                }
-            });
-            mp.setOnErrorListener(new FFmpegMediaPlayer.OnErrorListener() {
-
-                @Override
-                public boolean onError(FFmpegMediaPlayer mp, int what, int extra) {
-                    Log.d("6", "1");
-                    mp.release();
-                    return false;
-                }
-            });
-            Log.d("99", getCacheDir() + "//cacheaudio.mp3");
-            try {
-                mp.setDataSource(getCacheDir() + "//cacheaudio.mp3");
-                mp.prepareAsync();
-                Log.d("0", "1");
-            } catch (IllegalArgumentException e) {
-                Log.d("1", "1");
-                e.printStackTrace();
-            } catch (SecurityException e) {
-                Log.d("2", "1");
-                e.printStackTrace();
-            } catch (IllegalStateException e) {
-                Log.d("3", "1");
-                e.printStackTrace();
-            } catch (IOException e) {
-                Log.d("4", "1");
-                e.printStackTrace();
-            }
-        }
-
-        @Override
-        protected Object doInBackground(Object[] objects) {
-            run();
-            try {
-                Thread.sleep(8000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-    }
+//    public class AudioPlayerClass extends AsyncTask {
+//        FFmpegMediaPlayer mp = new FFmpegMediaPlayer();
+//        private String source;
+//        private int currentPosition;
+//
+//        public AudioPlayerClass(String source, int currentPosition) {
+//            this.source = source;
+//            this.currentPosition = currentPosition;
+//        }
+//
+//        public void run() {
+//            mp.setOnPreparedListener(new FFmpegMediaPlayer.OnPreparedListener() {
+//
+//                @Override
+//                public void onPrepared(FFmpegMediaPlayer mp) {
+//                    Log.d("7", "1");
+//                    mp.seekTo(currentPosition);
+//                    mp.start();
+//                    if (mp.isPlaying())
+//                        Log.d("Play", "true");
+//                    else
+//                        Log.d("Play", "false");
+//                }
+//            });
+//            mp.setOnErrorListener(new FFmpegMediaPlayer.OnErrorListener() {
+//
+//                @Override
+//                public boolean onError(FFmpegMediaPlayer mp, int what, int extra) {
+//                    Log.d("6", "1");
+//                    mp.release();
+//                    return false;
+//                }
+//            });
+//            Log.d("99", getCacheDir() + "//cacheaudio.mp3");
+//            try {
+//                mp.setDataSource(getCacheDir() + "//cacheaudio.mp3");
+//                mp.prepareAsync();
+//                Log.d("0", "1");
+//            } catch (IllegalArgumentException e) {
+//                Log.d("1", "1");
+//                e.printStackTrace();
+//            } catch (SecurityException e) {
+//                Log.d("2", "1");
+//                e.printStackTrace();
+//            } catch (IllegalStateException e) {
+//                Log.d("3", "1");
+//                e.printStackTrace();
+//            } catch (IOException e) {
+//                Log.d("4", "1");
+//                e.printStackTrace();
+//            }
+//        }
+//
+//        @Override
+//        protected Object doInBackground(Object[] objects) {
+//            run();
+//            try {
+//                Thread.sleep(8000);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//            return null;
+//        }
+//    }
     public class ServerClass extends AsyncTask {
         Socket socket;
         ServerSocket serverSocket;
@@ -480,9 +496,9 @@ public class activity_p2p extends AppCompatActivity {
         private DataOutputStream outputStream = null;
         Socket socket;
         String hostAdd;
-        MediaPlayer mediaPlayer = activity_main.mediaPlayer;
 
         public ClientClass(InetAddress hostAddress) {
+            mediaPlayer = activity_main.mediaPlayer;
             Log.d("CLOS", "FUCK3");
             try {
                 hostAdd = hostAddress.getHostAddress();
