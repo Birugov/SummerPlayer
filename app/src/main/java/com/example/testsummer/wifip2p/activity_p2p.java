@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.IntentFilter;
 import android.media.AudioAttributes;
 import android.media.MediaDataSource;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.net.wifi.WpsInfo;
@@ -36,10 +35,15 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.example.testsummer.PlayerTask;
 import com.example.testsummer.R;
 import com.example.testsummer.Services.WiFiDirectBroadcastReceiver;
 import com.example.testsummer.activity_main;
 
+import net.protyposis.android.mediaplayer.MediaPlayer;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
@@ -90,18 +94,6 @@ public class activity_p2p extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_p2p);
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.READ_PHONE_STATE,
-                Manifest.permission.FOREGROUND_SERVICE,
-                Manifest.permission.ACCESS_WIFI_STATE,
-                Manifest.permission.CHANGE_WIFI_STATE,
-                Manifest.permission.INTERNET,
-                Manifest.permission.CHANGE_NETWORK_STATE,
-                Manifest.permission.ACCESS_NETWORK_STATE,
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-        }, 1);
 
         initialWork();
         exqListener();
@@ -267,7 +259,7 @@ public class activity_p2p extends AppCompatActivity {
         return byteArraySize;
     }
 
-    private FFmpegMediaPlayer mediaPlayer;
+    private MediaPlayer mediaPlayer;
 
     public class AudioPlayerClass extends AsyncTask {
         FFmpegMediaPlayer mp = new FFmpegMediaPlayer();
@@ -350,7 +342,7 @@ public class activity_p2p extends AppCompatActivity {
                 Log.d("CLOS2", "CIRCLE2.45");
                 socket = serverSocket.accept();
                 Log.d("CLOS2", "CIRCLE2.5");
-                inputStream = new DataInputStream(socket.getInputStream());
+                inputStream = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
                 Log.d("CLOS2", "CIRCLE3");
                 int num = 0;
 
@@ -361,7 +353,7 @@ public class activity_p2p extends AppCompatActivity {
                 byte[] buffer = new byte[byteArraySize];
                 mediaPlayer = activity_main.mediaPlayer;
                 ByteArrayMediaDataSource po = new ByteArrayMediaDataSource();
-                FileOutputStream fileOut = new FileOutputStream(getCacheDir() + "//cacheaudio.mp3");
+                BufferedOutputStream fileOut = new BufferedOutputStream(new FileOutputStream(getCacheDir() + "//cacheaudio.mp3"));
                 int currentPos = 0;
                 int tmpOld1 = inputStream.read();
                 int tmpOld2 = inputStream.read();
@@ -407,8 +399,10 @@ public class activity_p2p extends AppCompatActivity {
 //                    mediaPlayer.reset();
 //                }
 
-                AudioPlayerClass audioPlayerClass = new AudioPlayerClass(getCacheDir() + "//cacheaudio.mp3", currentPos);
-                audioPlayerClass.execute();
+                PlayerTask playerTask = new PlayerTask(mediaPlayer, "Sound", getCacheDir() + "//cacheaudio.mp3", currentPos);
+                playerTask.execute();
+//                AudioPlayerClass audioPlayerClass = new AudioPlayerClass(getCacheDir() + "//cacheaudio.mp3", currentPos);
+//                audioPlayerClass.execute();
 
 
 
@@ -486,7 +480,7 @@ public class activity_p2p extends AppCompatActivity {
         private DataOutputStream outputStream = null;
         Socket socket;
         String hostAdd;
-        FFmpegMediaPlayer mediaPlayer = activity_main.mediaPlayer;
+        MediaPlayer mediaPlayer = activity_main.mediaPlayer;
 
         public ClientClass(InetAddress hostAddress) {
             Log.d("CLOS", "FUCK3");

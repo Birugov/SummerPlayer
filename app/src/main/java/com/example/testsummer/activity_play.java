@@ -9,7 +9,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.media.AudioManager;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,6 +19,11 @@ import android.widget.Toast;
 
 import com.example.testsummer.Services.OnClearFromRecentService;
 
+import net.protyposis.android.mediaplayer.MediaPlayer;
+import net.protyposis.android.mediaplayer.MediaSource;
+import net.protyposis.android.mediaplayer.dash.DashSource;
+import net.protyposis.android.mediaplayer.dash.SimpleRateBasedAdaptationLogic;
+
 import wseemann.media.FFmpegMediaPlayer;
 
 
@@ -27,7 +31,7 @@ public class activity_play extends AppCompatActivity {
 
     ImageButton mainImageButton, settingImageButton, playImageButton, leftImageButton, rightImageButton;
     int currentSong = 0;
-    FFmpegMediaPlayer mediaPlayer = activity_main.mediaPlayer;
+    MediaPlayer mediaPlayer = activity_main.mediaPlayer;
 
     static NotificationManager notificationManager;
 
@@ -52,14 +56,16 @@ public class activity_play extends AppCompatActivity {
                 try {
                     mediaPlayer.stop();
                     mediaPlayer.reset();
-                    mediaPlayer.setDataSource(activity_main.arrayTracks.get(currentSong).file);
+                    MediaSource mediaSource = new DashSource(activity_main.appContext, Uri.parse(activity_main.arrayTracks.get(currentSong).file), new SimpleRateBasedAdaptationLogic());
+                    mediaPlayer.setDataSource(mediaSource);
+                    //mediaPlayer.setDataSource(activity_main.arrayTracks.get(currentSong).file);
                     mediaPlayer.prepareAsync();
                 } catch (Exception ex) {
                 }
 
-                mediaPlayer.setOnPreparedListener(new FFmpegMediaPlayer.OnPreparedListener() {
+                mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                     @Override
-                    public void onPrepared(FFmpegMediaPlayer mp) {
+                    public void onPrepared(MediaPlayer mp) {
                         mediaPlayer.start();
                     }
                 });
@@ -70,14 +76,16 @@ public class activity_play extends AppCompatActivity {
                 try {
                     mediaPlayer.stop();
                     mediaPlayer.reset();
-                    mediaPlayer.setDataSource(activity_main.arrayTracks.get(currentSong).file);
+                    MediaSource mediaSource = new DashSource(activity_main.appContext, Uri.parse(activity_main.arrayTracks.get(currentSong).file), new SimpleRateBasedAdaptationLogic());
+                    mediaPlayer.setDataSource(mediaSource);
+                    //mediaPlayer.setDataSource(activity_main.arrayTracks.get(currentSong).file);
                     mediaPlayer.prepareAsync();
                 } catch (Exception ex) {
 
                 }
-                mediaPlayer.setOnPreparedListener(new FFmpegMediaPlayer.OnPreparedListener() {
+                mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                     @Override
-                    public void onPrepared(FFmpegMediaPlayer mp) {
+                    public void onPrepared(MediaPlayer mp) {
                         mediaPlayer.start();
                     }
                 });
@@ -97,11 +105,13 @@ public class activity_play extends AppCompatActivity {
             try {
                 mediaPlayer.stop();
                 mediaPlayer.reset();
-                mediaPlayer.setDataSource(activity_main.arrayTracks.get(currentSong).file);
+                MediaSource mediaSource = new DashSource(activity_main.appContext, Uri.parse(activity_main.arrayTracks.get(currentSong).file), new SimpleRateBasedAdaptationLogic());
+                mediaPlayer.setDataSource(mediaSource);
+                //mediaPlayer.setDataSource(activity_main.arrayTracks.get(currentSong).file);
                 mediaPlayer.prepareAsync();
-                mediaPlayer.setOnPreparedListener(new FFmpegMediaPlayer.OnPreparedListener() {
+                mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                     @Override
-                    public void onPrepared(FFmpegMediaPlayer mp) {
+                    public void onPrepared(MediaPlayer mp) {
                         mediaPlayer.start();
                     }
                 });
@@ -130,11 +140,13 @@ public class activity_play extends AppCompatActivity {
                     mediaPlayer.start();
                 } catch (Exception ex) {
                     mediaPlayer.reset();
-                    mediaPlayer.setDataSource(activity_main.arrayTracks.get(currentSong).file);
+                    MediaSource mediaSource = new DashSource(activity_main.appContext, Uri.parse(activity_main.arrayTracks.get(currentSong).file), new SimpleRateBasedAdaptationLogic());
+                    mediaPlayer.setDataSource(mediaSource);
+                    //mediaPlayer.setDataSource(activity_main.arrayTracks.get(currentSong).file);
                     mediaPlayer.prepareAsync();
-                    mediaPlayer.setOnPreparedListener(new FFmpegMediaPlayer.OnPreparedListener() {
+                    mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                         @Override
-                        public void onPrepared(FFmpegMediaPlayer mp) {
+                        public void onPrepared(MediaPlayer mp) {
                             mediaPlayer.start();
                         }
                     });
