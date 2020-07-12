@@ -18,17 +18,23 @@
     <option name="TOOL_WINDOW_REGEXP_FILTER" value="false" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="689912bb-895a-480c-876f-2c033ea9b7b7" name="Default Changelist" comment="// seekBar">
+    <list default="true" id="689912bb-895a-480c-876f-2c033ea9b7b7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/jarAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/testsummer/activity_main.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/testsummer/activity_main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/testsummer/wifip2p/activity_p2p.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/testsummer/wifip2p/activity_p2p.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_p2p.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_p2p.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +87,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="android.sdk.path" value="C:/AndroidSstudio" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Dependencies" />
+    <property name="project.structure.last.edited" value="SDK Location" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="gradle.compiler" />
@@ -353,7 +359,14 @@
       <option name="project" value="LOCAL" />
       <updated>1594502169679</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="// fix">
+      <created>1594571230488</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1594571230488</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -384,13 +397,15 @@
     <MESSAGE value="// rewrite some code" />
     <MESSAGE value="// music by wifi added" />
     <MESSAGE value="// music by wifi + delay + fix bugs + hide unreadable music + restructured app + rewrite some method + prevent some crash" />
-    <option name="LAST_COMMIT_MESSAGE" value="// music by wifi + delay + fix bugs + hide unreadable music + restructured app + rewrite some method + prevent some crash" />
+    <MESSAGE value="// fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="// fix" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="158" y="73" key="#PSD" timestamp="1594499852367">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state x="190" y="88" key="#PSD" timestamp="1594571475107">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="158" y="73" key="#PSD/0.0.1280.680@0.0.1280.680" timestamp="1594499852367" />
+    <state x="190" y="88" key="#PSD/0.0.1536.824@0.0.1536.824" timestamp="1594571475107" />
     <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1594302293936">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -416,20 +431,20 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="349" y="167" key="AndroidCreateResourceFileDialog/0.0.1536.824@0.0.1536.824" timestamp="1594557989660" />
-    <state x="628" y="243" key="AndroidCreateXmlResourceDialog" timestamp="1594553844373">
+    <state x="628" y="243" key="AndroidCreateXmlResourceDialog" timestamp="1594590315311">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="628" y="243" key="AndroidCreateXmlResourceDialog/0.0.1536.824@0.0.1536.824" timestamp="1594553844373" />
-    <state x="96" y="0" key="CommitChangelistDialog2" timestamp="1594571195545">
+    <state x="628" y="243" key="AndroidCreateXmlResourceDialog/0.0.1536.824@0.0.1536.824" timestamp="1594590315311" />
+    <state x="96" y="0" key="CommitChangelistDialog2" timestamp="1594571229704">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="80" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1594507021014" />
-    <state x="96" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1594571195545" />
-    <state x="505" y="116" key="FileChooserDialogImpl" timestamp="1594558153709">
+    <state x="96" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1594571229704" />
+    <state x="505" y="116" key="FileChooserDialogImpl" timestamp="1594571377114">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="421" y="96" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1594394388974" />
-    <state x="505" y="116" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1594558153709" />
+    <state x="505" y="116" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1594571377114" />
     <state width="1491" height="210" key="GridCell.Tab.0.bottom" timestamp="1594561085221">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -454,14 +469,16 @@
     <state width="1236" height="153" key="GridCell.Tab.0.right/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1594274602296" />
     <state width="1220" height="405" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1594545704120" />
     <state width="1491" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1594561085220" />
-    <state x="122" y="58" key="MergeDialog" timestamp="1594360690789">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state x="146" y="70" key="MergeDialog" timestamp="1594571317246">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="122" y="58" key="MergeDialog/0.0.1280.680@0.0.1280.680" timestamp="1594360690789" />
-    <state x="354" y="70" width="572" height="554" key="MultipleFileMergeDialog" timestamp="1594360693709">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state x="146" y="70" key="MergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1594571317246" />
+    <state x="425" y="85" width="572" height="554" key="MultipleFileMergeDialog" timestamp="1594571325813">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="354" y="70" width="572" height="554" key="MultipleFileMergeDialog/0.0.1280.680@0.0.1280.680" timestamp="1594360693709" />
+    <state x="425" y="85" key="MultipleFileMergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1594571325813" />
     <state x="142" y="0" key="SettingsEditor" timestamp="1594293065480">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -475,11 +492,11 @@
     </state>
     <state x="93" y="93" width="1095" height="495" key="com.android.tools.idea.avdmanager.AvdListDialog/0.0.1280.680@0.0.1280.680" timestamp="1594275720129" />
     <state x="129" y="105" width="1314" height="600" key="com.android.tools.idea.avdmanager.AvdListDialog/0.0.1536.824@0.0.1536.824" timestamp="1594553514803" />
-    <state x="388" y="195" key="com.intellij.ide.util.TipDialog" timestamp="1594538376474">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state x="465" y="236" key="com.intellij.ide.util.TipDialog" timestamp="1594589780097">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="388" y="195" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1594538376474" />
-    <state x="465" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1594309962801" />
+    <state x="465" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1594589780097" />
     <state x="540" y="313" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1594309725020">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -493,19 +510,24 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="419" y="54" key="git4idea.branch.GitSmartOperationDialog/0.0.1280.680@0.0.1280.680" timestamp="1594282935176" />
-    <state x="442" y="131" key="git4idea.merge.GitMergeDialog" timestamp="1594497851922">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state x="530" y="159" key="git4idea.merge.GitMergeDialog" timestamp="1594571266196">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="442" y="131" key="git4idea.merge.GitMergeDialog/0.0.1280.680@0.0.1280.680" timestamp="1594497851922" />
-    <state x="530" y="159" key="git4idea.merge.GitMergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1594309738635" />
-    <state x="369" y="132" key="git4idea.merge.GitPullDialog" timestamp="1594226258455">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state x="530" y="159" key="git4idea.merge.GitMergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1594571266196" />
+    <state x="443" y="160" key="git4idea.merge.GitPullDialog" timestamp="1594571273314">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="369" y="132" key="git4idea.merge.GitPullDialog/0.0.1280.680@0.0.1280.680" timestamp="1594226258455" />
+    <state x="443" y="160" key="git4idea.merge.GitPullDialog/0.0.1536.824@0.0.1536.824" timestamp="1594571273314" />
     <state x="267" y="84" key="psd.add.library.dependency.panel.dimension" timestamp="1594494026701">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="267" y="84" key="psd.add.library.dependency.panel.dimension/0.0.1280.680@0.0.1280.680" timestamp="1594494026701" />
+    <state x="425" y="187" key="run.anything.popup" timestamp="1594576424555">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1594576424555" />
     <state x="303" y="1" width="672" height="678" key="search.everywhere.popup" timestamp="1594296119336">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
