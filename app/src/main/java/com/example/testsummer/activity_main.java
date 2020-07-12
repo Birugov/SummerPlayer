@@ -7,13 +7,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.content.res.AssetFileDescriptor;
 import android.database.Cursor;
 import android.media.AudioManager;
+import android.media.MediaDataSource;
 import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -25,6 +28,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -34,12 +38,19 @@ import com.example.testsummer.wifip2p.activity_p2p;
 
 import net.protyposis.android.mediaplayer.FileSource;
 import net.protyposis.android.mediaplayer.MediaPlayer;
+import net.protyposis.android.mediaplayer.MediaSource;
+import net.protyposis.android.mediaplayer.UriSource;
+
+import org.apache.commons.io.IOUtils;
 
 import java.io.File;
+import java.io.FileDescriptor;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
-
-import wseemann.media.FFmpegMediaPlayer;
 
 
 public class activity_main extends AppCompatActivity {
@@ -80,6 +91,7 @@ public class activity_main extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
 
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
@@ -186,6 +198,7 @@ public class activity_main extends AppCompatActivity {
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.Q)
     public void getMusic() {
         ContentResolver contentResolver = getContentResolver();
         Uri uriSong = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
@@ -210,23 +223,39 @@ public class activity_main extends AppCompatActivity {
                 try {
                     MediaMetadataRetriever mediaMetadataRetriever = (MediaMetadataRetriever) new MediaMetadataRetriever();
                     File file = new File(currentLocation);
-                    Log.d("CANREAD", String.valueOf(file.canRead()));
+
+
+                    Log.d("CANREAD", String.valueOf(file.canRead()) + " " + currentLocation);
                     file.setReadable(true);
                     Log.d("CANREAD", String.valueOf(file.canRead()));
                     if (file.canRead()) {
+
                         isReadable = true;
                         Uri uri = (Uri) Uri.fromFile(new File(currentLocation));
                         mediaMetadataRetriever.setDataSource(activity_main.this, uri);
                         image = mediaMetadataRetriever.getEmbeddedPicture();
                     }
+                        //ParcelFileDescriptor pp = FileDescriptor
+Log.d("INFFFF", "SSS");
+                        //ParcelFileDescriptor parcelFileDescriptor = getContentResolver().openFileDescriptor (MediaStore.Audio.Media.getContentUri(activity_main.arrayTracks.get(activity_main.currentSong).file), "r", null );
+
+                        InputStream inputStream = new FileInputStream(activity_main.arrayTracks.get(activity_main.currentSong).file);
+                        File file2 = new File(appContext.getCacheDir(), "tmpSound");
+                        FileOutputStream outputStream = new FileOutputStream(file2);
+                        IOUtils.copy(inputStream, outputStream);
+                        FileSource mediaSource = new FileSource(file2);
+                        mediaPlayer.setDataSource(mediaSource);
+                        mediaPlayer.prepare();
+                        mediaPlayer.start();
+
 
                 } catch (Exception ex) {}
-                if (isReadable) {
+              // if (isReadable) {
                     Track track = new Track(currentTitle, currentArtist, currentLocation, image);
                     arrayTracks.add(track);
                     arrayList.add("Title: " + track.title + "\n"
                             + "Artist: " + track.artist);
-                }
+              //  }
             } while (songCursor.moveToNext());
             stream = arrayTracks.get(0).file;
             currentSong = 0;

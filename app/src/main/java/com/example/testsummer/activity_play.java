@@ -30,7 +30,6 @@ import net.protyposis.android.mediaplayer.dash.SimpleRateBasedAdaptationLogic;
 import java.io.File;
 import java.io.IOException;
 
-import wseemann.media.FFmpegMediaPlayer;
 
 import static com.example.testsummer.activity_main.playPauseBtn;
 

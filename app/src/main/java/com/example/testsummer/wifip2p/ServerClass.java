@@ -43,11 +43,6 @@ public class ServerClass extends AsyncTask {
             inputStream = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
             Log.d("CLOS2", "CIRCLE2.5");
 
-            Log.d("CLOS2", "CIRCLE3");
-            int num = 0;
-
-            int bytes;
-            boolean started = false;
             if (socket != null)
                 activity_p2p.byteArraySize = inputStream.readInt();
             byte[] buffer = new byte[activity_p2p.byteArraySize];
@@ -56,8 +51,6 @@ public class ServerClass extends AsyncTask {
             BufferedOutputStream fileOut = new BufferedOutputStream(new FileOutputStream(activity_main.appContext.getCacheDir() + "//cacheaudio.mp3"));
             int tmpOld1 = inputStream.read();
             int tmpOld2 = inputStream.read();
-            // while (socket != null) {
-            Log.d("ye", "ye");
             try {
                 while (true) {
                     int tmp = inputStream.read();

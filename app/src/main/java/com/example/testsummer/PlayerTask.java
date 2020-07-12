@@ -1,13 +1,25 @@
 package com.example.testsummer;
 
+import android.Manifest;
+import android.content.ContentResolver;
+import android.media.AudioManager;
 import android.net.Uri;
+import android.net.rtp.AudioStream;
 import android.os.AsyncTask;
+import android.os.Build;
+import android.os.ParcelFileDescriptor;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
+import android.widget.VideoView;
+
+import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityCompat;
+import androidx.media.AudioManagerCompat;
 
 import com.example.testsummer.wifip2p.ClientClass;
+import com.example.testsummer.wifip2p.InputStreamMediaDataSource;
 import com.example.testsummer.wifip2p.ServerClass;
 import com.example.testsummer.wifip2p.activity_p2p;
 
@@ -17,11 +29,18 @@ import net.protyposis.android.mediaplayer.MediaSource;
 import net.protyposis.android.mediaplayer.dash.DashSource;
 import net.protyposis.android.mediaplayer.dash.SimpleRateBasedAdaptationLogic;
 
+import org.apache.commons.io.IOUtils;
+
 import java.io.File;
+import java.io.FileDescriptor;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
-import wseemann.media.FFmpegMediaPlayer;
 
+
+import static com.example.testsummer.activity_main.appContext;
 import static com.example.testsummer.activity_main.playPauseBtn;
 import static com.example.testsummer.activity_main.toPlay;
 
@@ -31,10 +50,12 @@ public class PlayerTask extends AsyncTask<String, Void, Boolean> {
     String title;
     String source = null;
     int currentPost = 0;
+    android.media.MediaPlayer mm;
 
     public PlayerTask(MediaPlayer mediaPlayer, String title) {
         this.mediaPlayer = mediaPlayer;
         this.title = title;
+        mm = new android.media.MediaPlayer();
     }
 
     public PlayerTask(MediaPlayer mediaPlayer, String title, String source, int currentPost) {
@@ -44,6 +65,7 @@ public class PlayerTask extends AsyncTask<String, Void, Boolean> {
         this.currentPost = currentPost;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected Boolean doInBackground(String... strings) {
 
@@ -75,13 +97,31 @@ public class PlayerTask extends AsyncTask<String, Void, Boolean> {
                 FileSource mediaSource = new FileSource(new File(source));
                 mediaPlayer.setDataSource(mediaSource);
             } else {
-                FileSource mediaSource = new FileSource(new File(activity_main.arrayTracks.get(activity_main.currentSong).file));
+                //ContentResolver contentResolver = getContentResolver();
+                //ParcelFileDescriptor parcelFileDescriptor = appContext.getContentResolver().openFileDescriptor (Uri.parse(activity_main.arrayTracks.get(activity_main.currentSong).file), "r", null );
+
+                InputStream inputStream = new FileInputStream(activity_main.arrayTracks.get(activity_main.currentSong).file);
+                File file2 = new File(appContext.getCacheDir(), "tmpSound");
+                FileOutputStream outputStream = new FileOutputStream(file2);
+                IOUtils.copy(inputStream, outputStream);
+
+//                File file = new File(activity_main.arrayTracks.get(activity_main.currentSong).file);
+//                mm.setAudioStreamType(AudioManager.STREAM_MUSIC);
+//                mm.setDataSource(new InputStreamMediaDataSource(appContext.getContentResolver().openInputStream(Uri.parse(activity_main.arrayTracks.get(activity_main.currentSong).file)), file.length()));
+//                mm.prepareAsync();
+                FileSource mediaSource = new FileSource(file2);
                 mediaPlayer.setDataSource(mediaSource);
             }
             mediaPlayer.prepareAsync();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        mm.setOnPreparedListener(new android.media.MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(android.media.MediaPlayer mediaPlayer) {
+                mm.start();
+            }
+        });
         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {

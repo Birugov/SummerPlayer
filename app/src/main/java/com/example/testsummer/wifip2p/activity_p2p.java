@@ -64,7 +64,6 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
-import wseemann.media.FFmpegMediaPlayer;
 
 public class activity_p2p extends AppCompatActivity {
 
