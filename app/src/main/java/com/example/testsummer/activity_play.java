@@ -9,24 +9,40 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.media.AudioManager;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.SeekBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.testsummer.Services.OnClearFromRecentService;
+
+import net.protyposis.android.mediaplayer.FileSource;
+import net.protyposis.android.mediaplayer.MediaPlayer;
+import net.protyposis.android.mediaplayer.MediaSource;
+import net.protyposis.android.mediaplayer.dash.DashSource;
+import net.protyposis.android.mediaplayer.dash.SimpleRateBasedAdaptationLogic;
+
+import java.io.File;
+
+import wseemann.media.FFmpegMediaPlayer;
 
 
 public class activity_play extends AppCompatActivity {
 
     ImageButton mainImageButton, settingImageButton, playImageButton, leftImageButton, rightImageButton;
+    SeekBar seekBar;
+    TextView nameSong, songAuthor;
     int currentSong = 0;
     MediaPlayer mediaPlayer = activity_main.mediaPlayer;
+    static Context appPlayContext;
 
-    NotificationManager notificationManager;
+    static NotificationManager notificationManager;
+
 
     private void createChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -41,64 +57,128 @@ public class activity_play extends AppCompatActivity {
 
     private boolean firstTime = true;
 
-    private void playPrevios() {
+    public boolean playPrevios() {
         currentSong = activity_main.currentSong;
         if (currentSong > 0) {
             if (firstTime) {
-                mediaPlayer.stop();
-                mediaPlayer = MediaPlayer.create(activity_play.this, Uri.parse(activity_main.arrayTracks.get(currentSong).file));
-                mediaPlayer.start();
+                try {
+                    mediaPlayer.stop();
+                    mediaPlayer.reset();
+                    activity_main.stream = activity_main.arrayTracks.get(currentSong).file;
+                    FileSource mediaSource = new FileSource(new File(activity_main.stream));
+                    mediaPlayer.setDataSource(mediaSource);
+                    //mediaPlayer.setDataSource(activity_main.arrayTracks.get(currentSong).file);
+                    mediaPlayer.prepareAsync();
+                } catch (Exception ex) {
+                }
+
+                mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                    @Override
+                    public void onPrepared(MediaPlayer mp) {
+                        mediaPlayer.start();
+                    }
+                });
                 firstTime = false;
             } else {
                 activity_main.currentSong--;
                 currentSong = activity_main.currentSong;
-                mediaPlayer.stop();
-                mediaPlayer = MediaPlayer.create(activity_play.this, Uri.parse(activity_main.arrayTracks.get(currentSong).file));
-                mediaPlayer.start();
+                try {
+                    mediaPlayer.stop();
+                    mediaPlayer.reset();
+                    activity_main.stream = activity_main.arrayTracks.get(currentSong).file;
+                    FileSource mediaSource = new FileSource(new File(activity_main.stream));
+                    mediaPlayer.setDataSource(mediaSource);
+                    //mediaPlayer.setDataSource(activity_main.arrayTracks.get(currentSong).file);
+                    mediaPlayer.prepareAsync();
+                } catch (Exception ex) {
+
+                }
+                mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                    @Override
+                    public void onPrepared(MediaPlayer mp) {
+                        mediaPlayer.start();
+                    }
+                });
                 firstTime = true;
             }
-            playImageButton.setImageResource(R.drawable.baseline_pause_24);
         }
-        CreateNotification.createNotification(getApplicationContext(), activity_main.arrayTracks.get(currentSong),
+        CreateNotification.createNotification(activity_main.appContext, activity_main.arrayTracks.get(currentSong),
                 R.drawable.baseline_pause_24, currentSong, activity_main.arrayTracks.size() - 1);
-
+        try {
+            setNameSongAndAuthor(activity_main.arrayTracks.get(currentSong));
+        } catch (Exception ex) {}
+        return firstTime;
     }
 
-    private void playNext() {
+    public void playNext() {
         currentSong = activity_main.currentSong;
         if (currentSong < activity_main.arrayTracks.size() - 1) {
             activity_main.currentSong++;
             currentSong = activity_main.currentSong;
-            mediaPlayer.stop();
-            mediaPlayer = MediaPlayer.create(activity_play.this, Uri.parse(activity_main.arrayTracks.get(currentSong).file));
-            mediaPlayer.start();
-            playImageButton.setImageResource(R.drawable.baseline_pause_24);
-        }
-        CreateNotification.createNotification(getApplicationContext(), activity_main.arrayTracks.get(currentSong),
-                R.drawable.baseline_pause_24, currentSong, activity_main.arrayTracks.size() - 1);
-    }
-
-    private void pausePlay() {
-        currentSong = activity_main.currentSong;
-        if (mediaPlayer.isPlaying()) {
-            playImageButton.setImageResource(R.drawable.baseline_play_arrow_24);
-            mediaPlayer.pause();
-            CreateNotification.createNotification(getApplicationContext(), activity_main.arrayTracks.get(currentSong),
-                    R.drawable.baseline_play_arrow_24, currentSong, activity_main.arrayTracks.size() - 1);
-        } else {
             try {
-                mediaPlayer.getTrackInfo();
-                mediaPlayer.start();
+                mediaPlayer.stop();
+                mediaPlayer.reset();
+                activity_main.stream = activity_main.arrayTracks.get(currentSong).file;
+                FileSource mediaSource = new FileSource(new File(activity_main.stream));
+                mediaPlayer.setDataSource(mediaSource);
+                //mediaPlayer.setDataSource(activity_main.arrayTracks.get(currentSong).file);
+                mediaPlayer.prepareAsync();
+                mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                    @Override
+                    public void onPrepared(MediaPlayer mp) {
+                        mediaPlayer.start();
+                    }
+                });
             } catch (Exception ex) {
-                mediaPlayer = MediaPlayer.create(activity_play.this, Uri.parse(activity_main.arrayTracks.get(currentSong).file));
-                mediaPlayer.start();
+
             }
 
-            playImageButton.setImageResource(R.drawable.baseline_pause_24);
-            CreateNotification.createNotification(getApplicationContext(), activity_main.arrayTracks.get(currentSong),
-                    R.drawable.baseline_pause_24, currentSong, activity_main.arrayTracks.size() - 1);
+//FFmpegMediaPlayer.create(activity_main.appContext, Uri.parse(activity_main.arrayTracks.get(currentSong).file));
+        }
+        CreateNotification.createNotification(activity_main.appContext, activity_main.arrayTracks.get(currentSong),
+                R.drawable.baseline_pause_24, currentSong, activity_main.arrayTracks.size() - 1);
+        try {
+            setNameSongAndAuthor(activity_main.arrayTracks.get(currentSong));
+        } catch (Exception ex) {}
+    }
+
+    public boolean pausePlay() {
+        boolean isPlaying = false;
+        currentSong = activity_main.currentSong;
+        try {
+            if (mediaPlayer.isPlaying()) {
+                isPlaying = true;
+                mediaPlayer.pause();
+                CreateNotification.createNotification(activity_main.appContext, activity_main.arrayTracks.get(currentSong),
+                        R.drawable.baseline_play_arrow_24, currentSong, activity_main.arrayTracks.size() - 1);
+            } else {
+                try {
+                    //mediaPlayer.getTrackInfo();
+                    mediaPlayer.start();
+                } catch (Exception ex) {
+                    mediaPlayer.reset();
+                    FileSource mediaSource = new FileSource(new File(activity_main.arrayTracks.get(currentSong).file));
+                    mediaPlayer.setDataSource(mediaSource);
+                    //mediaPlayer.setDataSource(activity_main.arrayTracks.get(currentSong).file);
+                    mediaPlayer.prepareAsync();
+                    mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                        @Override
+                        public void onPrepared(MediaPlayer mp) {
+                            mediaPlayer.start();
+                        }
+                    });
+                }
+                CreateNotification.createNotification(activity_main.appContext, activity_main.arrayTracks.get(currentSong),
+                        R.drawable.baseline_pause_24, currentSong, activity_main.arrayTracks.size() - 1);
+            }
+            try {
+                setNameSongAndAuthor(activity_main.arrayTracks.get(currentSong));
+            } catch (Exception ex) {}
+        } catch (Exception ex) {
+            Toast.makeText(activity_main.appContext, "Error playing", Toast.LENGTH_LONG).show();
         }
 
+        return isPlaying;
     }
 
     @Override
@@ -108,6 +188,7 @@ public class activity_play extends AppCompatActivity {
         }
 
         super.onCreate(savedInstanceState);
+        appPlayContext = getApplicationContext();
         setContentView(R.layout.activity_play);
         currentSong = activity_main.currentSong;
 
@@ -116,9 +197,51 @@ public class activity_play extends AppCompatActivity {
         playImageButton = findViewById(R.id.playImageButton);
         leftImageButton = findViewById(R.id.leftImageButton);
         rightImageButton = findViewById(R.id.rightImageButton);
+        seekBar = findViewById(R.id.seekBar2);
+        nameSong = findViewById(R.id.name_song);
 
-        if (!mediaPlayer.isPlaying())
-            playImageButton.setImageResource(R.drawable.baseline_play_arrow_24);
+        Thread seekBarThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    try {
+                        seekBar.setProgress(mediaPlayer.getCurrentPosition() * 100 / mediaPlayer.getDuration());
+                    } catch (Exception ex) {
+
+                    }
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+        seekBarThread.start();
+        try {
+            if (!mediaPlayer.isPlaying())
+                playImageButton.setImageResource(R.drawable.baseline_play_arrow_24);
+        } catch (Exception ex) {
+            playImageButton.setImageResource(R.drawable.baseline_pause_24);
+        }
+
+
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                mediaPlayer.seekTo(seekBar.getProgress() * mediaPlayer.getDuration() / 100);
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                mediaPlayer.seekTo(seekBar.getProgress() * mediaPlayer.getDuration() / 100);
+            }
+        });
 
         leftImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,6 +254,7 @@ public class activity_play extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 playNext();
+                playImageButton.setImageResource(R.drawable.baseline_pause_24);
             }
         });
 
@@ -155,43 +279,18 @@ public class activity_play extends AppCompatActivity {
         playImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pausePlay();
+                boolean isPlaying = pausePlay();
+                if (isPlaying)
+                    playImageButton.setImageResource(R.drawable.baseline_play_arrow_24);
+                else
+                    playImageButton.setImageResource(R.drawable.baseline_pause_24);
             }
         });
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            registerReceiver(broadcastReceiver, new IntentFilter("TRACKS_TRACKS"));
-            startService(new Intent(getBaseContext(), OnClearFromRecentService.class));
-        }
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            notificationManager.cancelAll();
-        }
-        unregisterReceiver(broadcastReceiver);
+    void setNameSongAndAuthor(Track track) {
+        nameSong.setText(track.title);
+        songAuthor.setText(track.artist);
     }
-
-    BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getExtras().getString("actionname");
-
-            switch (action) {
-                case CreateNotification.ACTION_PREVIOUS:
-                    playPrevios();
-                    break;
-                case CreateNotification.ACTION_NEXT:
-                    playNext();
-                    break;
-                case CreateNotification.ACTION_PLAY:
-                    pausePlay();
-                    break;
-            }
-        }
-    };
-
 
 }
