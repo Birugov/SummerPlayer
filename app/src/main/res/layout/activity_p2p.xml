@@ -27,7 +27,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/act_main_button" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/discover"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

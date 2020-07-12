@@ -26,6 +26,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -67,7 +68,8 @@ import wseemann.media.FFmpegMediaPlayer;
 
 public class activity_p2p extends AppCompatActivity {
 
-    Button btnOnOff, btnDiscover, btnSend;
+    ImageButton btnOnOff, btnDiscover;
+    Button btnSend;
     ListView listView;
     TextView read_msg_box;
     public TextView connectionStatus;
@@ -121,10 +123,10 @@ public class activity_p2p extends AppCompatActivity {
             public void onClick(View view) {
                 if (wifiManager.isWifiEnabled()) {
                     wifiManager.setWifiEnabled(false);
-                    btnOnOff.setText("WIFI ON");
+                    //btnOnOff.setText("WIFI ON");
                 } else {
                     wifiManager.setWifiEnabled(true);
-                    btnOnOff.setText("WIFI OFF");
+                    //btnOnOff.setText("WIFI OFF");
                 }
             }
         });
@@ -200,8 +202,8 @@ public class activity_p2p extends AppCompatActivity {
     }
 
     private void initialWork() {
-        btnOnOff = (Button) findViewById(R.id.onOff);
-        btnDiscover = (Button) findViewById(R.id.discover);
+        btnOnOff = findViewById(R.id.onOff);
+        btnDiscover = findViewById(R.id.discover);
         btnSend = (Button) findViewById(R.id.sendButton);
         listView = (ListView) findViewById(R.id.peerListView);
         read_msg_box = (TextView) findViewById(R.id.readMsg);
