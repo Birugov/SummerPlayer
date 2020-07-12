@@ -9,4 +9,8 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
+<!--    <style name="MyActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">-->
+<!--        <item name="android:background">@color/divider</item>-->
+<!--    </style>-->
+
 </resources>
