@@ -49,7 +49,7 @@ public class activity_main extends AppCompatActivity {
     private Button btnSetting;
     public static MediaPlayer mediaPlayer = null;
     private ListView listOfSongs;
-    private static String stream = null;
+    public static String stream = null;
     private String title;
     protected static Integer currentSong = 0;
     protected static PlayerTask playerTask = null;
@@ -107,6 +107,7 @@ public class activity_main extends AppCompatActivity {
             }
         });
 
+
         BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
@@ -160,9 +161,10 @@ public class activity_main extends AppCompatActivity {
             int songLocation = songCursor.getColumnIndex(MediaStore.Audio.Media.DATA);
 
             do {
-                String currentTitle = songCursor.getString(songTitle);
+                String currentTitle = songCursor.getString(songTitle) == null ? "unknown": songCursor.getString(songTitle);
                 title = currentTitle;
-                String currentArtist = songCursor.getString(songArtist);
+                //Log.d("INFOART", "" + currentTitle + "");
+                String currentArtist = songCursor.getString(songArtist) == null ? "unknown": songCursor.getString(songArtist);
                 String currentLocation = songCursor.getString(songLocation);
 
                 byte[] image = null;

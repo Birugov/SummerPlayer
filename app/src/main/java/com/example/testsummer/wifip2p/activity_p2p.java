@@ -19,6 +19,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.style.AlignmentSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -39,6 +40,7 @@ import com.example.testsummer.PlayerTask;
 import com.example.testsummer.R;
 import com.example.testsummer.Services.WiFiDirectBroadcastReceiver;
 import com.example.testsummer.activity_main;
+import com.example.testsummer.activity_play;
 
 import net.protyposis.android.mediaplayer.MediaPlayer;
 
@@ -172,6 +174,9 @@ public class activity_p2p extends AppCompatActivity {
                 String msg = writeMsg.getText().toString();
                 try {
                     int mils = Integer.valueOf(msg);
+                    if (ServerClass.currentPos + mils > 0) {
+                        ServerClass.currentPos += mils;
+                    }
                     delay(mils);
                 } catch (Exception ex) {
                     Log.d("ERP", ex.getMessage());
@@ -186,7 +191,7 @@ public class activity_p2p extends AppCompatActivity {
             if (mediaPlayer.isPlaying()) {
                 int currentPos = mediaPlayer.getCurrentPosition();
                 if (currentPos > millisec)
-                mediaPlayer.seekTo(currentPos - millisec);
+                    mediaPlayer.seekTo(currentPos - millisec);
             }
         } catch (Exception ex) {
             Log.d("ERP2", ex.getMessage());
@@ -242,10 +247,11 @@ public class activity_p2p extends AppCompatActivity {
         }
     };
 
+    public static InetAddress groupOwnerAddress = null;
     public WifiP2pManager.ConnectionInfoListener connectionInfoListener = new WifiP2pManager.ConnectionInfoListener() {
         @Override
         public void onConnectionInfoAvailable(WifiP2pInfo wifiP2pInfo) {
-            final InetAddress groupOwnerAddress = wifiP2pInfo.groupOwnerAddress;
+            groupOwnerAddress = wifiP2pInfo.groupOwnerAddress;
 
             if (wifiP2pInfo.groupFormed && wifiP2pInfo.isGroupOwner) {
                 connectionStatus.setText("Host");
@@ -277,7 +283,7 @@ public class activity_p2p extends AppCompatActivity {
 
     public static MediaPlayer mediaPlayer;
 
-//    public class AudioPlayerClass extends AsyncTask {
+    //    public class AudioPlayerClass extends AsyncTask {
 //        FFmpegMediaPlayer mp = new FFmpegMediaPlayer();
 //        private String source;
 //        private int currentPosition;
@@ -341,108 +347,8 @@ public class activity_p2p extends AppCompatActivity {
 //            return null;
 //        }
 //    }
-    public class ServerClass extends AsyncTask {
-        Socket socket;
-        ServerSocket serverSocket;
+    public static boolean activeServer = false, activeClient = false;
 
-        private DataInputStream inputStream;
-
-        @RequiresApi(api = Build.VERSION_CODES.M)
-        @Override
-        protected Object doInBackground(Object[] objects) {
-
-            try {
-                Log.d("CLOS2", "CIRCLE2");
-                serverSocket = new ServerSocket(16384);
-
-                Log.d("CLOS2", "CIRCLE2.45");
-                socket = serverSocket.accept();
-                Log.d("CLOS2", "CIRCLE2.5");
-                inputStream = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
-                Log.d("CLOS2", "CIRCLE3");
-                int num = 0;
-
-                int bytes;
-                boolean started = false;
-                if (socket != null)
-                    byteArraySize = inputStream.readInt();
-                byte[] buffer = new byte[byteArraySize];
-                mediaPlayer = activity_main.mediaPlayer;
-                ByteArrayMediaDataSource po = new ByteArrayMediaDataSource();
-                BufferedOutputStream fileOut = new BufferedOutputStream(new FileOutputStream(getCacheDir() + "//cacheaudio.mp3"));
-                int currentPos = 0;
-                int tmpOld1 = inputStream.read();
-                int tmpOld2 = inputStream.read();
-               // while (socket != null) {
-                Log.d("ye", "ye");
-                    try {
-                        while (true) {
-                            int tmp = inputStream.read();
-                            if (tmp != -1) {
-                                fileOut.write(tmpOld1);
-                                tmpOld1 = tmpOld2;
-                                tmpOld2 = tmp;
-                            }
-                            else {
-                                currentPos = tmpOld1 << 8 | tmpOld2;
-                                break;
-                            }
-                        }
-//                        bytes = inputStream.read(buffer);
-//                        if (bytes > 0) {
-//                            po.addBytes(buffer);
-//
-//                            Log.d("ADDING", "OK");
-//                            num++;
-                            //currentPos = buffer[size - 2] << 8 | data[size - 1];
-                        //}
-//                        if (bytes == -1) {
-//                            Log.d("BREAKED", "-1");
-//                            break;
-//                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                inputStream.close();
-
-                Log.d("ye", "ye");
-               // }
-                //fileOut.close();
-                //po.deleteLastInt();
-                //Log.d("PLAYING", "OK " + po.size + " vs " + R.raw.sound1);
-//                if (mediaPlayer.isPlaying()) {
-//                    mediaPlayer.stop();
-//                    mediaPlayer.reset();
-//                }
-
-                PlayerTask playerTask = new PlayerTask(mediaPlayer, "Sound", getCacheDir() + "//cacheaudio.mp3", currentPos);
-                playerTask.execute();
-//                AudioPlayerClass audioPlayerClass = new AudioPlayerClass(getCacheDir() + "//cacheaudio.mp3", currentPos);
-//                audioPlayerClass.execute();
-
-
-
-
-//                new File (getCacheDir() + "/cacheaudio.mp3").setReadable(true);
-//                //mediaPlayer = MediaPlayer.create(getApplicationContext(), Uri.parse(getCacheDir() + "/cacheaudio.mp3"));
-//                mediaPlayer.setAudioAttributes(
-//                        new AudioAttributes.Builder()
-//                                .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
-//                                .setUsage(AudioAttributes.USAGE_MEDIA)
-//                                .build()
-//                );
-//                mediaPlayer.setDataSource(getCacheDir() + "/cacheaudio.mp3");
-//                //mediaPlayer.setDataSource(po);
-//                //mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.sound1);
-//                //mediaPlayer.seekTo(currentPos);
-//                mediaPlayer.start();
-                serverSocket.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-    }
 
 //    private class SendReceive extends Thread {
 //        private Socket socket;
@@ -492,105 +398,12 @@ public class activity_p2p extends AppCompatActivity {
 //        }
 //    }
 
-    public class ClientClass extends AsyncTask {
-        private DataOutputStream outputStream = null;
-        Socket socket;
-        String hostAdd;
 
-        public ClientClass(InetAddress hostAddress) {
-            mediaPlayer = activity_main.mediaPlayer;
-            Log.d("CLOS", "FUCK3");
-            try {
-                hostAdd = hostAddress.getHostAddress();
-                Log.d("CLOS", hostAdd);
-                socket = new Socket();
-            } catch (Exception e) {
 
-                Log.d("CLOS", "FUCK");
-                e.printStackTrace();
-            }
-
-        }
-
-        public void write() {
-            if (mediaPlayer == null)
-                return;
-            try {
-                int soundSize = (int) new File(activity_main.getStream()).length();
-                Log.d("SENDING", "OK");
-                if (outputStream == null)
-                    outputStream = new DataOutputStream(socket.getOutputStream());
-                Log.d("SENDING", "OK3");
-
-                InputStream inputStream = new FileInputStream(activity_main.getStream());
-                int len;
-                byte[] text = new byte[soundSize];
-                outputStream.writeInt(soundSize);
-                inputStream.read(text);
-                outputStream.write(text);
-                outputStream.writeInt(activity_main.mediaPlayer.getCurrentPosition());
-//                while ((len = inputStream.read(text)) != -1) {
-//                    Log.d("SENDING", "OK2");
-//                    outputStream.write(text);
-//                }
-                //Log.d("SENDINGERROR", String.valueOf(len));
-                //outputStream.close();
-                //outputStream.writeInt(mediaPlayer.getCurrentPosition());
-                outputStream.flush();
-
-                inputStream.close();
-            } catch (IOException e) {
-                Log.d("ClientSocket.TAG", e.toString());
-            } catch (Exception ex) {
-                Log.d("SENDING", ex.getMessage());
-
-            }
-        }
-
-        @Override
-        protected void onPostExecute(Object o) {
-            super.onPostExecute(o);
-            try {
-                if (outputStream != null)
-                outputStream.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        @Override
-        protected Object doInBackground(Object[] objects) {
-            if (mediaPlayer == null && !mediaPlayer.isPlaying())
-                return null;
-            InputStream inputStream = null;
-            try {
-                socket.bind(null);
-                socket.connect(new InetSocketAddress(hostAdd, 16384), 500);
-                //inputStream = new FileInputStream((activity_main.getStream()));
-                //inputStream = getResources().openRawResource(R.raw.sound1);
-                write();
-//                int length;
-//                long size = 0;
-//                byte[] buff = new byte[1024];
-//                while (true && inputStream != null) {
-//                    try {
-//                        if (((length = inputStream.read(buff)) == -1)) break;
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                    write(buff);
-//                    size += buff.length;
-//                }
-//                Log.d("LEN", String.valueOf(size));
-//                try {
-//                    outputStream.close();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        activeClient = false;
+        activeServer = false;
     }
 }

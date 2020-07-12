@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.testsummer.Services.OnClearFromRecentService;
@@ -35,6 +36,7 @@ public class activity_play extends AppCompatActivity {
 
     ImageButton mainImageButton, settingImageButton, playImageButton, leftImageButton, rightImageButton;
     SeekBar seekBar;
+    TextView nameSong, songAuthor;
     int currentSong = 0;
     MediaPlayer mediaPlayer = activity_main.mediaPlayer;
     static Context appPlayContext;
@@ -62,7 +64,8 @@ public class activity_play extends AppCompatActivity {
                 try {
                     mediaPlayer.stop();
                     mediaPlayer.reset();
-                    FileSource mediaSource = new FileSource(new File(activity_main.arrayTracks.get(currentSong).file));
+                    activity_main.stream = activity_main.arrayTracks.get(currentSong).file;
+                    FileSource mediaSource = new FileSource(new File(activity_main.stream));
                     mediaPlayer.setDataSource(mediaSource);
                     //mediaPlayer.setDataSource(activity_main.arrayTracks.get(currentSong).file);
                     mediaPlayer.prepareAsync();
@@ -82,7 +85,8 @@ public class activity_play extends AppCompatActivity {
                 try {
                     mediaPlayer.stop();
                     mediaPlayer.reset();
-                    FileSource mediaSource = new FileSource(new File(activity_main.arrayTracks.get(currentSong).file));
+                    activity_main.stream = activity_main.arrayTracks.get(currentSong).file;
+                    FileSource mediaSource = new FileSource(new File(activity_main.stream));
                     mediaPlayer.setDataSource(mediaSource);
                     //mediaPlayer.setDataSource(activity_main.arrayTracks.get(currentSong).file);
                     mediaPlayer.prepareAsync();
@@ -100,6 +104,9 @@ public class activity_play extends AppCompatActivity {
         }
         CreateNotification.createNotification(activity_main.appContext, activity_main.arrayTracks.get(currentSong),
                 R.drawable.baseline_pause_24, currentSong, activity_main.arrayTracks.size() - 1);
+        try {
+            setNameSongAndAuthor(activity_main.arrayTracks.get(currentSong));
+        } catch (Exception ex) {}
         return firstTime;
     }
 
@@ -111,7 +118,8 @@ public class activity_play extends AppCompatActivity {
             try {
                 mediaPlayer.stop();
                 mediaPlayer.reset();
-                FileSource mediaSource = new FileSource(new File(activity_main.arrayTracks.get(currentSong).file));
+                activity_main.stream = activity_main.arrayTracks.get(currentSong).file;
+                FileSource mediaSource = new FileSource(new File(activity_main.stream));
                 mediaPlayer.setDataSource(mediaSource);
                 //mediaPlayer.setDataSource(activity_main.arrayTracks.get(currentSong).file);
                 mediaPlayer.prepareAsync();
@@ -129,6 +137,9 @@ public class activity_play extends AppCompatActivity {
         }
         CreateNotification.createNotification(activity_main.appContext, activity_main.arrayTracks.get(currentSong),
                 R.drawable.baseline_pause_24, currentSong, activity_main.arrayTracks.size() - 1);
+        try {
+            setNameSongAndAuthor(activity_main.arrayTracks.get(currentSong));
+        } catch (Exception ex) {}
     }
 
     public boolean pausePlay() {
@@ -160,6 +171,9 @@ public class activity_play extends AppCompatActivity {
                 CreateNotification.createNotification(activity_main.appContext, activity_main.arrayTracks.get(currentSong),
                         R.drawable.baseline_pause_24, currentSong, activity_main.arrayTracks.size() - 1);
             }
+            try {
+                setNameSongAndAuthor(activity_main.arrayTracks.get(currentSong));
+            } catch (Exception ex) {}
         } catch (Exception ex) {
             Toast.makeText(activity_main.appContext, "Error playing", Toast.LENGTH_LONG).show();
         }
@@ -184,6 +198,7 @@ public class activity_play extends AppCompatActivity {
         leftImageButton = findViewById(R.id.leftImageButton);
         rightImageButton = findViewById(R.id.rightImageButton);
         seekBar = findViewById(R.id.seekBar2);
+        nameSong = findViewById(R.id.name_song);
 
         Thread seekBarThread = new Thread(new Runnable() {
             @Override
@@ -273,6 +288,9 @@ public class activity_play extends AppCompatActivity {
         });
     }
 
-
+    void setNameSongAndAuthor(Track track) {
+        nameSong.setText(track.title);
+        songAuthor.setText(track.artist);
+    }
 
 }

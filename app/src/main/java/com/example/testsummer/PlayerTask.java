@@ -2,7 +2,12 @@ package com.example.testsummer;
 
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
+
+import com.example.testsummer.wifip2p.ClientClass;
+import com.example.testsummer.wifip2p.ServerClass;
+import com.example.testsummer.wifip2p.activity_p2p;
 
 import net.protyposis.android.mediaplayer.FileSource;
 import net.protyposis.android.mediaplayer.MediaPlayer;
@@ -67,6 +72,23 @@ public class PlayerTask extends AsyncTask<String, Void, Boolean> {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                Log.d("KAKA", "fromPlayerTask");
+                activity_play activityPlay = new activity_play();
+                if (activity_p2p.activeServer) {
+                    ServerClass serverClass = new ServerClass();
+                    serverClass.execute();
+                } else {
+                    activityPlay.playNext();
+                }
+                if (activity_p2p.activeClient) {
+                    ClientClass clientClass = new ClientClass(activity_p2p.groupOwnerAddress);
+                    clientClass.execute();
+                }
+            }
+        });
         return true;
     }
 
