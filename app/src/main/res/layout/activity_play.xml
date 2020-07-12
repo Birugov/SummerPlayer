@@ -1,9 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/icons"
+    android:orientation="vertical"
     tools:context=".activity_play">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <RelativeLayout
+        android:id="@+id/exit_and_settings_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/primary_dark">
+
+
+        <ImageButton
+            android:id="@+id/mainImageButton"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="0dp"
+            android:background="@color/primary_dark"
+            android:contentDescription="@string/exit_button"
+            android:src="@drawable/baseline_arrow_back_ios_white_36" />
+
+        <ImageButton
+            android:id="@+id/settingImageButton"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_alignParentEnd="true"
+            android:background="@color/primary_dark"
+            android:contentDescription="@string/settings_button"
+            android:src="@drawable/baseline_settings_white_36" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="@android:dimen/thumbnail_height"
+        android:layout_weight="20"
+        android:background="@color/icons"
+        android:contentDescription="@string/song_image"
+        android:tint="@color/secondary_text"
+        app:srcCompat="@drawable/baseline_music_note_24" />
+
+    <TextView
+        android:id="@+id/name_song"
+        style="@style/Widget.AppCompat.TextView.SpinnerItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/icons"
+        android:foregroundTint="@color/secondary_text"
+        android:gravity="left"
+        android:text="@string/song_name"
+        android:textColor="@color/primary_text"
+        android:textColorHighlight="@color/secondary_text"
+        android:textColorHint="@color/secondary_text"
+        android:textColorLink="@color/secondary_text"
+        android:textSize="24sp"
+        app:drawableTint="@color/secondary_text" />
+
+    <Button
+        android:id="@+id/author_song"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/icons"
+        android:gravity="left|center_vertical"
+        android:text="@string/song_author"
+        android:textColor="@color/primary"
+        android:textSize="24sp"
+        tools:ignore="RtlHardcoded" />
+
+    <SeekBar
+        android:id="@+id/seekBar2"
+        style="@style/Widget.AppCompat.SeekBar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:backgroundTint="@color/icons"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/work_with_song_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@android:dimen/thumbnail_height"
+        android:layout_weight="0.1"
+        android:background="@color/icons">
+
+        <ImageButton
+            android:id="@+id/leftImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:background="@color/icons"
+            android:contentDescription="@string/left_button"
+            android:orientation="vertical"
+            android:src="@drawable/baseline_skip_previous_black_48"
+            android:tint="@color/primary_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/playImageButton"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/playImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/icons"
+            android:contentDescription="@string/play_button_play_act"
+            android:src="@drawable/baseline_pause_black_48"
+            android:tint="@color/primary_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.496" />
+
+        <ImageButton
+            android:id="@+id/rightImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:background="@android:color/white"
+            android:contentDescription="@string/right_button"
+            android:src="@drawable/baseline_skip_next_black_48"
+            android:tint="@color/primary_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/playImageButton"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</LinearLayout>
