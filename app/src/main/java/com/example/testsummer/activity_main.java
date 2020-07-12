@@ -11,7 +11,6 @@ import android.database.Cursor;
 import android.media.AudioManager;
 import android.media.MediaMetadataRetriever;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -20,9 +19,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
-import android.widget.VideoView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -31,14 +30,10 @@ import androidx.core.content.ContextCompat;
 import com.example.testsummer.Services.OnClearFromRecentService;
 import com.example.testsummer.wifip2p.activity_p2p;
 
-import net.protyposis.android.mediaplayer.FileSource;
 import net.protyposis.android.mediaplayer.MediaPlayer;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-
-import wseemann.media.FFmpegMediaPlayer;
 
 
 public class activity_main extends AppCompatActivity {
@@ -46,7 +41,7 @@ public class activity_main extends AppCompatActivity {
     private static final int REQUEST_PERMISSIONS = 12345;
 
     private Button toPlay;
-    private Button btnSetting;
+    private ImageButton btnSetting;
     public static MediaPlayer mediaPlayer = null;
     private ListView listOfSongs;
     public static String stream = null;
@@ -91,7 +86,7 @@ public class activity_main extends AppCompatActivity {
         }
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         toPlay = findViewById(R.id.toPlay);
-        btnSetting = findViewById(R.id.settings);
+        btnSetting = findViewById(R.id.start_from_beggin_button);
         btnSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

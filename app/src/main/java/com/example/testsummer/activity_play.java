@@ -103,7 +103,7 @@ public class activity_play extends AppCompatActivity {
             }
         }
         CreateNotification.createNotification(activity_main.appContext, activity_main.arrayTracks.get(currentSong),
-                R.drawable.baseline_pause_24, currentSong, activity_main.arrayTracks.size() - 1);
+                R.drawable.baseline_pause_black_48, currentSong, activity_main.arrayTracks.size() - 1);
         try {
             setNameSongAndAuthor(activity_main.arrayTracks.get(currentSong));
         } catch (Exception ex) {}
@@ -150,7 +150,7 @@ public class activity_play extends AppCompatActivity {
                 isPlaying = true;
                 mediaPlayer.pause();
                 CreateNotification.createNotification(activity_main.appContext, activity_main.arrayTracks.get(currentSong),
-                        R.drawable.baseline_play_arrow_24, currentSong, activity_main.arrayTracks.size() - 1);
+                        R.drawable.baseline_play_arrow_black_48, currentSong, activity_main.arrayTracks.size() - 1);
             } else {
                 try {
                     //mediaPlayer.getTrackInfo();
@@ -169,7 +169,7 @@ public class activity_play extends AppCompatActivity {
                     });
                 }
                 CreateNotification.createNotification(activity_main.appContext, activity_main.arrayTracks.get(currentSong),
-                        R.drawable.baseline_pause_24, currentSong, activity_main.arrayTracks.size() - 1);
+                        R.drawable.baseline_pause_black_48, currentSong, activity_main.arrayTracks.size() - 1);
             }
             try {
                 setNameSongAndAuthor(activity_main.arrayTracks.get(currentSong));
@@ -220,9 +220,9 @@ public class activity_play extends AppCompatActivity {
         seekBarThread.start();
         try {
             if (!mediaPlayer.isPlaying())
-                playImageButton.setImageResource(R.drawable.baseline_play_arrow_24);
+                playImageButton.setImageResource(R.drawable.baseline_play_arrow_black_48);
         } catch (Exception ex) {
-            playImageButton.setImageResource(R.drawable.baseline_pause_24);
+            playImageButton.setImageResource(R.drawable.baseline_pause_black_48);
         }
 
 
@@ -254,7 +254,7 @@ public class activity_play extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 playNext();
-                playImageButton.setImageResource(R.drawable.baseline_pause_24);
+                playImageButton.setImageResource(R.drawable.baseline_pause_black_48);
             }
         });
 
@@ -281,9 +281,9 @@ public class activity_play extends AppCompatActivity {
             public void onClick(View v) {
                 boolean isPlaying = pausePlay();
                 if (isPlaying)
-                    playImageButton.setImageResource(R.drawable.baseline_play_arrow_24);
+                    playImageButton.setImageResource(R.drawable.baseline_play_arrow_black_48);
                 else
-                    playImageButton.setImageResource(R.drawable.baseline_pause_24);
+                    playImageButton.setImageResource(R.drawable.baseline_pause_black_48);
             }
         });
     }
