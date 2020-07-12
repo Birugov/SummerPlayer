@@ -1,8 +1,12 @@
 package com.example.testsummer.wifip2p;
 
+import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.IntentFilter;
+import android.media.AudioAttributes;
+import android.media.MediaDataSource;
+import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.net.wifi.WpsInfo;
 import android.net.wifi.p2p.WifiP2pConfig;
@@ -10,9 +14,12 @@ import android.net.wifi.p2p.WifiP2pDevice;
 import android.net.wifi.p2p.WifiP2pDeviceList;
 import android.net.wifi.p2p.WifiP2pInfo;
 import android.net.wifi.p2p.WifiP2pManager;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.style.AlignmentSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -26,22 +33,42 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import com.example.testsummer.PlayerTask;
 import com.example.testsummer.R;
 import com.example.testsummer.Services.WiFiDirectBroadcastReceiver;
 import com.example.testsummer.activity_main;
+import com.example.testsummer.activity_play;
 
 import net.protyposis.android.mediaplayer.MediaPlayer;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
+import wseemann.media.FFmpegMediaPlayer;
+
 public class activity_p2p extends AppCompatActivity {
 
-    ImageButton btnOnOff;
-    Button btnDiscover;
+    ImageButton btnOnOff, btnDiscover;
     Button btnSend;
     ListView listView;
     TextView read_msg_box;
@@ -96,10 +123,10 @@ public class activity_p2p extends AppCompatActivity {
             public void onClick(View view) {
                 if (wifiManager.isWifiEnabled()) {
                     wifiManager.setWifiEnabled(false);
-//                    btnOnOff.setText("WIFI ON");
+                    //btnOnOff.setText("WIFI ON");
                 } else {
                     wifiManager.setWifiEnabled(true);
-//                    btnOnOff.setText("WIFI OFF");
+                    //btnOnOff.setText("WIFI OFF");
                 }
             }
         });
@@ -175,8 +202,8 @@ public class activity_p2p extends AppCompatActivity {
     }
 
     private void initialWork() {
-        btnOnOff = (ImageButton) findViewById(R.id.onOff);
-        btnDiscover = (Button) findViewById(R.id.discover);
+        btnOnOff = findViewById(R.id.onOff);
+        btnDiscover = findViewById(R.id.discover);
         btnSend = (Button) findViewById(R.id.sendButton);
         listView = (ListView) findViewById(R.id.peerListView);
         read_msg_box = (TextView) findViewById(R.id.readMsg);

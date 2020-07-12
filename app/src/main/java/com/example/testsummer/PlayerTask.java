@@ -3,6 +3,8 @@ package com.example.testsummer;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.testsummer.wifip2p.ClientClass;
@@ -19,6 +21,10 @@ import java.io.File;
 import java.io.IOException;
 
 import wseemann.media.FFmpegMediaPlayer;
+
+import static com.example.testsummer.activity_main.playPauseBtn;
+import static com.example.testsummer.activity_main.toPlay;
+
 
 public class PlayerTask extends AsyncTask<String, Void, Boolean> {
     MediaPlayer mediaPlayer;
@@ -46,6 +52,10 @@ public class PlayerTask extends AsyncTask<String, Void, Boolean> {
             @Override
             public void onPrepared(MediaPlayer mp) {
                 mp.seekTo(currentPost);
+                playPauseBtn.setImageResource(R.drawable.baseline_pause_black_36);
+                try {
+                    activity_play.playImageButton.setImageResource(R.drawable.baseline_pause_black_48);
+                } catch (Exception ex) {};
                 mp.start();
             }
         });
@@ -65,7 +75,7 @@ public class PlayerTask extends AsyncTask<String, Void, Boolean> {
                 FileSource mediaSource = new FileSource(new File(source));
                 mediaPlayer.setDataSource(mediaSource);
             } else {
-                FileSource mediaSource = new FileSource(new File(activity_main.getStream()));
+                FileSource mediaSource = new FileSource(new File(activity_main.arrayTracks.get(activity_main.currentSong).file));
                 mediaPlayer.setDataSource(mediaSource);
             }
             mediaPlayer.prepareAsync();
@@ -77,11 +87,19 @@ public class PlayerTask extends AsyncTask<String, Void, Boolean> {
             public void onCompletion(MediaPlayer mp) {
                 Log.d("KAKA", "fromPlayerTask");
                 activity_play activityPlay = new activity_play();
+                Log.d("eee", "3");
                 if (activity_p2p.activeServer) {
                     ServerClass serverClass = new ServerClass();
                     serverClass.execute();
                 } else {
+                    Log.d("eee", "33");
                     activityPlay.playNext();
+                    try {
+                        activity_play.songAuthor.setText(activity_main.arrayTracks.get(activityPlay.currentSong).artist);
+                        activity_play.nameSong.setText(activity_main.arrayTracks.get(activityPlay.currentSong).title);
+                    } catch (Exception ex) {}
+                    playPauseBtn.setImageResource(R.drawable.baseline_pause_black_36);
+                    toPlay.setText(activity_main.arrayTracks.get(activityPlay.currentSong).title);
                 }
                 if (activity_p2p.activeClient) {
                     ClientClass clientClass = new ClientClass(activity_p2p.groupOwnerAddress);
@@ -95,7 +113,6 @@ public class PlayerTask extends AsyncTask<String, Void, Boolean> {
     @Override
     protected void onPostExecute(Boolean aBoolean) {
         super.onPostExecute(aBoolean);
-
-        Toast.makeText(activity_main.appContext, "Playing..  " + title, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(activity_main.appContext, "Playing..  " + title, Toast.LENGTH_SHORT).show();
     }
 }

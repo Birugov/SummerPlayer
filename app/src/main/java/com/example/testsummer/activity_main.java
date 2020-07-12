@@ -46,14 +46,19 @@ public class activity_main extends AppCompatActivity {
 
     private static final int REQUEST_PERMISSIONS = 12345;
 
-    private Button toPlay;
+    protected static Button toPlay;
     private ImageButton btnSetting;
+    protected static ImageButton playPauseBtn;
+    private ImageButton startFromBegginBtn;
+    protected ImageButton nextBtn;
     public static MediaPlayer mediaPlayer = null;
     private ListView listOfSongs;
     public static String stream = null;
     private String title;
     protected static Integer currentSong = 0;
     protected static PlayerTask playerTask = null;
+
+    protected static activity_play activityPlay;
 
     public static Context appContext;
 
@@ -67,9 +72,15 @@ public class activity_main extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (mediaPlayer == null) {
+            mediaPlayer = new MediaPlayer();
+        }
+        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        activityPlay = new activity_play();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
                 Manifest.permission.ACCESS_FINE_LOCATION,
@@ -87,16 +98,43 @@ public class activity_main extends AppCompatActivity {
         }, 1);
         appContext = getApplicationContext();
 
-        if (mediaPlayer == null) {
-            mediaPlayer = new MediaPlayer();
-        }
-        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         toPlay = findViewById(R.id.toPlay);
         btnSetting = findViewById(R.id.settings);
-        btnSetting.setOnClickListener(new View.OnClickListener() {
+        playPauseBtn = findViewById(R.id.play_pause_button);
+        nextBtn = findViewById(R.id.next_button);
+        startFromBegginBtn = findViewById(R.id.start_from_beggin_button);
+
+
+        startFromBegginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(activity_main.this, activity_p2p.class);
+                startActivity(intent);
+            }
+        });
+        nextBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                activityPlay.playNext();
+                toPlay.setText(arrayTracks.get(currentSong).title);
+                playPauseBtn.setImageResource(R.drawable.baseline_pause_black_36);
+            }
+        });
+        playPauseBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                if (activityPlay.pausePlay()) {
+//                    playPauseBtn.setImageResource(R.drawable.baseline_play_arrow_black_36);
+//                } else {
+//                    playPauseBtn.setImageResource(R.drawable.baseline_pause_black_36);
+//                }
+                activityPlay.pausePlay();
+            }
+        });
+        btnSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(activity_main.this, acticity_setting.class);
                 startActivity(intent);
             }
         });
@@ -112,7 +150,6 @@ public class activity_main extends AppCompatActivity {
         BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                activity_play activityPlay = new activity_play();
                 String action = intent.getExtras().getString("actionname");
 
                 switch (action) {
@@ -164,9 +201,9 @@ public class activity_main extends AppCompatActivity {
             do {
                 String currentTitle = songCursor.getString(songTitle) == null ? "unknown": songCursor.getString(songTitle);
                 title = currentTitle;
-                //Log.d("INFOART", "" + currentTitle + "");
                 String currentArtist = songCursor.getString(songArtist) == null ? "unknown": songCursor.getString(songArtist);
                 String currentLocation = songCursor.getString(songLocation);
+                Log.d("INFOART", "" + currentArtist + "");
 
                 byte[] image = null;
                 boolean isReadable = false;
@@ -193,6 +230,7 @@ public class activity_main extends AppCompatActivity {
             } while (songCursor.moveToNext());
             stream = arrayTracks.get(0).file;
             currentSong = 0;
+            toPlay.setText(arrayTracks.get(0).title);
         }
     }
 
@@ -204,7 +242,7 @@ public class activity_main extends AppCompatActivity {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     if (ContextCompat.checkSelfPermission(activity_main.this,
                             Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                        Toast.makeText(this, "Permission granted!", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(this, "Permission granted!", Toast.LENGTH_SHORT).show();
                         doStuff();
                     }
                 } else {
@@ -233,20 +271,26 @@ public class activity_main extends AppCompatActivity {
                 stream = arrayTracks.get((int) id).file;
                 title = arrayList.get(position).substring(arrayList.get(position).indexOf("Title: ")+6, arrayList.get(position).indexOf("Artist: "));
                 currentSong = (int) id;
-                try {
-                    if (mediaPlayer.isPlaying() == true) {
-                        mediaPlayer.stop();
-                        mediaPlayer.reset();
-                    }
-                } catch (Exception ex) {
-                    mediaPlayer = new MediaPlayer();
-                }
-                playerTask = new PlayerTask(mediaPlayer, title);
-                playerTask.execute(stream);
+                startPlay();
                 CreateNotification.createNotification(activity_main.appContext, arrayTracks.get((int) id), R.drawable.baseline_pause_24, position, arrayTracks.size() - 1);
             }
         });
 
+    }
+
+    private void startPlay() {
+        try {
+            if (mediaPlayer.isPlaying() == true) {
+                mediaPlayer.stop();
+                mediaPlayer.reset();
+            }
+        } catch (Exception ex) {
+            mediaPlayer = new MediaPlayer();
+        }
+        playerTask = new PlayerTask(mediaPlayer, arrayTracks.get(currentSong).title);
+        playerTask.execute(stream);
+        toPlay.setText(arrayTracks.get(currentSong).title);
+        playPauseBtn.setImageResource(R.drawable.baseline_pause_black_36);
     }
 
 
