@@ -74,7 +74,7 @@
             android:layout_weight="1"
             android:background="@color/primary"
             android:tint="@color/icons"
-            app:srcCompat="@drawable/baseline_pause_black_36" />
+            app:srcCompat="@drawable/baseline_play_arrow_black_36" />
 
         <ImageButton
             android:id="@+id/next_button"
