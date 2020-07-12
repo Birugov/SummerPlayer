@@ -4,15 +4,27 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.view.View;
+
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
+    SharedPreferences appSettingPrefs;
+    Setting_Loader settingLoader;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        appSettingPrefs = getSharedPreferences("AppSettingPrefs", MODE_PRIVATE);
+        settingLoader = new Setting_Loader(appSettingPrefs);
+        settingLoader.load();
+
     }
 
     private static final String[] PERMISSION = {
@@ -32,4 +44,11 @@ public class MainActivity extends AppCompatActivity {
         }
         return false;
     }
+
+    public void switchOnSetting(View view){
+        Intent intent = new Intent(this, acticity_setting.class);
+        startActivity(intent);
+    }
+
+
 }
