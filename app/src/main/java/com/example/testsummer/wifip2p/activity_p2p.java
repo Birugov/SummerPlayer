@@ -205,7 +205,7 @@ public class activity_p2p extends AppCompatActivity {
         btnDiscover = findViewById(R.id.discover);
         btnSend = (Button) findViewById(R.id.sendButton);
         listView = (ListView) findViewById(R.id.peerListView);
-        read_msg_box = (TextView) findViewById(R.id.readMsg);
+//        read_msg_box = (TextView) findViewById(R.id.readMsg);
         connectionStatus = (TextView) findViewById(R.id.connectionStatus);
         writeMsg = (EditText) findViewById(R.id.writeMsg);
 
