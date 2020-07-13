@@ -117,14 +117,17 @@ public class activity_p2p extends AppCompatActivity {
     });
 
     private void exqListener() {
+
         btnOnOff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (wifiManager.isWifiEnabled()) {
                     wifiManager.setWifiEnabled(false);
+                    btnOnOff.setImageResource(R.drawable.baseline_wifi_black_48);
                     //btnOnOff.setText("WIFI ON");
                 } else {
                     wifiManager.setWifiEnabled(true);
+                    btnOnOff.setImageResource(R.drawable.baseline_wifi_off_black_48);
                     //btnOnOff.setText("WIFI OFF");
                 }
             }
@@ -189,10 +192,10 @@ public class activity_p2p extends AppCompatActivity {
 
     private void delay(int millisec) {
         try {
-            if (mediaPlayer.isPlaying()) {
-                int currentPos = mediaPlayer.getCurrentPosition();
+            if (activity_main.mediaPlayer.isPlaying()) {
+                int currentPos = activity_main.mediaPlayer.getCurrentPosition();
                 if (currentPos > millisec)
-                    mediaPlayer.seekTo(currentPos - millisec);
+                    activity_main.mediaPlayer.seekTo(currentPos - millisec);
             }
         } catch (Exception ex) {
             Log.d("ERP2", ex.getMessage());
@@ -281,8 +284,6 @@ public class activity_p2p extends AppCompatActivity {
     public static int getByteArraySize() {
         return byteArraySize;
     }
-
-    public static MediaPlayer mediaPlayer;
 
     //    public class AudioPlayerClass extends AsyncTask {
 //        FFmpegMediaPlayer mp = new FFmpegMediaPlayer();

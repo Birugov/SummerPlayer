@@ -46,7 +46,6 @@ public class ServerClass extends AsyncTask {
             if (socket != null)
                 activity_p2p.byteArraySize = inputStream.readInt();
             byte[] buffer = new byte[activity_p2p.byteArraySize];
-            activity_p2p.mediaPlayer = activity_main.mediaPlayer;
             ByteArrayMediaDataSource po = new ByteArrayMediaDataSource();
             BufferedOutputStream fileOut = new BufferedOutputStream(new FileOutputStream(activity_main.appContext.getCacheDir() + "//cacheaudio.mp3"));
             int tmpOld1 = inputStream.read();
@@ -82,7 +81,7 @@ public class ServerClass extends AsyncTask {
             }
             inputStream.close();
 
-            Log.d("ye", "ye");
+            Log.d("CLOS2", "ye");
             // }
             //fileOut.close();
             //po.deleteLastInt();
@@ -92,7 +91,7 @@ public class ServerClass extends AsyncTask {
 //                    mediaPlayer.reset();
 //                }
 
-            PlayerTask playerTask = new PlayerTask(activity_p2p.mediaPlayer, "Sound", activity_main.appContext.getCacheDir() + "//cacheaudio.mp3", currentPos);
+            PlayerTask playerTask = new PlayerTask(activity_main.mediaPlayer, "Sound", activity_main.appContext.getCacheDir() + "//cacheaudio.mp3", currentPos);
             playerTask.execute();
 //                AudioPlayerClass audioPlayerClass = new AudioPlayerClass(getCacheDir() + "//cacheaudio.mp3", currentPos);
 //                audioPlayerClass.execute();

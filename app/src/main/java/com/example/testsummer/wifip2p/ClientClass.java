@@ -20,7 +20,7 @@ public class ClientClass extends AsyncTask {
     String hostAdd;
 
     public ClientClass(InetAddress hostAddress) {
-        activity_p2p.mediaPlayer = activity_main.mediaPlayer;
+
         Log.d("CLOS", "FUCK3");
         try {
             hostAdd = hostAddress.getHostAddress();
@@ -33,16 +33,16 @@ public class ClientClass extends AsyncTask {
     }
 
     public void write() {
-        if (activity_p2p.mediaPlayer == null)
+        if (activity_main.mediaPlayer == null)
             return;
         try {
-            int soundSize = (int) new File(activity_main.getStream()).length();
+            int soundSize = (int) new File(activity_main.arrayTracks.get(activity_main.currentSong).file).length();
             Log.d("SENDING", "OK");
             //if (outputStream == null)
                 outputStream = new DataOutputStream(socket.getOutputStream());
             Log.d("SENDING", "OK3");
 
-            InputStream inputStream = new FileInputStream(activity_main.getStream());
+            InputStream inputStream = new FileInputStream(activity_main.arrayTracks.get(activity_main.currentSong).file);
             int len;
             byte[] text = new byte[soundSize];
             outputStream.writeInt(soundSize);
@@ -77,7 +77,7 @@ public class ClientClass extends AsyncTask {
     @Override
     protected Object doInBackground(Object[] objects) {
         activity_p2p.activeClient = true;
-        if (activity_p2p.mediaPlayer == null && !activity_p2p.mediaPlayer.isPlaying())
+        if (activity_main.mediaPlayer == null && !activity_main.mediaPlayer.isPlaying())
             return null;
         InputStream inputStream = null;
         try {

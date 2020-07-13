@@ -66,7 +66,7 @@ public class activity_main extends AppCompatActivity {
     private ListView listOfSongs;
     public static String stream = null;
     private String title;
-    protected static Integer currentSong = 0;
+    public static Integer currentSong = 0;
     protected static PlayerTask playerTask = null;
 
     protected static activity_play activityPlay;
@@ -75,11 +75,8 @@ public class activity_main extends AppCompatActivity {
 
     ArrayList<String> arrayList;
     ArrayAdapter<String> adapter;
-    static ArrayList<Track> arrayTracks;
+    public static ArrayList<Track> arrayTracks;
 
-    public static String getStream() {
-        return stream;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,44 +1,21 @@
 package com.example.testsummer;
 
-import android.Manifest;
-import android.content.ContentResolver;
-import android.content.pm.PackageManager;
-import android.media.AudioManager;
-import android.net.Uri;
-import android.net.rtp.AudioStream;
 import android.os.AsyncTask;
-import android.os.Build;
-import android.os.ParcelFileDescriptor;
-import android.util.Log;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.Toast;
-import android.widget.VideoView;
 
-import androidx.annotation.RequiresApi;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.media.AudioManagerCompat;
+import android.util.Log;
+
 
 import com.example.testsummer.wifip2p.ClientClass;
-import com.example.testsummer.wifip2p.InputStreamMediaDataSource;
 import com.example.testsummer.wifip2p.ServerClass;
 import com.example.testsummer.wifip2p.activity_p2p;
 
 import net.protyposis.android.mediaplayer.FileSource;
 import net.protyposis.android.mediaplayer.MediaPlayer;
-import net.protyposis.android.mediaplayer.MediaSource;
-import net.protyposis.android.mediaplayer.dash.DashSource;
-import net.protyposis.android.mediaplayer.dash.SimpleRateBasedAdaptationLogic;
 
-import org.apache.commons.io.IOUtils;
 
 import java.io.File;
-import java.io.FileDescriptor;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+
 import java.io.IOException;
-import java.io.InputStream;
 
 
 
@@ -67,7 +44,7 @@ public class PlayerTask extends AsyncTask<String, Void, Boolean> {
         this.currentPost = currentPost;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
+
     @Override
     protected Boolean doInBackground(String... strings) {
 
@@ -104,15 +81,14 @@ public class PlayerTask extends AsyncTask<String, Void, Boolean> {
 
             }
             mediaPlayer.prepareAsync();
+            if (activity_p2p.activeClient) {
+                ClientClass clientClass = new ClientClass(activity_p2p.groupOwnerAddress);
+                clientClass.execute();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        mm.setOnPreparedListener(new android.media.MediaPlayer.OnPreparedListener() {
-            @Override
-            public void onPrepared(android.media.MediaPlayer mediaPlayer) {
-                mm.start();
-            }
-        });
+
         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
