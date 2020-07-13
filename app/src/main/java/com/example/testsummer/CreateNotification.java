@@ -32,7 +32,7 @@ public class CreateNotification {
             NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
             MediaSessionCompat mediaSessionCompat = new MediaSessionCompat(context, "tag");
 
-            Bitmap icon = BitmapFactory.decodeResource(context.getResources(), track.image);
+            Bitmap icon = BitmapFactory.decodeByteArray(track.image, 0, track.image.length);
 
             PendingIntent pendingIntentPrevious;
             int drw_previos;
@@ -48,7 +48,7 @@ public class CreateNotification {
             Intent intentPlay = new Intent(context, NotificationActionService.class)
                     .setAction(ACTION_PLAY);
             PendingIntent pendingIntentPlay = PendingIntent.getBroadcast(context, 0, intentPlay, PendingIntent.FLAG_UPDATE_CURRENT);
-            playbutton = R.drawable.baseline_play_arrow_24;
+
 
 
 
@@ -68,6 +68,7 @@ public class CreateNotification {
                     .setSmallIcon(R.drawable.baseline_music_note_24)
                     .setContentTitle(track.title)
                     .setContentText(track.artist)
+                    .setLargeIcon(icon)
                     .setOnlyAlertOnce(true)
                     .setShowWhen(false)
                     .addAction(drw_previos, "Previos", pendingIntentPrevious)
