@@ -2,6 +2,7 @@ package com.example.testsummer;
 
 import android.Manifest;
 import android.content.ContentResolver;
+import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.net.rtp.AudioStream;
@@ -16,6 +17,7 @@ import android.widget.VideoView;
 
 import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.media.AudioManagerCompat;
 
 import com.example.testsummer.wifip2p.ClientClass;
@@ -97,20 +99,9 @@ public class PlayerTask extends AsyncTask<String, Void, Boolean> {
                 FileSource mediaSource = new FileSource(new File(source));
                 mediaPlayer.setDataSource(mediaSource);
             } else {
-                //ContentResolver contentResolver = getContentResolver();
-                //ParcelFileDescriptor parcelFileDescriptor = appContext.getContentResolver().openFileDescriptor (Uri.parse(activity_main.arrayTracks.get(activity_main.currentSong).file), "r", null );
-
-                InputStream inputStream = new FileInputStream(activity_main.arrayTracks.get(activity_main.currentSong).file);
-                File file2 = new File(appContext.getCacheDir(), "tmpSound");
-                FileOutputStream outputStream = new FileOutputStream(file2);
-                IOUtils.copy(inputStream, outputStream);
-
-//                File file = new File(activity_main.arrayTracks.get(activity_main.currentSong).file);
-//                mm.setAudioStreamType(AudioManager.STREAM_MUSIC);
-//                mm.setDataSource(new InputStreamMediaDataSource(appContext.getContentResolver().openInputStream(Uri.parse(activity_main.arrayTracks.get(activity_main.currentSong).file)), file.length()));
-//                mm.prepareAsync();
-                FileSource mediaSource = new FileSource(file2);
+                FileSource mediaSource = new FileSource(new File(activity_main.arrayTracks.get(activity_main.currentSong).file));
                 mediaPlayer.setDataSource(mediaSource);
+
             }
             mediaPlayer.prepareAsync();
         } catch (IOException e) {

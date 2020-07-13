@@ -198,7 +198,6 @@ public class activity_main extends AppCompatActivity {
     }
 
 
-    @RequiresApi(api = Build.VERSION_CODES.Q)
     public void getMusic() {
         ContentResolver contentResolver = getContentResolver();
         Uri uriSong = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
@@ -235,27 +234,14 @@ public class activity_main extends AppCompatActivity {
                         mediaMetadataRetriever.setDataSource(activity_main.this, uri);
                         image = mediaMetadataRetriever.getEmbeddedPicture();
                     }
-                        //ParcelFileDescriptor pp = FileDescriptor
-Log.d("INFFFF", "SSS");
-                        //ParcelFileDescriptor parcelFileDescriptor = getContentResolver().openFileDescriptor (MediaStore.Audio.Media.getContentUri(activity_main.arrayTracks.get(activity_main.currentSong).file), "r", null );
-
-                        InputStream inputStream = new FileInputStream(activity_main.arrayTracks.get(activity_main.currentSong).file);
-                        File file2 = new File(appContext.getCacheDir(), "tmpSound");
-                        FileOutputStream outputStream = new FileOutputStream(file2);
-                        IOUtils.copy(inputStream, outputStream);
-                        FileSource mediaSource = new FileSource(file2);
-                        mediaPlayer.setDataSource(mediaSource);
-                        mediaPlayer.prepare();
-                        mediaPlayer.start();
-
 
                 } catch (Exception ex) {}
-              // if (isReadable) {
+               if (isReadable) {
                     Track track = new Track(currentTitle, currentArtist, currentLocation, image);
                     arrayTracks.add(track);
                     arrayList.add("Title: " + track.title + "\n"
                             + "Artist: " + track.artist);
-              //  }
+                }
             } while (songCursor.moveToNext());
             stream = arrayTracks.get(0).file;
             currentSong = 0;
