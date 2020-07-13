@@ -1,9 +1,12 @@
 <resources>
     <string name="app_name">TestSummer</string>
-    <string name="exit_button">Exit button</string>
-    <string name="song_name">Song Name</string>
-    <string name="song_author">Song author</string>
+    <string name="exit_button">exit_button</string>
+    <string name="song_name">song_name</string>
+    <string name="song_author">song_author</string>
     <string name="left_button">left_button</string>
-    <string name="play_button">play_button</string>
+    <string name="play_button_play_act">play_button</string>
     <string name="right_button">right_button</string>
+    <string name="settings_button">settings_button</string>
+    <string name="song_image">Song name</string>
+    <string name="play_button">Play</string>
 </resources>
