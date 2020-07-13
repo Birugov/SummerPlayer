@@ -51,7 +51,6 @@ public class PlayerTask extends AsyncTask<String, Void, Boolean> {
 
             @Override
             public void onPrepared(MediaPlayer mp) {
-                mp.reset();
                 mp.seekTo(currentPost);
                 playPauseBtn.setImageResource(R.drawable.baseline_pause_black_36);
                 try {

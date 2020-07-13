@@ -221,12 +221,12 @@ public class activity_main extends AppCompatActivity {
                     }
 
                 } catch (Exception ex) {}
-               // if (isReadable) {
+                if (isReadable) {
                     Track track = new Track(currentTitle, currentArtist, currentLocation, image);
                     arrayTracks.add(track);
                     arrayList.add("Title: " + track.title + "\n"
                             + "Artist: " + track.artist);
-             //   }
+                }
             } while (songCursor.moveToNext());
             stream = arrayTracks.get(0).file;
             currentSong = 0;
