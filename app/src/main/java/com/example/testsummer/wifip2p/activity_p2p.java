@@ -64,7 +64,6 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
-import wseemann.media.FFmpegMediaPlayer;
 
 public class activity_p2p extends AppCompatActivity {
 
@@ -118,15 +117,22 @@ public class activity_p2p extends AppCompatActivity {
     });
 
     private void exqListener() {
+
         btnOnOff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (wifiManager.isWifiEnabled()) {
-                    wifiManager.setWifiEnabled(false);
-                    //btnOnOff.setText("WIFI ON");
+                if (Build.VERSION_CODES.Q > Build.VERSION.SDK_INT) {
+                    if (wifiManager.isWifiEnabled()) {
+                        wifiManager.setWifiEnabled(false);
+                        btnOnOff.setImageResource(R.drawable.baseline_wifi_off_black_48);
+                        //btnOnOff.setText("WIFI ON");
+                    } else {
+                        wifiManager.setWifiEnabled(true);
+                        btnOnOff.setImageResource(R.drawable.baseline_wifi_black_48);
+                        //btnOnOff.setText("WIFI OFF");
+                    }
                 } else {
-                    wifiManager.setWifiEnabled(true);
-                    //btnOnOff.setText("WIFI OFF");
+                    Toast.makeText(activity_main.appContext, "You have Android Q. On/Off WIFI manually", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -190,10 +196,10 @@ public class activity_p2p extends AppCompatActivity {
 
     private void delay(int millisec) {
         try {
-            if (mediaPlayer.isPlaying()) {
-                int currentPos = mediaPlayer.getCurrentPosition();
+            if (activity_main.mediaPlayer.isPlaying()) {
+                int currentPos = activity_main.mediaPlayer.getCurrentPosition();
                 if (currentPos > millisec)
-                    mediaPlayer.seekTo(currentPos - millisec);
+                    activity_main.mediaPlayer.seekTo(currentPos - millisec);
             }
         } catch (Exception ex) {
             Log.d("ERP2", ex.getMessage());
@@ -206,11 +212,16 @@ public class activity_p2p extends AppCompatActivity {
         btnDiscover = findViewById(R.id.discover);
         btnSend = (Button) findViewById(R.id.sendButton);
         listView = (ListView) findViewById(R.id.peerListView);
-        read_msg_box = (TextView) findViewById(R.id.readMsg);
+//        read_msg_box = (TextView) findViewById(R.id.readMsg);
         connectionStatus = (TextView) findViewById(R.id.connectionStatus);
         writeMsg = (EditText) findViewById(R.id.writeMsg);
 
         wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+        if (wifiManager.isWifiEnabled()) {
+            btnOnOff.setImageResource(R.drawable.baseline_wifi_black_48);
+        } else {
+            btnOnOff.setImageResource(R.drawable.baseline_wifi_off_black_48);
+        }
 
         mManager = (WifiP2pManager) getSystemService(Context.WIFI_P2P_SERVICE);
         mChannel = mManager.initialize(this, getMainLooper(), null);
@@ -250,6 +261,7 @@ public class activity_p2p extends AppCompatActivity {
     };
 
     public static InetAddress groupOwnerAddress = null;
+
     public WifiP2pManager.ConnectionInfoListener connectionInfoListener = new WifiP2pManager.ConnectionInfoListener() {
         @Override
         public void onConnectionInfoAvailable(WifiP2pInfo wifiP2pInfo) {
@@ -283,72 +295,7 @@ public class activity_p2p extends AppCompatActivity {
         return byteArraySize;
     }
 
-    public static MediaPlayer mediaPlayer;
 
-    //    public class AudioPlayerClass extends AsyncTask {
-//        FFmpegMediaPlayer mp = new FFmpegMediaPlayer();
-//        private String source;
-//        private int currentPosition;
-//
-//        public AudioPlayerClass(String source, int currentPosition) {
-//            this.source = source;
-//            this.currentPosition = currentPosition;
-//        }
-//
-//        public void run() {
-//            mp.setOnPreparedListener(new FFmpegMediaPlayer.OnPreparedListener() {
-//
-//                @Override
-//                public void onPrepared(FFmpegMediaPlayer mp) {
-//                    Log.d("7", "1");
-//                    mp.seekTo(currentPosition);
-//                    mp.start();
-//                    if (mp.isPlaying())
-//                        Log.d("Play", "true");
-//                    else
-//                        Log.d("Play", "false");
-//                }
-//            });
-//            mp.setOnErrorListener(new FFmpegMediaPlayer.OnErrorListener() {
-//
-//                @Override
-//                public boolean onError(FFmpegMediaPlayer mp, int what, int extra) {
-//                    Log.d("6", "1");
-//                    mp.release();
-//                    return false;
-//                }
-//            });
-//            Log.d("99", getCacheDir() + "//cacheaudio.mp3");
-//            try {
-//                mp.setDataSource(getCacheDir() + "//cacheaudio.mp3");
-//                mp.prepareAsync();
-//                Log.d("0", "1");
-//            } catch (IllegalArgumentException e) {
-//                Log.d("1", "1");
-//                e.printStackTrace();
-//            } catch (SecurityException e) {
-//                Log.d("2", "1");
-//                e.printStackTrace();
-//            } catch (IllegalStateException e) {
-//                Log.d("3", "1");
-//                e.printStackTrace();
-//            } catch (IOException e) {
-//                Log.d("4", "1");
-//                e.printStackTrace();
-//            }
-//        }
-//
-//        @Override
-//        protected Object doInBackground(Object[] objects) {
-//            run();
-//            try {
-//                Thread.sleep(8000);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//            return null;
-//        }
-//    }
     public static boolean activeServer = false, activeClient = false;
 
 

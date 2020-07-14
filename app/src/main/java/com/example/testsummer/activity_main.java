@@ -7,13 +7,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.content.res.AssetFileDescriptor;
 import android.database.Cursor;
 import android.media.AudioManager;
+import android.media.MediaDataSource;
 import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -25,6 +28,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -34,12 +38,19 @@ import com.example.testsummer.wifip2p.activity_p2p;
 
 import net.protyposis.android.mediaplayer.FileSource;
 import net.protyposis.android.mediaplayer.MediaPlayer;
+import net.protyposis.android.mediaplayer.MediaSource;
+import net.protyposis.android.mediaplayer.UriSource;
+
+import org.apache.commons.io.IOUtils;
 
 import java.io.File;
+import java.io.FileDescriptor;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
-
-import wseemann.media.FFmpegMediaPlayer;
 
 
 public class activity_main extends AppCompatActivity {
@@ -55,7 +66,7 @@ public class activity_main extends AppCompatActivity {
     private ListView listOfSongs;
     public static String stream = null;
     private String title;
-    protected static Integer currentSong = 0;
+    public static Integer currentSong = 0;
     protected static PlayerTask playerTask = null;
 
     protected static activity_play activityPlay;
@@ -64,11 +75,8 @@ public class activity_main extends AppCompatActivity {
 
     ArrayList<String> arrayList;
     ArrayAdapter<String> adapter;
-    static ArrayList<Track> arrayTracks;
+    public static ArrayList<Track> arrayTracks;
 
-    public static String getStream() {
-        return stream;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +103,7 @@ public class activity_main extends AppCompatActivity {
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.ACCESS_MEDIA_LOCATION,
                 Manifest.permission.MODIFY_AUDIO_SETTINGS,
+                Manifest.permission.CHANGE_WIFI_STATE
         }, 1);
         appContext = getApplicationContext();
 
@@ -199,9 +208,9 @@ public class activity_main extends AppCompatActivity {
             int songLocation = songCursor.getColumnIndex(MediaStore.Audio.Media.DATA);
 
             do {
-                String currentTitle = songCursor.getString(songTitle) == null ? "unknown": songCursor.getString(songTitle);
+                String currentTitle = songCursor.getString(songTitle) == null ? "unknown" : songCursor.getString(songTitle);
                 title = currentTitle;
-                String currentArtist = songCursor.getString(songArtist) == null ? "unknown": songCursor.getString(songArtist);
+                String currentArtist = songCursor.getString(songArtist) == null ? "unknown" : songCursor.getString(songArtist);
                 String currentLocation = songCursor.getString(songLocation);
                 Log.d("INFOART", "" + currentArtist + "");
 
@@ -210,17 +219,21 @@ public class activity_main extends AppCompatActivity {
                 try {
                     MediaMetadataRetriever mediaMetadataRetriever = (MediaMetadataRetriever) new MediaMetadataRetriever();
                     File file = new File(currentLocation);
-                    Log.d("CANREAD", String.valueOf(file.canRead()));
+
+
+                    Log.d("CANREAD", String.valueOf(file.canRead()) + " " + currentLocation);
                     file.setReadable(true);
                     Log.d("CANREAD", String.valueOf(file.canRead()));
                     if (file.canRead()) {
+
                         isReadable = true;
                         Uri uri = (Uri) Uri.fromFile(new File(currentLocation));
                         mediaMetadataRetriever.setDataSource(activity_main.this, uri);
                         image = mediaMetadataRetriever.getEmbeddedPicture();
                     }
 
-                } catch (Exception ex) {}
+                } catch (Exception ex) {
+                }
                 if (isReadable) {
                     Track track = new Track(currentTitle, currentArtist, currentLocation, image);
                     arrayTracks.add(track);
@@ -269,7 +282,7 @@ public class activity_main extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 stream = arrayTracks.get((int) id).file;
-                title = arrayList.get(position).substring(arrayList.get(position).indexOf("Title: ")+6, arrayList.get(position).indexOf("Artist: "));
+                title = arrayList.get(position).substring(arrayList.get(position).indexOf("Title: ") + 6, arrayList.get(position).indexOf("Artist: "));
                 currentSong = (int) id;
                 startPlay();
                 CreateNotification.createNotification(activity_main.appContext, arrayTracks.get((int) id), R.drawable.baseline_pause_24, position, arrayTracks.size() - 1);

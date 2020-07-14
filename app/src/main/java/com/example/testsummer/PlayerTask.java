@@ -1,11 +1,9 @@
 package com.example.testsummer;
 
-import android.net.Uri;
 import android.os.AsyncTask;
+
 import android.util.Log;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.Toast;
+
 
 import com.example.testsummer.wifip2p.ClientClass;
 import com.example.testsummer.wifip2p.ServerClass;
@@ -13,15 +11,15 @@ import com.example.testsummer.wifip2p.activity_p2p;
 
 import net.protyposis.android.mediaplayer.FileSource;
 import net.protyposis.android.mediaplayer.MediaPlayer;
-import net.protyposis.android.mediaplayer.MediaSource;
-import net.protyposis.android.mediaplayer.dash.DashSource;
-import net.protyposis.android.mediaplayer.dash.SimpleRateBasedAdaptationLogic;
+
 
 import java.io.File;
+
 import java.io.IOException;
 
-import wseemann.media.FFmpegMediaPlayer;
 
+
+import static com.example.testsummer.activity_main.appContext;
 import static com.example.testsummer.activity_main.playPauseBtn;
 import static com.example.testsummer.activity_main.toPlay;
 
@@ -43,6 +41,7 @@ public class PlayerTask extends AsyncTask<String, Void, Boolean> {
         this.source = source;
         this.currentPost = currentPost;
     }
+
 
     @Override
     protected Boolean doInBackground(String... strings) {
@@ -77,11 +76,17 @@ public class PlayerTask extends AsyncTask<String, Void, Boolean> {
             } else {
                 FileSource mediaSource = new FileSource(new File(activity_main.arrayTracks.get(activity_main.currentSong).file));
                 mediaPlayer.setDataSource(mediaSource);
+
             }
             mediaPlayer.prepareAsync();
+            if (activity_p2p.activeClient) {
+                ClientClass clientClass = new ClientClass(activity_p2p.groupOwnerAddress);
+                clientClass.execute();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
@@ -113,6 +118,10 @@ public class PlayerTask extends AsyncTask<String, Void, Boolean> {
     @Override
     protected void onPostExecute(Boolean aBoolean) {
         super.onPostExecute(aBoolean);
+        if (activity_p2p.activeServer) {
+            ServerClass serverClass = new ServerClass();
+            serverClass.execute();
+        }
         //Toast.makeText(activity_main.appContext, "Playing..  " + title, Toast.LENGTH_SHORT).show();
     }
 }
