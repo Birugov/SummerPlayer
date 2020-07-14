@@ -122,6 +122,5 @@ public class PlayerTask extends AsyncTask<String, Void, Boolean> {
             ServerClass serverClass = new ServerClass();
             serverClass.execute();
         }
-        //Toast.makeText(activity_main.appContext, "Playing..  " + title, Toast.LENGTH_SHORT).show();
     }
 }

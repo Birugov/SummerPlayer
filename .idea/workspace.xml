@@ -22,17 +22,6 @@
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/classAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/testsummer/PlayerTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/testsummer/PlayerTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/testsummer/Services/WiFiDirectBroadcastReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/testsummer/Services/WiFiDirectBroadcastReceiver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/testsummer/activity_main.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/testsummer/activity_main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/testsummer/activity_play.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/testsummer/activity_play.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/testsummer/wifip2p/ByteArrayMediaDataSource.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/testsummer/wifip2p/InputStreamMediaDataSource.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/testsummer/wifip2p/ServerClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/testsummer/wifip2p/ServerClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/testsummer/wifip2p/activity_p2p.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/testsummer/wifip2p/activity_p2p.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,7 +74,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="android.sdk.path" value="C:/AndroidSstudio" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="SDK Location" />
+    <property name="project.structure.last.edited" value="Dependencies" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="gradle.compiler" />
@@ -441,7 +430,28 @@
       <option name="project" value="LOCAL" />
       <updated>1594627420490</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="song author + song title on activity play + some bugs fixed + music queue&#10;BUG: connection needs to be not closed in addition to play music on queue correctly from p2p connection">
+      <created>1594743386537</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1594743386537</updated>
+    </task>
+    <task id="LOCAL-00040" summary="song author + song title on activity play + some bugs fixed + music queue&#10;BUG: connection needs to be not closed in addition to play music on queue correctly from p2p connection">
+      <created>1594743417124</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1594743417124</updated>
+    </task>
+    <task id="LOCAL-00041" summary="song author + song title on activity play + some bugs fixed + music queue&#10;BUG: connection needs to be not closed in addition to play music on queue correctly from p2p connection">
+      <created>1594744427480</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1594744427480</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -476,10 +486,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="song author + song title on activity play + some bugs fixed + music queue&#10;BUG: connection needs to be not closed in addition to play music on queue correctly from p2p connection" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="158" y="73" key="#PSD" timestamp="1594625357392">
+    <state x="158" y="73" key="#PSD" timestamp="1594744339508">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="158" y="73" key="#PSD/0.0.1280.680@0.0.1280.680" timestamp="1594625357392" />
+    <state x="158" y="73" key="#PSD/0.0.1280.680@0.0.1280.680" timestamp="1594744339508" />
     <state x="361" y="0" key="#app" timestamp="1594623815104">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -506,37 +516,37 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="221" y="95" key="AndroidCreateResourceDirectoryDialog/0.0.1280.680@0.0.1280.680" timestamp="1594403386618" />
-    <state x="80" y="0" key="CommitChangelistDialog2" timestamp="1594743393254">
+    <state x="80" y="0" key="CommitChangelistDialog2" timestamp="1594744426309">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="80" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1594743393254" />
+    <state x="80" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1594744426309" />
     <state x="421" y="96" key="FileChooserDialogImpl" timestamp="1594589388071">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="421" y="96" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1594589388071" />
-    <state width="1220" height="451" key="GridCell.Tab.0.bottom" timestamp="1594626766967">
+    <state width="1220" height="5" key="GridCell.Tab.0.bottom" timestamp="1594744436168">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1236" height="153" key="GridCell.Tab.0.bottom/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1594274602296" />
-    <state width="1220" height="451" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1594626766967" />
+    <state width="1220" height="5" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1594744436168" />
     <state width="1491" height="216" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1594309740470" />
-    <state width="1220" height="451" key="GridCell.Tab.0.center" timestamp="1594626766967">
+    <state width="1220" height="5" key="GridCell.Tab.0.center" timestamp="1594744436168">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1236" height="153" key="GridCell.Tab.0.center/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1594274602296" />
-    <state width="1220" height="451" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1594626766967" />
+    <state width="1220" height="5" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1594744436168" />
     <state width="1491" height="216" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1594309740470" />
-    <state width="1220" height="451" key="GridCell.Tab.0.left" timestamp="1594626766967">
+    <state width="1220" height="5" key="GridCell.Tab.0.left" timestamp="1594744436167">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1236" height="153" key="GridCell.Tab.0.left/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1594274602296" />
-    <state width="1220" height="451" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1594626766967" />
+    <state width="1220" height="5" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1594744436167" />
     <state width="1491" height="216" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1594309740470" />
-    <state width="1220" height="451" key="GridCell.Tab.0.right" timestamp="1594626766967">
+    <state width="1220" height="5" key="GridCell.Tab.0.right" timestamp="1594744436168">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1236" height="153" key="GridCell.Tab.0.right/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1594274602296" />
-    <state width="1220" height="451" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1594626766967" />
+    <state width="1220" height="5" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1594744436168" />
     <state width="1491" height="216" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1594309740470" />
     <state x="122" y="58" key="MergeDialog" timestamp="1594570346274">
       <screen x="0" y="0" width="1280" height="680" />
@@ -550,10 +560,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="142" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1594293065480" />
-    <state x="233" y="74" key="Vcs.Push.Dialog.v2" timestamp="1594627442728">
+    <state x="233" y="74" key="Vcs.Push.Dialog.v2" timestamp="1594743431305">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="233" y="74" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1594627442728" />
+    <state x="233" y="74" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1594743431305" />
     <state x="129" y="105" width="1314" height="600" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1594303677700">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
