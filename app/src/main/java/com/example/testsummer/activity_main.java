@@ -229,7 +229,7 @@ public class activity_main extends AppCompatActivity {
                     file.setReadable(true);
                     Log.d("CANREAD", String.valueOf(file.canRead()));
                     if (file.canRead()) {
-                        if(blackList.getBoolean(currentLocation, true)) {
+                        if(!blackList.getBoolean(currentTitle, false)) {
                             isReadable = true;
                             Uri uri = (Uri) Uri.fromFile(new File(currentLocation));
                             mediaMetadataRetriever.setDataSource(activity_main.this, uri);
