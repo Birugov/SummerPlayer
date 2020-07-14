@@ -24,7 +24,6 @@ public class ServerClass extends AsyncTask {
 
     private DataInputStream inputStream;
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected Object doInBackground(Object[] objects) {
         activity_p2p.activeServer = true;
@@ -43,21 +42,12 @@ public class ServerClass extends AsyncTask {
             inputStream = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
             Log.d("CLOS2", "CIRCLE2.5");
 
-            Log.d("CLOS2", "CIRCLE3");
-            int num = 0;
-
-            int bytes;
-            boolean started = false;
             if (socket != null)
                 activity_p2p.byteArraySize = inputStream.readInt();
             byte[] buffer = new byte[activity_p2p.byteArraySize];
-            activity_p2p.mediaPlayer = activity_main.mediaPlayer;
-            ByteArrayMediaDataSource po = new ByteArrayMediaDataSource();
             BufferedOutputStream fileOut = new BufferedOutputStream(new FileOutputStream(activity_main.appContext.getCacheDir() + "//cacheaudio.mp3"));
             int tmpOld1 = inputStream.read();
             int tmpOld2 = inputStream.read();
-            // while (socket != null) {
-            Log.d("ye", "ye");
             try {
                 while (true) {
                     int tmp = inputStream.read();
@@ -70,18 +60,6 @@ public class ServerClass extends AsyncTask {
                         break;
                     }
                 }
-//                        bytes = inputStream.read(buffer);
-//                        if (bytes > 0) {
-//                            po.addBytes(buffer);
-//
-//                            Log.d("ADDING", "OK");
-//                            num++;
-                //currentPos = buffer[size - 2] << 8 | data[size - 1];
-                //}
-//                        if (bytes == -1) {
-//                            Log.d("BREAKED", "-1");
-//                            break;
-//                        }
             } catch (IOException e) {
                 serverSocket.close();
                 serverSocket = null;
@@ -89,36 +67,10 @@ public class ServerClass extends AsyncTask {
             }
             inputStream.close();
 
-            Log.d("ye", "ye");
-            // }
-            //fileOut.close();
-            //po.deleteLastInt();
-            //Log.d("PLAYING", "OK " + po.size + " vs " + R.raw.sound1);
-//                if (mediaPlayer.isPlaying()) {
-//                    mediaPlayer.stop();
-//                    mediaPlayer.reset();
-//                }
-
-            PlayerTask playerTask = new PlayerTask(activity_p2p.mediaPlayer, "Sound", activity_main.appContext.getCacheDir() + "//cacheaudio.mp3", currentPos);
+            Log.d("CLOS2", "ye");
+            PlayerTask playerTask = new PlayerTask(activity_main.mediaPlayer, "Sound", activity_main.appContext.getCacheDir() + "//cacheaudio.mp3", currentPos);
             playerTask.execute();
-//                AudioPlayerClass audioPlayerClass = new AudioPlayerClass(getCacheDir() + "//cacheaudio.mp3", currentPos);
-//                audioPlayerClass.execute();
 
-
-//                new File (getCacheDir() + "/cacheaudio.mp3").setReadable(true);
-//                //mediaPlayer = MediaPlayer.create(getApplicationContext(), Uri.parse(getCacheDir() + "/cacheaudio.mp3"));
-//                mediaPlayer.setAudioAttributes(
-//                        new AudioAttributes.Builder()
-//                                .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
-//                                .setUsage(AudioAttributes.USAGE_MEDIA)
-//                                .build()
-//                );
-//                mediaPlayer.setDataSource(getCacheDir() + "/cacheaudio.mp3");
-//                //mediaPlayer.setDataSource(po);
-//                //mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.sound1);
-//                //mediaPlayer.seekTo(currentPos);
-//                mediaPlayer.start();
-            //serverSocket.close();
             serverSocket.close();
             serverSocket = null;
             socket.close();
