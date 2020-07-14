@@ -64,8 +64,6 @@ public class activity_main extends AppCompatActivity {
     protected ImageButton nextBtn;
     public static MediaPlayer mediaPlayer = null;
     private ListView listOfSongs;
-    public static String stream = null;
-    private String title;
     public static Integer currentSong = 0;
     protected static PlayerTask playerTask = null;
 
@@ -132,11 +130,6 @@ public class activity_main extends AppCompatActivity {
         playPauseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                if (activityPlay.pausePlay()) {
-//                    playPauseBtn.setImageResource(R.drawable.baseline_play_arrow_black_36);
-//                } else {
-//                    playPauseBtn.setImageResource(R.drawable.baseline_pause_black_36);
-//                }
                 activityPlay.pausePlay();
             }
         });
@@ -209,7 +202,6 @@ public class activity_main extends AppCompatActivity {
 
             do {
                 String currentTitle = songCursor.getString(songTitle) == null ? "unknown" : songCursor.getString(songTitle);
-                title = currentTitle;
                 String currentArtist = songCursor.getString(songArtist) == null ? "unknown" : songCursor.getString(songArtist);
                 String currentLocation = songCursor.getString(songLocation);
                 Log.d("INFOART", "" + currentArtist + "");
@@ -241,7 +233,6 @@ public class activity_main extends AppCompatActivity {
                             + "Artist: " + track.artist);
                 }
             } while (songCursor.moveToNext());
-            stream = arrayTracks.get(0).file;
             currentSong = 0;
             toPlay.setText(arrayTracks.get(0).title);
         }
@@ -255,8 +246,7 @@ public class activity_main extends AppCompatActivity {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     if (ContextCompat.checkSelfPermission(activity_main.this,
                             Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                        //Toast.makeText(this, "Permission granted!", Toast.LENGTH_SHORT).show();
-                        doStuff();
+                       doStuff();
                     }
                 } else {
                     Toast.makeText(this, "No permission granted", Toast.LENGTH_SHORT).show();
@@ -281,8 +271,6 @@ public class activity_main extends AppCompatActivity {
         listOfSongs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                stream = arrayTracks.get((int) id).file;
-                title = arrayList.get(position).substring(arrayList.get(position).indexOf("Title: ") + 6, arrayList.get(position).indexOf("Artist: "));
                 currentSong = (int) id;
                 startPlay();
                 CreateNotification.createNotification(activity_main.appContext, arrayTracks.get((int) id), R.drawable.baseline_pause_24, position, arrayTracks.size() - 1);
@@ -301,7 +289,7 @@ public class activity_main extends AppCompatActivity {
             mediaPlayer = new MediaPlayer();
         }
         playerTask = new PlayerTask(mediaPlayer, arrayTracks.get(currentSong).title);
-        playerTask.execute(stream);
+        playerTask.execute(arrayTracks.get(currentSong).file);
         toPlay.setText(arrayTracks.get(currentSong).title);
         playPauseBtn.setImageResource(R.drawable.baseline_pause_black_36);
     }

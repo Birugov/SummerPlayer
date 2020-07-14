@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.NetworkInfo;
 import android.net.wifi.p2p.WifiP2pManager;
-import android.widget.Toast;
 
 import com.example.testsummer.wifip2p.activity_p2p;
 

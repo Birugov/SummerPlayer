@@ -49,13 +49,6 @@ public class ClientClass extends AsyncTask {
             inputStream.read(text);
             outputStream.write(text);
             outputStream.writeInt(activity_main.mediaPlayer.getCurrentPosition());
-//                while ((len = inputStream.read(text)) != -1) {
-//                    Log.d("SENDING", "OK2");
-//                    outputStream.write(text);
-//                }
-            //Log.d("SENDINGERROR", String.valueOf(len));
-            //outputStream.close();
-            //outputStream.writeInt(mediaPlayer.getCurrentPosition());
             outputStream.flush();
             outputStream.close();
 
@@ -71,7 +64,6 @@ public class ClientClass extends AsyncTask {
     @Override
     protected void onPostExecute(Object o) {
         super.onPostExecute(o);
-//
     }
 
     @Override
@@ -79,7 +71,6 @@ public class ClientClass extends AsyncTask {
         activity_p2p.activeClient = true;
         if (activity_main.mediaPlayer == null && !activity_main.mediaPlayer.isPlaying())
             return null;
-        InputStream inputStream = null;
         try {
             if (socket == null) {
                 socket = new Socket();
@@ -87,27 +78,7 @@ public class ClientClass extends AsyncTask {
                 socket.connect(new InetSocketAddress(hostAdd, 16384), 500);
                 //socket.setKeepAlive(true);
             }
-            //inputStream = new FileInputStream((activity_main.getStream()));
-            //inputStream = getResources().openRawResource(R.raw.sound1);
             write();
-//                int length;
-//                long size = 0;
-//                byte[] buff = new byte[1024];
-//                while (true && inputStream != null) {
-//                    try {
-//                        if (((length = inputStream.read(buff)) == -1)) break;
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                    write(buff);
-//                    size += buff.length;
-//                }
-//                Log.d("LEN", String.valueOf(size));
-//                try {
-//                    outputStream.close();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
         } catch (IOException e) {
             e.printStackTrace();
             socket = null;

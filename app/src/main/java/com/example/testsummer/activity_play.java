@@ -66,7 +66,6 @@ public class activity_play extends AppCompatActivity {
                 try {
                     mediaPlayer.stop();
                     mediaPlayer.reset();
-                    activity_main.stream = activity_main.arrayTracks.get(currentSong).file;
                     PlayerTask playerTask = new PlayerTask(mediaPlayer, activity_main.arrayTracks.get(currentSong).title);
                     playerTask.execute();
                 } catch (Exception ex) {
@@ -79,7 +78,6 @@ public class activity_play extends AppCompatActivity {
                 try {
                     mediaPlayer.stop();
                     mediaPlayer.reset();
-                    activity_main.stream = activity_main.arrayTracks.get(currentSong).file;
                     activity_main.toPlay.setText(activity_main.arrayTracks.get(currentSong).title);
                     PlayerTask playerTask = new PlayerTask(mediaPlayer, activity_main.arrayTracks.get(currentSong).title);
                     playerTask.execute();
