@@ -1,36 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/icons"
+    android:orientation="vertical">
 
-    <Button
-        android:id="@+id/onOff"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="55dp"
-        android:background="@drawable/act_main_button"
-        android:text="Wifi On" />
 
-    <Button
-        android:id="@+id/discover"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/onOff"
-        android:layout_alignBottom="@+id/onOff"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="0dp"
-        android:background="@drawable/act_main_button"
-        android:text="discover" />
+        android:background="@color/primary"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/onOff"
+                android:layout_width="0dp"
+                android:layout_height="55dp"
+                android:layout_marginStart="10sp"
+                android:layout_marginTop="10sp"
+                android:layout_marginEnd="@android:dimen/app_icon_size"
+                android:layout_weight="1"
+                android:background="@drawable/act_main_button" />
+
+            <ImageButton
+                android:id="@+id/discover"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/onOff"
+                android:layout_marginBottom="0dp"
+                android:background="@drawable/act_main_button"
+                android:text="discover" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/connectionStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/act_main_button"
+            android:text="Connection Status"
+            android:textAlignment="center"
+            android:textColor="@android:color/holo_blue_dark"
+            android:textSize="18sp"
+            android:textStyle="italic" />
+
+    </LinearLayout>
 
     <ListView
         android:id="@+id/peerListView"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_below="@+id/onOff"
-        android:layout_alignParentStart="true"
         android:layout_marginTop="25dp"
         android:background="@color/icons" />
 
@@ -38,9 +62,6 @@
         android:id="@+id/readMsg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/peerListView"
         android:layout_marginTop="31dp"
         android:text="Message"
         android:textAlignment="center"
@@ -51,32 +72,14 @@
         android:id="@+id/writeMsg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:layout_toStartOf="@+id/sendButton" />
+        android:inputType="textPersonName" />
 
     <Button
         android:id="@+id/sendButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
         android:background="@drawable/act_main_button"
-        android:text="Send" />
+        android:text="Delay" />
 
-    <TextView
-        android:id="@+id/connectionStatus"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="15dp"
-        android:text="Connection Status"
-        android:textAlignment="center"
-        android:textColor="@android:color/holo_blue_dark"
-        android:textSize="18sp"
-        android:textStyle="italic" />
-
-</RelativeLayout>
+</LinearLayout>
