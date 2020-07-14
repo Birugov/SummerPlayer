@@ -38,7 +38,7 @@ public class acticity_setting extends AppCompatActivity {
         final Button about_button = (Button)findViewById(R.id.about_button);
         final Button blackList_button = (Button)findViewById(R.id.blackList_button);
 
-        switch_button.setOnClickListener(new View.OnClickListener() {
+        switch_button.setOnClickListener(new View.OnClickListener() { //
 
             @Override
             public void onClick(View v) {
