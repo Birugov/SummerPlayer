@@ -4,12 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.media.AudioManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,19 +14,7 @@ import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.example.testsummer.Services.OnClearFromRecentService;
-
-import net.protyposis.android.mediaplayer.FileSource;
 import net.protyposis.android.mediaplayer.MediaPlayer;
-import net.protyposis.android.mediaplayer.MediaSource;
-import net.protyposis.android.mediaplayer.dash.DashSource;
-import net.protyposis.android.mediaplayer.dash.SimpleRateBasedAdaptationLogic;
-
-import java.io.File;
-import java.io.IOException;
-
-
 import static com.example.testsummer.activity_main.playPauseBtn;
 
 
