@@ -7,16 +7,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
-import android.content.res.AssetFileDescriptor;
 import android.database.Cursor;
 import android.media.AudioManager;
-import android.media.MediaDataSource;
 import android.media.MediaMetadataRetriever;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -26,9 +22,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
-import android.widget.VideoView;
-
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -36,20 +29,10 @@ import androidx.core.content.ContextCompat;
 import com.example.testsummer.Services.OnClearFromRecentService;
 import com.example.testsummer.wifip2p.activity_p2p;
 
-import net.protyposis.android.mediaplayer.FileSource;
 import net.protyposis.android.mediaplayer.MediaPlayer;
-import net.protyposis.android.mediaplayer.MediaSource;
-import net.protyposis.android.mediaplayer.UriSource;
 
-import org.apache.commons.io.IOUtils;
 
 import java.io.File;
-import java.io.FileDescriptor;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 
 
