@@ -6,6 +6,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.media.AudioManager;
@@ -41,10 +42,16 @@ import java.util.ArrayList;
 
 import wseemann.media.FFmpegMediaPlayer;
 
+import static android.content.Context.MODE_PRIVATE;
+
 
 public class activity_main extends AppCompatActivity {
 
     private static final int REQUEST_PERMISSIONS = 12345;
+
+    SharedPreferences appSettingPrefs; //
+    Setting_Loader settingLoader; //
+
 
     protected static Button toPlay;
     private ImageButton btnSetting;
@@ -72,6 +79,11 @@ public class activity_main extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        appSettingPrefs = getSharedPreferences("AppSettingPrefs", MODE_PRIVATE); //
+        settingLoader = new Setting_Loader(appSettingPrefs); //
+        settingLoader.load(); //
+
         if (mediaPlayer == null) {
             mediaPlayer = new MediaPlayer();
         }
