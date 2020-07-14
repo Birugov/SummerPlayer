@@ -50,6 +50,7 @@ public class activity_main extends AppCompatActivity {
     private static final int REQUEST_PERMISSIONS = 12345;
 
     SharedPreferences appSettingPrefs; //
+    SharedPreferences blackList; //
     Setting_Loader settingLoader; //
 
 
@@ -81,6 +82,7 @@ public class activity_main extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         appSettingPrefs = getSharedPreferences("AppSettingPrefs", MODE_PRIVATE); //
+        blackList = getSharedPreferences("songBlackList", MODE_PRIVATE); //
         settingLoader = new Setting_Loader(appSettingPrefs); //
         settingLoader.load(); //
 
@@ -223,13 +225,16 @@ public class activity_main extends AppCompatActivity {
                     MediaMetadataRetriever mediaMetadataRetriever = (MediaMetadataRetriever) new MediaMetadataRetriever();
                     File file = new File(currentLocation);
                     Log.d("CANREAD", String.valueOf(file.canRead()));
+
                     file.setReadable(true);
                     Log.d("CANREAD", String.valueOf(file.canRead()));
                     if (file.canRead()) {
-                        isReadable = true;
-                        Uri uri = (Uri) Uri.fromFile(new File(currentLocation));
-                        mediaMetadataRetriever.setDataSource(activity_main.this, uri);
-                        image = mediaMetadataRetriever.getEmbeddedPicture();
+                        if(blackList.getBoolean(currentLocation, true)) {
+                            isReadable = true;
+                            Uri uri = (Uri) Uri.fromFile(new File(currentLocation));
+                            mediaMetadataRetriever.setDataSource(activity_main.this, uri);
+                            image = mediaMetadataRetriever.getEmbeddedPicture();
+                        }
                     }
 
                 } catch (Exception ex) {}
