@@ -90,7 +90,6 @@ public class activity_main extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
                 Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.READ_PHONE_STATE,
@@ -104,6 +103,7 @@ public class activity_main extends AppCompatActivity {
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.ACCESS_MEDIA_LOCATION,
                 Manifest.permission.MODIFY_AUDIO_SETTINGS,
+                Manifest.permission.CHANGE_WIFI_STATE
         }, 1);
         appContext = getApplicationContext();
 
@@ -208,9 +208,9 @@ public class activity_main extends AppCompatActivity {
             int songLocation = songCursor.getColumnIndex(MediaStore.Audio.Media.DATA);
 
             do {
-                String currentTitle = songCursor.getString(songTitle) == null ? "unknown": songCursor.getString(songTitle);
+                String currentTitle = songCursor.getString(songTitle) == null ? "unknown" : songCursor.getString(songTitle);
                 title = currentTitle;
-                String currentArtist = songCursor.getString(songArtist) == null ? "unknown": songCursor.getString(songArtist);
+                String currentArtist = songCursor.getString(songArtist) == null ? "unknown" : songCursor.getString(songArtist);
                 String currentLocation = songCursor.getString(songLocation);
                 Log.d("INFOART", "" + currentArtist + "");
 
@@ -232,8 +232,9 @@ public class activity_main extends AppCompatActivity {
                         image = mediaMetadataRetriever.getEmbeddedPicture();
                     }
 
-                } catch (Exception ex) {}
-               if (isReadable) {
+                } catch (Exception ex) {
+                }
+                if (isReadable) {
                     Track track = new Track(currentTitle, currentArtist, currentLocation, image);
                     arrayTracks.add(track);
                     arrayList.add("Title: " + track.title + "\n"
@@ -281,7 +282,7 @@ public class activity_main extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 stream = arrayTracks.get((int) id).file;
-                title = arrayList.get(position).substring(arrayList.get(position).indexOf("Title: ")+6, arrayList.get(position).indexOf("Artist: "));
+                title = arrayList.get(position).substring(arrayList.get(position).indexOf("Title: ") + 6, arrayList.get(position).indexOf("Artist: "));
                 currentSong = (int) id;
                 startPlay();
                 CreateNotification.createNotification(activity_main.appContext, arrayTracks.get((int) id), R.drawable.baseline_pause_24, position, arrayTracks.size() - 1);

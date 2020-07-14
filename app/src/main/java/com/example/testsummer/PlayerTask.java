@@ -29,12 +29,10 @@ public class PlayerTask extends AsyncTask<String, Void, Boolean> {
     String title;
     String source = null;
     int currentPost = 0;
-    android.media.MediaPlayer mm;
 
     public PlayerTask(MediaPlayer mediaPlayer, String title) {
         this.mediaPlayer = mediaPlayer;
         this.title = title;
-        mm = new android.media.MediaPlayer();
     }
 
     public PlayerTask(MediaPlayer mediaPlayer, String title, String source, int currentPost) {
@@ -120,6 +118,10 @@ public class PlayerTask extends AsyncTask<String, Void, Boolean> {
     @Override
     protected void onPostExecute(Boolean aBoolean) {
         super.onPostExecute(aBoolean);
+        if (activity_p2p.activeServer) {
+            ServerClass serverClass = new ServerClass();
+            serverClass.execute();
+        }
         //Toast.makeText(activity_main.appContext, "Playing..  " + title, Toast.LENGTH_SHORT).show();
     }
 }
