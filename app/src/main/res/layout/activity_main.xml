@@ -86,4 +86,12 @@
             app:srcCompat="@drawable/baseline_skip_next_black_36" />
     </LinearLayout>
 
+    <Button
+        android:id="@+id/button"
+        android:onClick="switchOnSetting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Button" />
+
 </LinearLayout>
