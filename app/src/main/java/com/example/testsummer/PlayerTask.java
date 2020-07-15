@@ -90,14 +90,11 @@ public class PlayerTask extends AsyncTask<String, Void, Boolean> {
         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
-                Log.d("KAKA", "fromPlayerTask");
                 activity_play activityPlay = new activity_play();
-                Log.d("eee", "3");
                 if (activity_p2p.activeServer) {
                     ServerClass serverClass = new ServerClass();
                     serverClass.execute();
                 } else {
-                    Log.d("eee", "33");
                     activityPlay.playNext();
                     try {
                         activity_play.songAuthor.setText(activity_main.arrayTracks.get(activityPlay.currentSong).artist);

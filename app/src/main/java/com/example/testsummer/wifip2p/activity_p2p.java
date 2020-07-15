@@ -101,19 +101,6 @@ public class activity_p2p extends AppCompatActivity {
         exqListener();
     }
 
-    Handler handler = new Handler(new Handler.Callback() {
-        @Override
-        public boolean handleMessage(@NonNull Message message) {
-            switch (message.what) {
-                case MESSAGE_READ:
-                    byte[] readBuff = (byte[]) message.obj;
-                    String tempMsg = new String(readBuff, 0, message.arg1);
-                    read_msg_box.setText(tempMsg);
-                    break;
-            }
-            return true;
-        }
-    });
 
     private void exqListener() {
 
@@ -184,7 +171,8 @@ public class activity_p2p extends AppCompatActivity {
                     }
                     delay(mils);
                 } catch (Exception ex) {
-                    Toast.makeText(activity_main.appContext, "Enter number in milliseconds", Toast.LENGTH_LONG).show();
+                    Toast.makeText(activity_main.appContext, "Enter number in milliseconds",
+                            Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -258,7 +246,8 @@ public class activity_p2p extends AppCompatActivity {
 
     public static InetAddress groupOwnerAddress = null;
 
-    public WifiP2pManager.ConnectionInfoListener connectionInfoListener = new WifiP2pManager.ConnectionInfoListener() {
+    public WifiP2pManager.ConnectionInfoListener connectionInfoListener =
+            new WifiP2pManager.ConnectionInfoListener() {
         @Override
         public void onConnectionInfoAvailable(WifiP2pInfo wifiP2pInfo) {
             groupOwnerAddress = wifiP2pInfo.groupOwnerAddress;

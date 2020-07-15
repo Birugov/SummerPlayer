@@ -40,10 +40,8 @@ public class ClientClass extends AsyncTask {
             Log.d("SENDING", "OK");
             //if (outputStream == null)
                 outputStream = new DataOutputStream(socket.getOutputStream());
-            Log.d("SENDING", "OK3");
 
             InputStream inputStream = new FileInputStream(activity_main.arrayTracks.get(activity_main.currentSong).file);
-            int len;
             byte[] text = new byte[soundSize];
             outputStream.writeInt(soundSize);
             inputStream.read(text);
