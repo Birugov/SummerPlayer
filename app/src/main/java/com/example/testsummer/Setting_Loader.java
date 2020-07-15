@@ -15,6 +15,7 @@ public class Setting_Loader{
         nightModeLoad();
     }
 
+
     private void nightModeLoad(){
         final boolean isNightModeOn = settings.getBoolean("NightMode", false);
         if(isNightModeOn){
