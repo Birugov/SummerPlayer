@@ -36,9 +36,7 @@ import net.protyposis.android.mediaplayer.MediaPlayer;
 import java.io.File;
 import java.util.ArrayList;
 
-import wseemann.media.FFmpegMediaPlayer;
 
-import static android.content.Context.MODE_PRIVATE;
 
 
 public class activity_main extends AppCompatActivity {
