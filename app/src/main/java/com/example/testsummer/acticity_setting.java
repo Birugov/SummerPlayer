@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.fragment.app.FragmentManager;
 
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 
 import android.os.Bundle;
@@ -19,15 +20,19 @@ public class acticity_setting extends AppCompatActivity {
 
     SharedPreferences appSettingPrefs;
     static SharedPreferences blackList;
+    static ArrayList<Track> arrayList_toCopy = new ArrayList<>(activity_main.arrayTracks);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_acticity_setting);
+        //Bundle arguments = getIntent().getExtras();
+        //assert arguments != null;
+        //boolean check = arguments.getBoolean("arrayTrack");
 
 
-        ArrayList<Track> arrayTracks = activity_main.arrayTracks;
 
         appSettingPrefs = getSharedPreferences("AppSettingPrefs", MODE_PRIVATE);
         blackList = getSharedPreferences("songBlackList", MODE_PRIVATE);
@@ -37,6 +42,7 @@ public class acticity_setting extends AppCompatActivity {
         final Button switch_button = (Button)findViewById(R.id.switch_button);
         final Button about_button = (Button)findViewById(R.id.about_button);
         final Button blackList_button = (Button)findViewById(R.id.blackList_button);
+        final Button refresh_button = (Button)findViewById(R.id.refresh_button);
 
         switch_button.setOnClickListener(new View.OnClickListener() { //
 
@@ -72,12 +78,25 @@ public class acticity_setting extends AppCompatActivity {
         blackList_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 FragmentManager manager = getSupportFragmentManager();
                 SongBlackListDialogFragment blackList_DialogFragment = new SongBlackListDialogFragment();
                 blackList_DialogFragment.show(manager, " blackList_Dialog");
             }
         });
 
+        refresh_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                acticity_setting.this.recreate();
+            }
+        });
+
+    }
+
+    @Override public void onBackPressed(){
+        Intent intent = new Intent(acticity_setting.this, activity_main.class);
+        startActivity (intent);
     }
 
 }

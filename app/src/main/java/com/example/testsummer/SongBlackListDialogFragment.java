@@ -2,6 +2,7 @@ package com.example.testsummer;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 
@@ -15,7 +16,11 @@ public class SongBlackListDialogFragment extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        ArrayList<Track> arrayTracks = activity_main.arrayTracks;
+
+        ArrayList<Track> arrayTracks = new ArrayList<>(acticity_setting.arrayList_toCopy);
+
+
+
         String[] whiteList = new String[arrayTracks.size()];
         //load white_list
         for(int i = 0; i < whiteList.length; i++){
@@ -49,7 +54,9 @@ public class SongBlackListDialogFragment extends DialogFragment {
                         boolean trackOnBlack = acticity_setting.blackList.getBoolean(songName, false);
                         if(!trackOnBlack){
                             acticity_setting.blackList.edit().putBoolean(songName, true).apply();
+                            acticity_setting.arrayList_toCopy.remove(which-blackList.length);
                         } else {
+                            acticity_setting.arrayList_toCopy.add(new Track(songName, "", "", new byte[0]));
                             acticity_setting.blackList.edit().remove(songName).apply();
                         }
                     }

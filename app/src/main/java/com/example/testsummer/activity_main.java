@@ -49,6 +49,7 @@ public class activity_main extends AppCompatActivity {
 
     private static final int REQUEST_PERMISSIONS = 12345;
 
+
     SharedPreferences appSettingPrefs; //
     SharedPreferences blackList; //
     Setting_Loader settingLoader; //
@@ -149,7 +150,9 @@ public class activity_main extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(activity_main.this, acticity_setting.class);
-                startActivity(intent);
+                intent.putExtra("arrayTrack", true);
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity (intent);
             }
         });
         toPlay.setOnClickListener(new View.OnClickListener() {
@@ -309,6 +312,7 @@ public class activity_main extends AppCompatActivity {
         toPlay.setText(arrayTracks.get(currentSong).title);
         playPauseBtn.setImageResource(R.drawable.baseline_pause_black_36);
     }
+
 
 
 }
