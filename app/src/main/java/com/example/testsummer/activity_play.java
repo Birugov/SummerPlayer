@@ -30,7 +30,6 @@ import net.protyposis.android.mediaplayer.dash.SimpleRateBasedAdaptationLogic;
 import java.io.File;
 import java.io.IOException;
 
-import wseemann.media.FFmpegMediaPlayer;
 
 import static com.example.testsummer.activity_main.playPauseBtn;
 
@@ -67,7 +66,6 @@ public class activity_play extends AppCompatActivity {
                 try {
                     mediaPlayer.stop();
                     mediaPlayer.reset();
-                    activity_main.stream = activity_main.arrayTracks.get(currentSong).file;
                     PlayerTask playerTask = new PlayerTask(mediaPlayer, activity_main.arrayTracks.get(currentSong).title);
                     playerTask.execute();
                 } catch (Exception ex) {
@@ -80,7 +78,6 @@ public class activity_play extends AppCompatActivity {
                 try {
                     mediaPlayer.stop();
                     mediaPlayer.reset();
-                    activity_main.stream = activity_main.arrayTracks.get(currentSong).file;
                     activity_main.toPlay.setText(activity_main.arrayTracks.get(currentSong).title);
                     PlayerTask playerTask = new PlayerTask(mediaPlayer, activity_main.arrayTracks.get(currentSong).title);
                     playerTask.execute();
@@ -113,24 +110,11 @@ public class activity_play extends AppCompatActivity {
                 activity_main.toPlay.setText(activity_main.arrayTracks.get(currentSong).title);
                 PlayerTask playerTask = new PlayerTask(mediaPlayer, activity_main.arrayTracks.get(currentSong).file);
                 playerTask.execute();
-//                activity_main.stream = activity_main.arrayTracks.get(currentSong).file;
-//                FileSource mediaSource = new FileSource(new File(activity_main.stream));
-//                mediaPlayer.setDataSource(mediaSource);
-//                //mediaPlayer.setDataSource(activity_main.arrayTracks.get(currentSong).file);
-//                mediaPlayer.prepareAsync();
-//                mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-//                    @Override
-//                    public void onPrepared(MediaPlayer mp) {
-//                        mediaPlayer.start();
-//                        playPauseBtn.setImageResource(R.drawable.baseline_pause_black_36);
-//                    }
-//                });
             } catch (Exception ex) {
 
             }
 
-//FFmpegMediaPlayer.create(activity_main.appContext, Uri.parse(activity_main.arrayTracks.get(currentSong).file));
-        }
+       }
         CreateNotification.createNotification(activity_main.appContext, activity_main.arrayTracks.get(currentSong),
                 R.drawable.baseline_pause_24, currentSong, activity_main.arrayTracks.size() - 1);
         try {
@@ -150,24 +134,12 @@ public class activity_play extends AppCompatActivity {
                         R.drawable.baseline_play_arrow_24, currentSong, activity_main.arrayTracks.size() - 1);
             } else {
                 try {
-                    //mediaPlayer.getTrackInfo();
                     mediaPlayer.start();
                     playPauseBtn.setImageResource(R.drawable.baseline_pause_black_36);
                 } catch (Exception ex) {
                     Log.d("eee", "5");
                     PlayerTask playerTask = new PlayerTask(mediaPlayer, activity_main.arrayTracks.get(currentSong).file);
                     playerTask.execute();
-//                    mediaPlayer.reset();
-//                    FileSource mediaSource = new FileSource(new File(activity_main.arrayTracks.get(currentSong).file));
-//                    mediaPlayer.setDataSource(mediaSource);
-//                    //mediaPlayer.setDataSource(activity_main.arrayTracks.get(currentSong).file);
-//                    mediaPlayer.prepareAsync();
-//                    mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-//                        @Override
-//                        public void onPrepared(MediaPlayer mp) {
-//                            mediaPlayer.start();
-//                        }
-//                    });
                 }
                 CreateNotification.createNotification(activity_main.appContext, activity_main.arrayTracks.get(currentSong),
                         R.drawable.baseline_pause_24, currentSong, activity_main.arrayTracks.size() - 1);
@@ -270,8 +242,6 @@ public class activity_play extends AppCompatActivity {
             public void onClick(View v) {
                 activity_main.mediaPlayer = mediaPlayer;
                 finish();
-//                Intent intent = new Intent(activity_play.this, activity_main.class);
-//                startActivity(intent);
             }
         });
 
