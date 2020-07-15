@@ -91,7 +91,6 @@ public class activity_p2p extends AppCompatActivity {
 
     ServerClass serverClass;
     ClientClass clientClass;
-    //SendReceive sendReceive;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -125,11 +124,9 @@ public class activity_p2p extends AppCompatActivity {
                     if (wifiManager.isWifiEnabled()) {
                         wifiManager.setWifiEnabled(false);
                         btnOnOff.setImageResource(R.drawable.baseline_wifi_off_black_48);
-                        //btnOnOff.setText("WIFI ON");
                     } else {
                         wifiManager.setWifiEnabled(true);
                         btnOnOff.setImageResource(R.drawable.baseline_wifi_black_48);
-                        //btnOnOff.setText("WIFI OFF");
                     }
                 } else {
                     Toast.makeText(activity_main.appContext, "You have Android Q. On/Off WIFI manually", Toast.LENGTH_LONG).show();
@@ -187,7 +184,6 @@ public class activity_p2p extends AppCompatActivity {
                     }
                     delay(mils);
                 } catch (Exception ex) {
-                    Log.d("ERP", ex.getMessage());
                     Toast.makeText(activity_main.appContext, "Enter number in milliseconds", Toast.LENGTH_LONG).show();
                 }
             }
@@ -291,9 +287,6 @@ public class activity_p2p extends AppCompatActivity {
         unregisterReceiver(mReceiver);
     }
 
-    public static int getByteArraySize() {
-        return byteArraySize;
-    }
 
 
     public static boolean activeServer = false, activeClient = false;
