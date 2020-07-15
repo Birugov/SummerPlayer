@@ -38,7 +38,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="D:\Ural\Downloads\baseline_play_arrow_black_48.png" />
+                                                <entry key="imagePath" value="D:\Ural\Downloads\icons8-музыка-256.png" />
                                                 <entry key="opacityPercent" value="80" />
                                                 <entry key="trimmed" value="true" />
                                               </map>
@@ -77,8 +77,8 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="D:\Ural\Downloads\baseline_play_arrow_black_48.png" />
-                                      <entry key="outputName" value="ic_play" />
+                                      <entry key="imageAsset" value="D:\Ural\Downloads\icons8-музыка-256.png" />
+                                      <entry key="outputName" value="music_notes" />
                                       <entry key="theme" value="HOLO_DARK" />
                                       <entry key="themeColor" value="ffffff" />
                                     </map>
