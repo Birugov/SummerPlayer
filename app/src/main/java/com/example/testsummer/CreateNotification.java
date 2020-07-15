@@ -49,9 +49,6 @@ public class CreateNotification {
                     .setAction(ACTION_PLAY);
             PendingIntent pendingIntentPlay = PendingIntent.getBroadcast(context, 0, intentPlay, PendingIntent.FLAG_UPDATE_CURRENT);
 
-
-
-
             PendingIntent pendingIntentNext;
             int drw_next;
             if (pos == size) {

@@ -11,7 +11,6 @@ import android.database.Cursor;
 import android.media.AudioManager;
 import android.media.MediaMetadataRetriever;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -23,8 +22,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
-import android.widget.VideoView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -32,14 +29,11 @@ import androidx.core.content.ContextCompat;
 import com.example.testsummer.Services.OnClearFromRecentService;
 import com.example.testsummer.wifip2p.activity_p2p;
 
-import net.protyposis.android.mediaplayer.FileSource;
 import net.protyposis.android.mediaplayer.MediaPlayer;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 
-import wseemann.media.FFmpegMediaPlayer;
+import java.io.File;
+import java.util.ArrayList;
 
 
 public class activity_main extends AppCompatActivity {
@@ -53,9 +47,7 @@ public class activity_main extends AppCompatActivity {
     protected ImageButton nextBtn;
     public static MediaPlayer mediaPlayer = null;
     private ListView listOfSongs;
-    public static String stream = null;
-    private String title;
-    protected static Integer currentSong = 0;
+    public static Integer currentSong = 0;
     protected static PlayerTask playerTask = null;
 
     protected static activity_play activityPlay;
@@ -64,11 +56,8 @@ public class activity_main extends AppCompatActivity {
 
     ArrayList<String> arrayList;
     ArrayAdapter<String> adapter;
-    static ArrayList<Track> arrayTracks;
+    public static ArrayList<Track> arrayTracks;
 
-    public static String getStream() {
-        return stream;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +84,7 @@ public class activity_main extends AppCompatActivity {
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.ACCESS_MEDIA_LOCATION,
                 Manifest.permission.MODIFY_AUDIO_SETTINGS,
+                Manifest.permission.CHANGE_WIFI_STATE
         }, 1);
         appContext = getApplicationContext();
 
@@ -123,11 +113,6 @@ public class activity_main extends AppCompatActivity {
         playPauseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                if (activityPlay.pausePlay()) {
-//                    playPauseBtn.setImageResource(R.drawable.baseline_play_arrow_black_36);
-//                } else {
-//                    playPauseBtn.setImageResource(R.drawable.baseline_pause_black_36);
-//                }
                 activityPlay.pausePlay();
             }
         });
@@ -199,9 +184,8 @@ public class activity_main extends AppCompatActivity {
             int songLocation = songCursor.getColumnIndex(MediaStore.Audio.Media.DATA);
 
             do {
-                String currentTitle = songCursor.getString(songTitle) == null ? "unknown": songCursor.getString(songTitle);
-                title = currentTitle;
-                String currentArtist = songCursor.getString(songArtist) == null ? "unknown": songCursor.getString(songArtist);
+                String currentTitle = songCursor.getString(songTitle) == null ? "unknown" : songCursor.getString(songTitle);
+                String currentArtist = songCursor.getString(songArtist) == null ? "unknown" : songCursor.getString(songArtist);
                 String currentLocation = songCursor.getString(songLocation);
                 Log.d("INFOART", "" + currentArtist + "");
 
@@ -210,17 +194,21 @@ public class activity_main extends AppCompatActivity {
                 try {
                     MediaMetadataRetriever mediaMetadataRetriever = (MediaMetadataRetriever) new MediaMetadataRetriever();
                     File file = new File(currentLocation);
-                    Log.d("CANREAD", String.valueOf(file.canRead()));
+
+
+                    Log.d("CANREAD", String.valueOf(file.canRead()) + " " + currentLocation);
                     file.setReadable(true);
                     Log.d("CANREAD", String.valueOf(file.canRead()));
                     if (file.canRead()) {
+
                         isReadable = true;
                         Uri uri = (Uri) Uri.fromFile(new File(currentLocation));
                         mediaMetadataRetriever.setDataSource(activity_main.this, uri);
                         image = mediaMetadataRetriever.getEmbeddedPicture();
                     }
 
-                } catch (Exception ex) {}
+                } catch (Exception ex) {
+                }
                 if (isReadable) {
                     Track track = new Track(currentTitle, currentArtist, currentLocation, image);
                     arrayTracks.add(track);
@@ -228,7 +216,6 @@ public class activity_main extends AppCompatActivity {
                             + "Artist: " + track.artist);
                 }
             } while (songCursor.moveToNext());
-            stream = arrayTracks.get(0).file;
             currentSong = 0;
             toPlay.setText(arrayTracks.get(0).title);
         }
@@ -242,8 +229,7 @@ public class activity_main extends AppCompatActivity {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     if (ContextCompat.checkSelfPermission(activity_main.this,
                             Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                        //Toast.makeText(this, "Permission granted!", Toast.LENGTH_SHORT).show();
-                        doStuff();
+                       doStuff();
                     }
                 } else {
                     Toast.makeText(this, "No permission granted", Toast.LENGTH_SHORT).show();
@@ -268,8 +254,6 @@ public class activity_main extends AppCompatActivity {
         listOfSongs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                stream = arrayTracks.get((int) id).file;
-                title = arrayList.get(position).substring(arrayList.get(position).indexOf("Title: ")+6, arrayList.get(position).indexOf("Artist: "));
                 currentSong = (int) id;
                 startPlay();
                 CreateNotification.createNotification(activity_main.appContext, arrayTracks.get((int) id), R.drawable.baseline_pause_24, position, arrayTracks.size() - 1);
@@ -288,7 +272,7 @@ public class activity_main extends AppCompatActivity {
             mediaPlayer = new MediaPlayer();
         }
         playerTask = new PlayerTask(mediaPlayer, arrayTracks.get(currentSong).title);
-        playerTask.execute(stream);
+        playerTask.execute(arrayTracks.get(currentSong).file);
         toPlay.setText(arrayTracks.get(currentSong).title);
         playPauseBtn.setImageResource(R.drawable.baseline_pause_black_36);
     }
