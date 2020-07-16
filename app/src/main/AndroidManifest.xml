@@ -26,6 +26,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".acticity_setting"></activity>
         <activity android:name=".activity_play"></activity>
         <activity android:name=".wifip2p.activity_p2p"></activity>
