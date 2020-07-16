@@ -197,12 +197,31 @@ public class activity_play extends AppCompatActivity {
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-                mediaPlayer.seekTo(seekBar.getProgress() * mediaPlayer.getDuration() / 100);
+                int progress = seekBar.getProgress();
+                try {
+                    if (mediaPlayer.isPlaying() || !mediaPlayer.isPlaying())
+                        mediaPlayer.seekTo(seekBar.getProgress() * mediaPlayer.getDuration() / 100);
+                } catch (Exception ex) {
+
+                    Log.d("ffff", "" + progress);
+                    pausePlay();
+                    mediaPlayer.seekTo(progress * mediaPlayer.getDuration() / 100);
+                }
+
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                mediaPlayer.seekTo(seekBar.getProgress() * mediaPlayer.getDuration() / 100);
+                int progress = seekBar.getProgress();
+                try {
+                    if (mediaPlayer.isPlaying() || !mediaPlayer.isPlaying())
+                        mediaPlayer.seekTo(seekBar.getProgress() * mediaPlayer.getDuration() / 100);
+                } catch (Exception ex) {
+                    Log.d("ffff", "" + progress);
+                    pausePlay();
+                    mediaPlayer.seekTo(progress * mediaPlayer.getDuration() / 100);
+                }
+                //mediaPlayer.seekTo(seekBar.getProgress() * mediaPlayer.getDuration() / 100);
             }
         });
 
