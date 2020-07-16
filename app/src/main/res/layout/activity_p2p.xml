@@ -56,7 +56,7 @@
             android:background="@drawable/act_main_button"
             android:text="Connection Status"
             android:textAlignment="center"
-            android:textColor="@color/primary_text"
+            android:textColor="@color/p2p_text"
             android:textSize="18sp"
             android:textStyle="italic" />
 
@@ -86,9 +86,9 @@
             android:background="@drawable/act_main_button"
             android:ems="10"
             android:gravity="center"
+            android:hint="msec"
             android:inputType="textPersonName"
-            android:text="msec"
-            android:textColor="@color/secondary_text" />
+            android:textColor="@color/p2p_text" />
 
         <Button
             android:id="@+id/sendButton"
@@ -99,7 +99,8 @@
             android:layout_marginBottom="15dp"
             android:background="@drawable/act_main_button"
             android:gravity="center"
-            android:text="Delay" />
+            android:text="Delay"
+            android:textColor="@color/p2p_text" />
     </LinearLayout>
 
 </LinearLayout>

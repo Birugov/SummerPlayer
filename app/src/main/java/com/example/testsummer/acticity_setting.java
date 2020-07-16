@@ -3,7 +3,6 @@ package com.example.testsummer;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.fragment.app.FragmentManager;
 
 
@@ -14,9 +13,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import net.protyposis.android.mediaplayer.MediaPlayer;
+
 import java.util.ArrayList;
 
 public class acticity_setting extends AppCompatActivity {
+
+    static MediaPlayer mediaPlayer;
 
     SharedPreferences appSettingPrefs;
     static SharedPreferences blackList;
@@ -28,9 +31,9 @@ public class acticity_setting extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_acticity_setting);
-        //Bundle arguments = getIntent().getExtras();
-        //assert arguments != null;
-        //boolean check = arguments.getBoolean("arrayTrack");
+        Bundle arguments = getIntent().getExtras();
+        assert arguments != null;
+       //boolean check = arguments.getBoolean("arrayTrack");
 
 
 
@@ -97,6 +100,7 @@ public class acticity_setting extends AppCompatActivity {
     @Override public void onBackPressed(){
         Intent intent = new Intent(acticity_setting.this, activity_main.class);
         startActivity (intent);
+        finish();
     }
 
 }

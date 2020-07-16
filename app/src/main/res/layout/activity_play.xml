@@ -13,7 +13,7 @@
         android:id="@+id/exit_and_settings_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/primary_dark">
+        android:background="@color/primary">
 
 
         <ImageButton
@@ -22,7 +22,7 @@
             android:layout_height="75dp"
             android:layout_alignParentStart="true"
             android:layout_marginStart="0dp"
-            android:background="@color/primary_dark"
+            android:background="@color/primary"
             android:contentDescription="@string/exit_button"
             android:src="@drawable/baseline_arrow_back_ios_white_36" />
 
@@ -31,7 +31,7 @@
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:layout_alignParentEnd="true"
-            android:background="@color/primary_dark"
+            android:background="@color/primary"
             android:contentDescription="@string/settings_button"
             android:src="@drawable/baseline_settings_white_36" />
     </RelativeLayout>
@@ -70,7 +70,7 @@
         android:background="@color/icons"
         android:gravity="center|center_vertical"
         android:text="@string/song_author"
-        android:textColor="@color/primary"
+        android:textColor="@color/song_author_text"
         android:textSize="24sp"
         tools:ignore="RtlHardcoded" />
 
@@ -127,7 +127,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:background="@android:color/white"
+            android:background="@color/icons"
             android:contentDescription="@string/right_button"
             android:src="@drawable/baseline_skip_next_black_48"
             android:tint="@color/primary_text"

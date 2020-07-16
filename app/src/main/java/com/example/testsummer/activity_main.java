@@ -14,6 +14,7 @@ import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -125,6 +126,11 @@ public class activity_main extends AppCompatActivity {
                 playPauseBtn.setImageResource(R.drawable.baseline_pause_black_36);
             }
         });
+        try {
+            if (mediaPlayer.isPlaying()) {
+                playPauseBtn.setImageResource(R.drawable.baseline_pause_black_36);
+            }
+        } catch (Exception ex) {}
         playPauseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -139,6 +145,8 @@ public class activity_main extends AppCompatActivity {
                 intent.putExtra("arrayTrack", true);
                 intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity (intent);
+                acticity_setting.mediaPlayer = mediaPlayer;
+                finish();
             }
         });
         toPlay.setOnClickListener(new View.OnClickListener() {
@@ -235,8 +243,13 @@ public class activity_main extends AppCompatActivity {
                             + "Artist: " + track.artist);
                 }
             } while (songCursor.moveToNext());
-            currentSong = 0;
-            toPlay.setText(arrayTracks.get(0).title);
+            if (PlayerTask.fixForSetting == null) {
+                currentSong = 0;
+                toPlay.setText(arrayTracks.get(0).title);
+            } else {
+                currentSong = PlayerTask.fixForSetting;
+                toPlay.setText(arrayTracks.get(currentSong).title);
+            }
         }
     }
 

@@ -64,7 +64,7 @@
             android:background="@color/primary"
             android:gravity="center|center_vertical"
             android:text="@string/song_name"
-            android:textColor="@color/icons"
+            android:textColor="@color/act_main_white"
             android:textSize="14sp" />
 
         <ImageButton
@@ -73,7 +73,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/primary"
-            android:tint="@color/icons"
+            android:tint="@color/act_main_white"
             app:srcCompat="@drawable/baseline_play_arrow_black_36" />
 
         <ImageButton
@@ -82,7 +82,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/primary"
-            android:tint="@color/icons"
+            android:tint="@color/act_main_white"
             app:srcCompat="@drawable/baseline_skip_next_black_36" />
     </LinearLayout>
 
