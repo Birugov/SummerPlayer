@@ -7,12 +7,17 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.fragment.app.FragmentManager;
 
 
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
+import com.example.testsummer.Services.FixerSettingService;
+import com.example.testsummer.Services.NotificationActionService;
 
 import java.util.ArrayList;
 
@@ -37,33 +42,33 @@ public class acticity_setting extends AppCompatActivity {
         appSettingPrefs = getSharedPreferences("AppSettingPrefs", MODE_PRIVATE);
         blackList = getSharedPreferences("songBlackList", MODE_PRIVATE);
         final SharedPreferences.Editor sharedPrefEdit= appSettingPrefs.edit();
-        final boolean isNightModeOn = appSettingPrefs.getBoolean("NightMode", false);
+      //  final boolean isNightModeOn = appSettingPrefs.getBoolean("NightMode", false);
 
         final Button switch_button = (Button)findViewById(R.id.switch_button);
         final Button about_button = (Button)findViewById(R.id.about_button);
         final Button blackList_button = (Button)findViewById(R.id.blackList_button);
         final Button refresh_button = (Button)findViewById(R.id.refresh_button);
 
-        switch_button.setOnClickListener(new View.OnClickListener() { //
-
-            @Override
-            public void onClick(View v) {
-
-                if(isNightModeOn){
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                    sharedPrefEdit.putBoolean("NightMode", false);
-                    sharedPrefEdit.apply();
-
-                } else {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                    sharedPrefEdit.putBoolean("NightMode", true);
-                    sharedPrefEdit.apply();
-
-                }
-
-
-            }
-        });
+//        switch_button.setOnClickListener(new View.OnClickListener() { //
+//
+//            @Override
+//            public void onClick(View v) {
+//
+//                if(isNightModeOn){
+//                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+//                    sharedPrefEdit.putBoolean("NightMode", false);
+//                    sharedPrefEdit.apply();
+//
+//                } else {
+//                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+//                    sharedPrefEdit.putBoolean("NightMode", true);
+//                    sharedPrefEdit.apply();
+//
+//                }
+//
+//
+//            }
+//        });
 
         about_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,8 +100,18 @@ public class acticity_setting extends AppCompatActivity {
     }
 
     @Override public void onBackPressed(){
-        Intent intent = new Intent(acticity_setting.this, activity_main.class);
-        startActivity (intent);
+        Intent intentNext = new Intent(activity_main.appContext, FixerSettingService.class)
+                .setAction("actionupdate");
+        PendingIntent pendingIntentNext = PendingIntent.getBroadcast(activity_main.appContext, 0, intentNext, PendingIntent.FLAG_UPDATE_CURRENT);
+        Log.d("good", "sending");
+        try {
+            pendingIntentNext.send();
+            Log.d("good", "sending2");
+        } catch (PendingIntent.CanceledException e) {
+            Log.d("good", "sending3");
+            e.printStackTrace();
+        }
+        finish();
     }
 
 }

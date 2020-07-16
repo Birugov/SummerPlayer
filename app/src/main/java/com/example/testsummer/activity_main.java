@@ -71,20 +71,23 @@ public class activity_main extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        appSettingPrefs = getSharedPreferences("AppSettingPrefs", MODE_PRIVATE); //
+//        appSettingPrefs = getSharedPreferences("AppSettingPrefs", MODE_PRIVATE); //
         blackList = getSharedPreferences("songBlackList", MODE_PRIVATE); //
-        settingLoader = new Setting_Loader(appSettingPrefs); //
-        settingLoader.load(); //
-
-        if (mediaPlayer == null) {
+        //settingLoader = new Setting_Loader(appSettingPrefs); //
+//
+//        settingLoader.load(); //
+        if (mediaPlayer == null)
             mediaPlayer = new MediaPlayer();
-        }
+
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         activityPlay = new activity_play();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if (blackList == null || settingLoader == null || appSettingPrefs == null) {
+            Toast.makeText(getApplicationContext(), "asdasd", Toast.LENGTH_LONG).show();
+        }
 
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
                 Manifest.permission.ACCESS_FINE_LOCATION,
@@ -125,6 +128,11 @@ public class activity_main extends AppCompatActivity {
                 playPauseBtn.setImageResource(R.drawable.baseline_pause_black_36);
             }
         });
+        try {
+            if (mediaPlayer.isPlaying()) {
+                playPauseBtn.setImageResource(R.drawable.baseline_pause_black_36);
+            }
+        } catch (Exception ex) {}
         playPauseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -168,10 +176,28 @@ public class activity_main extends AppCompatActivity {
                 }
             }
         };
+
+        BroadcastReceiver broadcastReceiver2 = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                Log.d("good", "sending4");
+                String action = intent.getExtras().getString("actionname2");
+
+                switch (action) {
+                    case "actionupdate":
+                        Log.d("good", "sending5");
+                        getMusic();
+                        break;
+                }
+            }
+        };
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             registerReceiver(broadcastReceiver, new IntentFilter("TRACKS_TRACKS"));
             startService(new Intent(activity_main.appContext, OnClearFromRecentService.class));
         }
+        registerReceiver(broadcastReceiver2, new IntentFilter("TRACKS_TRACKS2"));
+        startService(new Intent(activity_main.appContext, OnClearFromRecentService.class));
 
         if (ContextCompat.checkSelfPermission(activity_main.this,
                 Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -223,8 +249,8 @@ public class activity_main extends AppCompatActivity {
                             Uri uri = (Uri) Uri.fromFile(new File(currentLocation));
                             mediaMetadataRetriever.setDataSource(activity_main.this, uri);
                             image = mediaMetadataRetriever.getEmbeddedPicture();
-                        }
-                    }
+                      }
+                   }
 
                 } catch (Exception ex) {
                 }
@@ -235,8 +261,13 @@ public class activity_main extends AppCompatActivity {
                             + "Artist: " + track.artist);
                 }
             } while (songCursor.moveToNext());
-            currentSong = 0;
-            toPlay.setText(arrayTracks.get(0).title);
+            if (PlayerTask.fixForSetting == null) {
+                currentSong = 0;
+                toPlay.setText(arrayTracks.get(0).title);
+            } else {
+                currentSong = PlayerTask.fixForSetting;
+                toPlay.setText(arrayTracks.get(currentSong).title);
+            }
         }
     }
 

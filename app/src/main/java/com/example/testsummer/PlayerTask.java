@@ -29,10 +29,12 @@ public class PlayerTask extends AsyncTask<String, Void, Boolean> {
     String title;
     String source = null;
     int currentPost = 0;
+    static Integer fixForSetting = null;
 
     public PlayerTask(MediaPlayer mediaPlayer, String title) {
         this.mediaPlayer = mediaPlayer;
         this.title = title;
+        fixForSetting = activity_main.currentSong;
     }
 
     public PlayerTask(MediaPlayer mediaPlayer, String title, String source, int currentPost) {
