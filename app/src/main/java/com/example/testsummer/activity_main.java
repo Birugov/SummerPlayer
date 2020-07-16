@@ -72,10 +72,10 @@ public class activity_main extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        //appSettingPrefs = getSharedPreferences("AppSettingPrefs", MODE_PRIVATE); //
+        appSettingPrefs = getSharedPreferences("AppSettingPrefs", MODE_PRIVATE); //
         blackList = getSharedPreferences("songBlackList", MODE_PRIVATE); //
-        //settingLoader = new Setting_Loader(appSettingPrefs); //
-        //settingLoader.load(); //
+        settingLoader = new Setting_Loader(appSettingPrefs); //
+        settingLoader.load(); //
 
         if (mediaPlayer == null) {
             mediaPlayer = new MediaPlayer();
