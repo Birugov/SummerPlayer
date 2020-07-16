@@ -12,4 +12,6 @@
     <color name="settings_text">#212121</color>
     <color name="p2p_text">#212121</color>
     <color name="act_set_button">#D6D6D6</color>
+    <color name="act_main_white">#FFFFFF</color>
+    <color name="song_author_text">#673AB7</color>
 </resources>

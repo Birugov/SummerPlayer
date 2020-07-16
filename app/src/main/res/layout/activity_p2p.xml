@@ -86,9 +86,9 @@
             android:background="@drawable/act_main_button"
             android:ems="10"
             android:gravity="center"
+            android:hint="msec"
             android:inputType="textPersonName"
-            android:text="msec"
-            android:textColor="@color/secondary_text" />
+            android:textColor="@color/p2p_text" />
 
         <Button
             android:id="@+id/sendButton"

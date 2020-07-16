@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primary">#6200EE</color>
+    <color name="primary">#673AB7</color>
     <color name="primary_dark">#512DA8</color>
     <color name="primary_light">#F1F1F1</color>
     <color name="accent">#4B4591</color>
@@ -12,4 +12,6 @@
     <color name="settings_text">#FFFFFF</color>
     <color name="p2p_text">#212121</color>
     <color name="act_set_button">#512DA8</color>
+    <color name="act_main_white">#FFFFFF</color>
+    <color name="song_author_text">#a384d9</color>
 </resources>
