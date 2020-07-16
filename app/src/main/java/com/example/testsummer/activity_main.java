@@ -14,6 +14,7 @@ import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -71,23 +72,20 @@ public class activity_main extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-//        appSettingPrefs = getSharedPreferences("AppSettingPrefs", MODE_PRIVATE); //
+        //appSettingPrefs = getSharedPreferences("AppSettingPrefs", MODE_PRIVATE); //
         blackList = getSharedPreferences("songBlackList", MODE_PRIVATE); //
         //settingLoader = new Setting_Loader(appSettingPrefs); //
-//
-//        settingLoader.load(); //
-        if (mediaPlayer == null)
-            mediaPlayer = new MediaPlayer();
+        //settingLoader.load(); //
 
+        if (mediaPlayer == null) {
+            mediaPlayer = new MediaPlayer();
+        }
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         activityPlay = new activity_play();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (blackList == null || settingLoader == null || appSettingPrefs == null) {
-            Toast.makeText(getApplicationContext(), "asdasd", Toast.LENGTH_LONG).show();
-        }
 
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
                 Manifest.permission.ACCESS_FINE_LOCATION,
@@ -147,6 +145,8 @@ public class activity_main extends AppCompatActivity {
                 intent.putExtra("arrayTrack", true);
                 intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity (intent);
+                acticity_setting.mediaPlayer = mediaPlayer;
+                finish();
             }
         });
         toPlay.setOnClickListener(new View.OnClickListener() {
@@ -176,28 +176,10 @@ public class activity_main extends AppCompatActivity {
                 }
             }
         };
-
-        BroadcastReceiver broadcastReceiver2 = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                Log.d("good", "sending4");
-                String action = intent.getExtras().getString("actionname2");
-
-                switch (action) {
-                    case "actionupdate":
-                        Log.d("good", "sending5");
-                        getMusic();
-                        break;
-                }
-            }
-        };
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             registerReceiver(broadcastReceiver, new IntentFilter("TRACKS_TRACKS"));
             startService(new Intent(activity_main.appContext, OnClearFromRecentService.class));
         }
-        registerReceiver(broadcastReceiver2, new IntentFilter("TRACKS_TRACKS2"));
-        startService(new Intent(activity_main.appContext, OnClearFromRecentService.class));
 
         if (ContextCompat.checkSelfPermission(activity_main.this,
                 Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -249,8 +231,8 @@ public class activity_main extends AppCompatActivity {
                             Uri uri = (Uri) Uri.fromFile(new File(currentLocation));
                             mediaMetadataRetriever.setDataSource(activity_main.this, uri);
                             image = mediaMetadataRetriever.getEmbeddedPicture();
-                      }
-                   }
+                        }
+                    }
 
                 } catch (Exception ex) {
                 }

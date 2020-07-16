@@ -31,6 +31,8 @@ public class PlayerTask extends AsyncTask<String, Void, Boolean> {
     int currentPost = 0;
     static Integer fixForSetting = null;
 
+    static Integer fixForSetting = null;
+
     public PlayerTask(MediaPlayer mediaPlayer, String title) {
         this.mediaPlayer = mediaPlayer;
         this.title = title;
