@@ -6,6 +6,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.media.AudioManager;
@@ -13,6 +14,7 @@ import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -36,9 +38,17 @@ import java.io.File;
 import java.util.ArrayList;
 
 
+
+
 public class activity_main extends AppCompatActivity {
 
     private static final int REQUEST_PERMISSIONS = 12345;
+
+
+    SharedPreferences appSettingPrefs; //
+    SharedPreferences blackList; //
+    Setting_Loader settingLoader; //
+
 
     protected static Button toPlay;
     private ImageButton btnSetting;
@@ -61,6 +71,12 @@ public class activity_main extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        appSettingPrefs = getSharedPreferences("AppSettingPrefs", MODE_PRIVATE); //
+        blackList = getSharedPreferences("songBlackList", MODE_PRIVATE); //
+        settingLoader = new Setting_Loader(appSettingPrefs); //
+        settingLoader.load(); //
+
         if (mediaPlayer == null) {
             mediaPlayer = new MediaPlayer();
         }
@@ -110,9 +126,15 @@ public class activity_main extends AppCompatActivity {
                 playPauseBtn.setImageResource(R.drawable.baseline_pause_black_36);
             }
         });
+        try {
+            if (mediaPlayer.isPlaying()) {
+                playPauseBtn.setImageResource(R.drawable.baseline_pause_black_36);
+            }
+        } catch (Exception ex) {}
         playPauseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 activityPlay.pausePlay();
             }
         });
@@ -120,7 +142,11 @@ public class activity_main extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(activity_main.this, acticity_setting.class);
-                startActivity(intent);
+                intent.putExtra("arrayTrack", true);
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity (intent);
+                acticity_setting.mediaPlayer = mediaPlayer;
+                finish();
             }
         });
         toPlay.setOnClickListener(new View.OnClickListener() {
@@ -200,11 +226,12 @@ public class activity_main extends AppCompatActivity {
                     file.setReadable(true);
                     Log.d("CANREAD", String.valueOf(file.canRead()));
                     if (file.canRead()) {
-
-                        isReadable = true;
-                        Uri uri = (Uri) Uri.fromFile(new File(currentLocation));
-                        mediaMetadataRetriever.setDataSource(activity_main.this, uri);
-                        image = mediaMetadataRetriever.getEmbeddedPicture();
+                        if(!blackList.getBoolean(currentTitle, false)) {
+                            isReadable = true;
+                            Uri uri = (Uri) Uri.fromFile(new File(currentLocation));
+                            mediaMetadataRetriever.setDataSource(activity_main.this, uri);
+                            image = mediaMetadataRetriever.getEmbeddedPicture();
+                        }
                     }
 
                 } catch (Exception ex) {
@@ -216,8 +243,13 @@ public class activity_main extends AppCompatActivity {
                             + "Artist: " + track.artist);
                 }
             } while (songCursor.moveToNext());
-            currentSong = 0;
-            toPlay.setText(arrayTracks.get(0).title);
+            if (PlayerTask.fixForSetting == null) {
+                currentSong = 0;
+                toPlay.setText(arrayTracks.get(0).title);
+            } else {
+                currentSong = PlayerTask.fixForSetting;
+                toPlay.setText(arrayTracks.get(currentSong).title);
+            }
         }
     }
 
@@ -276,6 +308,7 @@ public class activity_main extends AppCompatActivity {
         toPlay.setText(arrayTracks.get(currentSong).title);
         playPauseBtn.setImageResource(R.drawable.baseline_pause_black_36);
     }
+
 
 
 }
