@@ -13,52 +13,45 @@ import androidx.fragment.app.DialogFragment;
 import java.util.ArrayList;
 
 public class SongBlackListDialogFragment extends DialogFragment {
+
     @NonNull
     @Override
+
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-        ArrayList<Track> arrayTracks = new ArrayList<>(acticity_setting.arrayList_toCopy);
+        ArrayList<Track> arrayTracks = activity_main.allTrack;
 
+        boolean[] checkedItemsArray = new boolean[arrayTracks.size()];
 
-
-        String[] whiteList = new String[arrayTracks.size()];
-        //load white_list
-        for(int i = 0; i < whiteList.length; i++){
-            whiteList[i] = arrayTracks.get(i).title;
-        }
-        String[] blackList = new String[acticity_setting.blackList.getAll().size()];
-
-        //Load black_list
-        Object[] blackListLoader = acticity_setting.blackList.getAll().keySet().toArray();
-        for(int i = 0; i < blackListLoader.length; i++){
-            blackList[i] = (String) blackListLoader[i];
+        for(int i = 0; i < checkedItemsArray.length; i++){
+           checkedItemsArray[i] = acticity_setting.blackList.getBoolean(arrayTracks.get(i).title, false);
         }
 
-        String[] allTracks = new String[blackList.length + whiteList.length];
-
-        for(int i = 0; i < blackList.length; i++){
-            allTracks[i] = blackList[i];
+        String[] allTracks = new String[arrayTracks.size()];
+        for(int i = 0; i < allTracks.length; i++){
+            allTracks[i] = arrayTracks.get(i).title;
         }
 
-        for(int i = 0; i < whiteList.length; i++){
-            allTracks[i+blackList.length] = whiteList[i];
-        }
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Black List")
-                .setItems(allTracks, new DialogInterface.OnClickListener() {
+                .setMultiChoiceItems(allTracks, checkedItemsArray, new DialogInterface.OnMultiChoiceClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                        checkedItemsArray[which] = isChecked;
+                    }
+                }).setPositiveButton("Apply", new DialogInterface.OnClickListener() {
+                    @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        for(int i = 0; i < checkedItemsArray.length; i++){
+                            if(checkedItemsArray[i]){
+                                acticity_setting.blackList.edit().putBoolean(allTracks[i], true).apply();
+                            } else{
+                                acticity_setting.blackList.edit().putBoolean(allTracks[i], false).apply();
+                            }
 
-                        String songName = allTracks[which];
-
-                        boolean trackOnBlack = acticity_setting.blackList.getBoolean(songName, false);
-                        if(!trackOnBlack){
-                            acticity_setting.blackList.edit().putBoolean(songName, true).apply();
-                            acticity_setting.arrayList_toCopy.remove(which-blackList.length);
-                        } else {
-                            acticity_setting.arrayList_toCopy.add(new Track(songName, "", "", new byte[0]));
-                            acticity_setting.blackList.edit().remove(songName).apply();
                         }
+                        dialog.cancel();
                     }
                 });
 

@@ -48,6 +48,7 @@ public class activity_main extends AppCompatActivity {
     SharedPreferences appSettingPrefs; //
     SharedPreferences blackList; //
     Setting_Loader settingLoader; //
+    public static ArrayList<Track> allTrack; //
 
 
     protected static Button toPlay;
@@ -109,7 +110,6 @@ public class activity_main extends AppCompatActivity {
         playPauseBtn = findViewById(R.id.play_pause_button);
         nextBtn = findViewById(R.id.next_button);
         startFromBegginBtn = findViewById(R.id.start_from_beggin_button);
-
 
         startFromBegginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -226,11 +226,14 @@ public class activity_main extends AppCompatActivity {
                     file.setReadable(true);
                     Log.d("CANREAD", String.valueOf(file.canRead()));
                     if (file.canRead()) {
+                        image = mediaMetadataRetriever.getEmbeddedPicture();
+                        Track track = new Track(currentTitle, currentArtist, currentLocation, image);
+                        allTrack.add(track);
                         if(!blackList.getBoolean(currentTitle, false)) {
                             isReadable = true;
                             Uri uri = (Uri) Uri.fromFile(new File(currentLocation));
                             mediaMetadataRetriever.setDataSource(activity_main.this, uri);
-                            image = mediaMetadataRetriever.getEmbeddedPicture();
+
                         }
                     }
 
@@ -277,6 +280,7 @@ public class activity_main extends AppCompatActivity {
         listOfSongs = findViewById(R.id.listOfSongs);
         arrayList = new ArrayList<>();
         arrayTracks = new ArrayList<>();
+        allTrack = new ArrayList<>(); //
 
         getMusic();
 

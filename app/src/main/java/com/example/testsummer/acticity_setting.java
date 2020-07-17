@@ -23,7 +23,7 @@ public class acticity_setting extends AppCompatActivity {
 
     SharedPreferences appSettingPrefs;
     static SharedPreferences blackList;
-    static ArrayList<Track> arrayList_toCopy = new ArrayList<>(activity_main.arrayTracks);
+
 
 
     @Override
