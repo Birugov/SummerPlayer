@@ -53,7 +53,12 @@ public class SongBlackListDialogFragment extends DialogFragment {
                         }
                         dialog.cancel();
                     }
-                });
+                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
 
         return builder.create();
     }
