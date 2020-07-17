@@ -47,7 +47,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/shake_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
@@ -56,7 +56,7 @@
             android:background="@drawable/act_setting_button"
             android:backgroundTint="@color/act_set_button"
             android:gravity="center"
-            android:text="Button"
+            android:text="SHAKE"
             android:textColor="@color/settings_text"
             app:layout_constraintBottom_toTopOf="@+id/switch_button"
             app:layout_constraintEnd_toEndOf="parent"
@@ -75,7 +75,7 @@
             android:gravity="center"
             android:text="Black List"
             android:textColor="@color/settings_text"
-            app:layout_constraintBottom_toTopOf="@+id/button"
+            app:layout_constraintBottom_toTopOf="@+id/shake_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 

@@ -38,11 +38,27 @@ import java.io.File;
 import java.util.ArrayList;
 
 
+import android.app.Activity;
+import android.content.Context;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
+import android.os.Bundle;
+import android.util.Log;
 
 
 public class activity_main extends AppCompatActivity {
 
     private static final int REQUEST_PERMISSIONS = 12345;
+
+
+
+    private static final String TAG = "ShakeActivity"; //
+    private static final int SHAKE_SENSITIVITY = 4; //
+    private SensorManager sensorManager; //
+    private float accel = SensorManager.GRAVITY_EARTH; //
+    private float accelPrevious = SensorManager.GRAVITY_EARTH; //
 
 
     SharedPreferences appSettingPrefs; //
@@ -72,6 +88,12 @@ public class activity_main extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE); //
+        sensorManager.registerListener( //
+                sensorListener, //
+                sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), //
+                SensorManager.SENSOR_DELAY_NORMAL); //
 
         appSettingPrefs = getSharedPreferences("AppSettingPrefs", MODE_PRIVATE); //
         blackList = getSharedPreferences("songBlackList", MODE_PRIVATE); //
@@ -313,6 +335,42 @@ public class activity_main extends AppCompatActivity {
         playPauseBtn.setImageResource(R.drawable.baseline_pause_black_36);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
 
+        sensorManager.registerListener(
+                sensorListener,
+                sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
+                SensorManager.SENSOR_DELAY_NORMAL);
+    }
+
+    @Override
+    protected void onStop() {
+        sensorManager.unregisterListener(sensorListener);
+
+        super.onStop();
+    }
+
+
+    private final SensorEventListener sensorListener = new SensorEventListener() {
+
+        public void onSensorChanged(SensorEvent sensorEvent) {
+            float x = sensorEvent.values[0];
+            float y = sensorEvent.values[1];
+            float z = sensorEvent.values[2];
+            accelPrevious = accel;
+            accel = (float) Math.sqrt((double) (x * x + y * y + z * z));
+            if (accel - accelPrevious > SHAKE_SENSITIVITY) {
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        "Пора покормить кота!",
+                        Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        }
+
+        public void onAccuracyChanged(Sensor sensor, int accuracy) {
+        }
+    };
 
 }
