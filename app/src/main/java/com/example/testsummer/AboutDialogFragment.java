@@ -13,11 +13,11 @@ public class AboutDialogFragment extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        String content = "ЛЯГУШКА";
 
         AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
         builder.setTitle("About").
-                setMessage(content).
+                setMessage("Authors:" + "\n" + "Ахметханов Ринат" + "\n" + "Закиев Данияр" + "\n" +
+                           "Дьяконов Алексей" + "\n" + "Садритдинов Урал" + "\n" + "Ильгамов Ильсаф").
                 setPositiveButton("Close", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
