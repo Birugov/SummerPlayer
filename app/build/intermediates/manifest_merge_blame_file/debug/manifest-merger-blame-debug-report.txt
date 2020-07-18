@@ -1,0 +1,118 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.testsummer"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="21"
+8-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="29" />
+9-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.BLUETOOTH" />
+11-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:5:5-68
+11-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:5:22-65
+12    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+12-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:6:5-74
+12-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:6:22-71
+13    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+13-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:7:5-81
+13-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:7:22-78
+14    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+14-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:8:5-79
+14-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:8:22-76
+15    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+15-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:9:5-75
+15-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:9:22-72
+16    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+16-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:10:5-77
+16-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:10:22-74
+17    <uses-permission android:name="android.permission.INTERNET" />
+17-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:11:5-66
+17-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:11:22-64
+18    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+18-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:12:5-75
+18-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:12:22-73
+19    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+19-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:13:5-75
+19-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:13:22-73
+20    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+20-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:14:5-79
+20-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:14:22-76
+21    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+21-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:15:5-78
+21-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:15:22-76
+22    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+22-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:16:5-79
+22-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:16:22-77
+23    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+23-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:17:5-81
+23-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:17:22-78
+24    <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
+24-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:19:5-80
+24-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:19:22-77
+25    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+25-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:20:5-80
+25-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:20:22-77
+26
+27    <application
+27-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:22:5-45:19
+28        android:allowBackup="true"
+28-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:24:9-35
+29        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+29-->[androidx.core:core:1.1.0] C:\Users\pc\.gradle\caches\transforms-2\files-2.1\03736cf4bc3669a69d502627b70a527e\core-1.1.0\AndroidManifest.xml:24:18-86
+30        android:debuggable="true"
+31        android:icon="@mipmap/ic_launcher"
+31-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:25:9-43
+32        android:label="Music Player"
+32-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:26:9-37
+33        android:requestLegacyExternalStorage="true"
+33-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:22:18-61
+34        android:roundIcon="@mipmap/ic_launcher_round"
+34-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:27:9-54
+35        android:supportsRtl="true"
+35-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:28:9-35
+36        android:testOnly="true"
+37        android:theme="@style/AppTheme" >
+37-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:29:9-40
+38        <activity android:name="com.example.testsummer.acticity_setting" />
+38-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:30:9-63
+38-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:30:19-51
+39        <activity android:name="com.example.testsummer.activity_play" />
+39-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:31:9-60
+39-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:31:19-48
+40        <activity android:name="com.example.testsummer.wifip2p.activity_p2p" />
+40-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:32:9-67
+40-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:32:19-55
+41        <activity
+41-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:33:9-41:20
+42            android:name="com.example.testsummer.activity_main"
+42-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:34:13-42
+43            android:screenOrientation="portrait" >
+43-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:35:13-49
+44            <intent-filter>
+44-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:36:13-40:29
+45                <action android:name="android.intent.action.MAIN" />
+45-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:37:17-69
+45-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:37:25-66
+46
+47                <category android:name="android.intent.category.LAUNCHER" />
+47-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:39:17-77
+47-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:39:27-74
+48            </intent-filter>
+49        </activity>
+50
+51        <receiver android:name="com.example.testsummer.Services.NotificationActionService" />
+51-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:42:9-71
+51-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:42:19-69
+52
+53        <service android:name="com.example.testsummer.Services.OnClearFromRecentService" />
+53-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:43:9-69
+53-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:43:18-67
+54        <service android:name="com.example.testsummer.Services.ShakeService" />
+54-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:44:9-57
+54-->C:\GitHubProjects\Summer_Player\SummerPlayer\app\src\main\AndroidManifest.xml:44:18-55
+55    </application>
+56
+57</manifest>

@@ -15,7 +15,7 @@ import android.widget.Button;
 
 import net.protyposis.android.mediaplayer.MediaPlayer;
 
-import java.util.ArrayList;
+
 
 public class acticity_setting extends AppCompatActivity {
 
@@ -33,7 +33,7 @@ public class acticity_setting extends AppCompatActivity {
         setContentView(R.layout.activity_acticity_setting);
         Bundle arguments = getIntent().getExtras();
         assert arguments != null;
-       //boolean check = arguments.getBoolean("arrayTrack");
+
 
 
 

@@ -14,7 +14,6 @@ import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -29,6 +28,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.example.testsummer.Services.OnClearFromRecentService;
+import com.example.testsummer.Services.ShakeService;
 import com.example.testsummer.wifip2p.activity_p2p;
 
 import net.protyposis.android.mediaplayer.MediaPlayer;
@@ -38,38 +38,20 @@ import java.io.File;
 import java.util.ArrayList;
 
 
-import android.app.Activity;
-import android.content.Context;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
-import android.os.Bundle;
-import android.util.Log;
 
 
 public class activity_main extends AppCompatActivity {
 
     private static final int REQUEST_PERMISSIONS = 12345;
 
-
-
-    private static final String TAG = "ShakeActivity"; //
-    private static final int SHAKE_SENSITIVITY = 4; //
-    private SensorManager sensorManager; //
-    private float accel = SensorManager.GRAVITY_EARTH; //
-    private float accelPrevious = SensorManager.GRAVITY_EARTH; //
-
-
     SharedPreferences appSettingPrefs; //
     SharedPreferences blackList; //
     Setting_Loader settingLoader; //
     public static ArrayList<Track> allTrack; //
 
-
-    protected static Button toPlay;
+    public static Button toPlay;
     private ImageButton btnSetting;
-    protected static ImageButton playPauseBtn;
+    public static ImageButton playPauseBtn;
     private ImageButton startFromBegginBtn;
     protected ImageButton nextBtn;
     public static MediaPlayer mediaPlayer = null;
@@ -77,7 +59,7 @@ public class activity_main extends AppCompatActivity {
     public static Integer currentSong = 0;
     protected static PlayerTask playerTask = null;
 
-    protected static activity_play activityPlay;
+    public static activity_play activityPlay;
 
     public static Context appContext;
 
@@ -89,11 +71,8 @@ public class activity_main extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE); //
-        sensorManager.registerListener( //
-                sensorListener, //
-                sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), //
-                SensorManager.SENSOR_DELAY_NORMAL); //
+        Intent intent = new Intent(activity_main.this, ShakeService.class);
+        startService(intent);
 
         appSettingPrefs = getSharedPreferences("AppSettingPrefs", MODE_PRIVATE); //
         blackList = getSharedPreferences("songBlackList", MODE_PRIVATE); //
@@ -160,6 +139,7 @@ public class activity_main extends AppCompatActivity {
                 activityPlay.pausePlay();
             }
         });
+
         btnSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -201,6 +181,7 @@ public class activity_main extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             registerReceiver(broadcastReceiver, new IntentFilter("TRACKS_TRACKS"));
             startService(new Intent(activity_main.appContext, OnClearFromRecentService.class));
+
         }
 
         if (ContextCompat.checkSelfPermission(activity_main.this,
@@ -335,42 +316,5 @@ public class activity_main extends AppCompatActivity {
         playPauseBtn.setImageResource(R.drawable.baseline_pause_black_36);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        sensorManager.registerListener(
-                sensorListener,
-                sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
-                SensorManager.SENSOR_DELAY_NORMAL);
-    }
-
-    @Override
-    protected void onStop() {
-        sensorManager.unregisterListener(sensorListener);
-
-        super.onStop();
-    }
-
-
-    private final SensorEventListener sensorListener = new SensorEventListener() {
-
-        public void onSensorChanged(SensorEvent sensorEvent) {
-            float x = sensorEvent.values[0];
-            float y = sensorEvent.values[1];
-            float z = sensorEvent.values[2];
-            accelPrevious = accel;
-            accel = (float) Math.sqrt((double) (x * x + y * y + z * z));
-            if (accel - accelPrevious > SHAKE_SENSITIVITY) {
-                Toast toast = Toast.makeText(getApplicationContext(),
-                        "Пора покормить кота!",
-                        Toast.LENGTH_SHORT);
-                toast.show();
-            }
-        }
-
-        public void onAccuracyChanged(Sensor sensor, int accuracy) {
-        }
-    };
 
 }

@@ -20,6 +20,7 @@
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
 
     <application android:requestLegacyExternalStorage="true"
+
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="Music Player"
@@ -40,6 +41,7 @@
         </activity>
         <receiver android:name=".Services.NotificationActionService"/>
         <service android:name=".Services.OnClearFromRecentService"/>
+        <service android:name=".Services.ShakeService"/>
     </application>
 
 </manifest>

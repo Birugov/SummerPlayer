@@ -1,0 +1,88 @@
+{
+    "logs": [
+        {
+            "outputFile": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-night-v8\\values-night-v8.xml",
+            "map": [
+                {
+                    "source": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\src\\main\\res\\values-night\\strings.xml",
+                    "from": {
+                        "startLines": "-1",
+                        "startColumns": "-1",
+                        "startOffsets": "-1"
+                    },
+                    "to": {
+                        "startLines": "16",
+                        "startColumns": "4",
+                        "startOffsets": "709",
+                        "endColumns": "47",
+                        "endOffsets": "752"
+                    }
+                },
+                {
+                    "source": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\src\\main\\res\\values-night\\styles.xml",
+                    "from": {
+                        "startLines": "3",
+                        "startColumns": "4",
+                        "startOffsets": "57",
+                        "endLines": "13",
+                        "endColumns": "12",
+                        "endOffsets": "625"
+                    },
+                    "to": {
+                        "startLines": "17",
+                        "startColumns": "4",
+                        "startOffsets": "757",
+                        "endLines": "27",
+                        "endColumns": "12",
+                        "endOffsets": "1315"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-2\\files-2.1\\081958b85be993b26123dd5b1125e07f\\material-1.1.0\\res\\values-night-v8\\values-night-v8.xml",
+                    "from": {
+                        "startLines": "-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1",
+                        "startColumns": "-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1",
+                        "startOffsets": "-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1"
+                    },
+                    "to": {
+                        "startLines": "35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,52,53,54,55,56,57,58",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "1952,2040,2164,2266,2368,2484,2586,2700,2828,2944,3066,3202,3322,3456,3576,3688,3903,4041,4165,4295,4417,4555,4671",
+                        "endColumns": "87,123,101,101,115,101,113,127,115,121,135,119,133,119,111,125,137,123,129,121,137,115,119",
+                        "endOffsets": "2035,2159,2261,2363,2479,2581,2695,2823,2939,3061,3197,3317,3451,3571,3683,3809,4036,4160,4290,4412,4550,4666,4786"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\pc\\.gradle\\caches\\transforms-2\\files-2.1\\c2c5fa787d66aaf40578b3071f4d283f\\appcompat-1.1.0\\res\\values-night-v8\\values-night-v8.xml",
+                    "from": {
+                        "startLines": "-1,-1,-1,-1,-1,-1,-1,-1",
+                        "startColumns": "-1,-1,-1,-1,-1,-1,-1,-1",
+                        "startOffsets": "-1,-1,-1,-1,-1,-1,-1,-1"
+                    },
+                    "to": {
+                        "startLines": "28,29,30,31,32,33,34,51",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "1320,1390,1474,1558,1654,1756,1858,3814",
+                        "endColumns": "69,83,83,95,101,101,93,88",
+                        "endOffsets": "1385,1469,1553,1649,1751,1853,1947,3898"
+                    }
+                },
+                {
+                    "source": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\src\\main\\res\\values-night\\colors.xml",
+                    "from": {
+                        "startLines": "-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1",
+                        "startColumns": "-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1",
+                        "startOffsets": "-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,96,145,194,236,294,334,377,419,466,514,561,610,658",
+                        "endColumns": "40,48,48,41,57,39,42,41,46,47,46,48,47,50",
+                        "endOffsets": "91,140,189,231,289,329,372,414,461,509,556,605,653,704"
+                    }
+                }
+            ]
+        }
+    ]
+}
