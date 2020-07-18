@@ -43,21 +43,36 @@ public class ShakeService extends Service implements SensorEventListener {
     @Override
     public void onSensorChanged(SensorEvent event) {
         shakeFunStatus = getSharedPreferences("shakeFunStatus", MODE_PRIVATE);
-        if(shakeFunStatus.getBoolean("status", false)) {
-            float x = event.values[0];
-            float y = event.values[1];
-            float z = event.values[2];
-            mAccelLast = mAccelCurrent;
-            mAccelCurrent = (float) Math.sqrt((double) (x * x + y * y + z * z));
-            float delta = mAccelCurrent - mAccelLast;
-            mAccel = mAccel * 0.9f + delta; // perform low-cut filter
+        String mode = shakeFunStatus.getString("mode", "None");
+        float x = event.values[0];
+        float y = event.values[1];
+        float z = event.values[2];
+        mAccelLast = mAccelCurrent;
+        mAccelCurrent = (float) Math.sqrt((double) (x * x + y * y + z * z));
+        float delta = mAccelCurrent - mAccelLast;
+        mAccel = mAccel * 0.9f + delta; // perform low-cut filter
 
-            if (mAccel > 11) {
-                if (activity_main.activityPlay != null) {
-                    activity_main.activityPlay.pausePlay();
+        if (mAccel > 11) {
+            try {
+                Thread.sleep(400);
+            } catch (InterruptedException ex) {
+
+            }
+            if (activity_main.activityPlay != null) {
+                switch (mode){
+                    case "Next Song":
+                        activity_main.activityPlay.playNext();
+                        break;
+                    case "Play/Pasuse":
+                        activity_main.activityPlay.pausePlay();
+                        break;
                 }
+
             }
         }
-    }
 
+
+    }
 }
+
+

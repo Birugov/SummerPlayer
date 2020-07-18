@@ -23,7 +23,7 @@ public class acticity_setting extends AppCompatActivity {
 
     SharedPreferences appSettingPrefs;
     static SharedPreferences blackList;
-    SharedPreferences shakeFunStatus;
+    static SharedPreferences shakeFunStatus;
 
 
 
@@ -52,11 +52,6 @@ public class acticity_setting extends AppCompatActivity {
         final Button refresh_button = (Button)findViewById(R.id.refresh_button);
         final Button shake_button = (Button)findViewById(R.id.shake_button);
 
-        if(shakeFunStatus.getBoolean("status", false)){
-            shake_button.setText("SHAKE ON");
-        } else {
-            shake_button.setText("SHAKE OFF");
-        }
 
 
         switch_button.setOnClickListener(new View.OnClickListener() { //
@@ -83,15 +78,9 @@ public class acticity_setting extends AppCompatActivity {
         shake_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean check = shakeFunStatus.getBoolean("status", false);
-                if(!check){
-                    shakeFunStatus.edit().putBoolean("status", true).apply();
-                    shake_button.setText("SHAKE ON");
-
-                } else {
-                    shakeFunStatus.edit().putBoolean("status", false).apply();
-                    shake_button.setText("SHAKE OFF");
-                }
+                FragmentManager manager = getSupportFragmentManager();
+                ShakeModeDialogFragment shake_Mode = new ShakeModeDialogFragment();
+                shake_Mode.show(manager, "shake_Mode");
             }
         });
 
