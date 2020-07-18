@@ -1662,6 +1662,7 @@ id next_button
 id noScroll
 id none
 id normal
+id not_button
 id notification_background
 id notification_main_column
 id notification_main_column_container
@@ -1684,7 +1685,6 @@ id play_pause_button
 id progress_circular
 id progress_horizontal
 id radio
-id refresh_button
 id right
 id rightImageButton
 id right_icon

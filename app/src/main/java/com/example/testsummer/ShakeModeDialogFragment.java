@@ -16,7 +16,7 @@ public class ShakeModeDialogFragment extends DialogFragment {
         String[] mode = new String[]{"Next Song", "Play/Pasuse", "None"};
 
         AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
-        builder.setTitle("Shake Mode").
+        builder.setTitle("Shake Mode: " + acticity_setting.shakeFunStatus.getString("mode", "None")).
                 setSingleChoiceItems(mode, -1, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -35,12 +35,7 @@ public class ShakeModeDialogFragment extends DialogFragment {
                 }).setPositiveButton("Apply", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
-            }
-        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
+                dialog.cancel();
             }
         });
 

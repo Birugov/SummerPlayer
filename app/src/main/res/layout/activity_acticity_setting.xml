@@ -80,7 +80,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
-            android:id="@+id/refresh_button"
+            android:id="@+id/not_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -90,7 +90,7 @@
             android:background="@drawable/act_setting_button"
             android:backgroundTint="@color/act_set_button"
             android:gravity="center"
-            android:text="Refresh"
+            android:text="Not click"
             android:textColor="@color/settings_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -111,7 +111,7 @@
             android:textColor="@color/settings_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/refresh_button" />
+            app:layout_constraintTop_toBottomOf="@+id/not_button" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

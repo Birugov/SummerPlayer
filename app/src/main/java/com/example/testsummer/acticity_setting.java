@@ -6,12 +6,16 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.FragmentManager;
 
 
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 
 import android.os.Bundle;
 import android.view.View;
+
 import android.widget.Button;
+import android.widget.Toast;
+
 
 import net.protyposis.android.mediaplayer.MediaPlayer;
 
@@ -49,7 +53,7 @@ public class acticity_setting extends AppCompatActivity {
         final Button switch_button = (Button)findViewById(R.id.switch_button);
         final Button about_button = (Button)findViewById(R.id.about_button);
         final Button blackList_button = (Button)findViewById(R.id.blackList_button);
-        final Button refresh_button = (Button)findViewById(R.id.refresh_button);
+        final Button not_button = (Button)findViewById(R.id.not_button);
         final Button shake_button = (Button)findViewById(R.id.shake_button);
 
 
@@ -104,10 +108,14 @@ public class acticity_setting extends AppCompatActivity {
             }
         });
 
-        refresh_button.setOnClickListener(new View.OnClickListener() {
+        not_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                acticity_setting.this.recreate();
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        "Всего хорошего! Русские идут домой!",
+                        Toast.LENGTH_SHORT);
+                toast.show();
+
             }
         });
 
