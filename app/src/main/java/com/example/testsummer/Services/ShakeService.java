@@ -3,6 +3,7 @@ package com.example.testsummer.Services;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -18,6 +19,7 @@ public class ShakeService extends Service implements SensorEventListener {
     private float mAccel; // acceleration apart from gravity
     private float mAccelCurrent; // current acceleration including gravity
     private float mAccelLast; // last acceleration including gravity
+    SharedPreferences shakeFunStatus;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -40,17 +42,20 @@ public class ShakeService extends Service implements SensorEventListener {
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        float x = event.values[0];
-        float y = event.values[1];
-        float z = event.values[2];
-        mAccelLast = mAccelCurrent;
-        mAccelCurrent = (float) Math.sqrt((double) (x * x + y * y + z * z));
-        float delta = mAccelCurrent - mAccelLast;
-        mAccel = mAccel * 0.9f + delta; // perform low-cut filter
+        shakeFunStatus = getSharedPreferences("shakeFunStatus", MODE_PRIVATE);
+        if(shakeFunStatus.getBoolean("status", false)) {
+            float x = event.values[0];
+            float y = event.values[1];
+            float z = event.values[2];
+            mAccelLast = mAccelCurrent;
+            mAccelCurrent = (float) Math.sqrt((double) (x * x + y * y + z * z));
+            float delta = mAccelCurrent - mAccelLast;
+            mAccel = mAccel * 0.9f + delta; // perform low-cut filter
 
-        if (mAccel > 11) {
-            if(activity_main.activityPlay != null) {
-                activity_main.activityPlay.pausePlay();
+            if (mAccel > 11) {
+                if (activity_main.activityPlay != null) {
+                    activity_main.activityPlay.pausePlay();
+                }
             }
         }
     }

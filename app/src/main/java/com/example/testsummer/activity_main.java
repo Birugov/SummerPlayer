@@ -46,6 +46,7 @@ public class activity_main extends AppCompatActivity {
 
     SharedPreferences appSettingPrefs; //
     SharedPreferences blackList; //
+    ; //
     Setting_Loader settingLoader; //
     public static ArrayList<Track> allTrack; //
 

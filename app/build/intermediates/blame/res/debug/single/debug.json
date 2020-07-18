@@ -1,11 +1,11 @@
 [
     {
-        "merged": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_baseline_pause_black_48.png.flat",
-        "source": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\src\\main\\res\\drawable-xxhdpi\\baseline_pause_black_48.png"
-    },
-    {
         "merged": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_baseline_search_black_24.png.flat",
         "source": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\src\\main\\res\\drawable-xhdpi\\baseline_search_black_24.png"
+    },
+    {
+        "merged": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_baseline_pause_black_48.png.flat",
+        "source": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\src\\main\\res\\drawable-xxhdpi\\baseline_pause_black_48.png"
     },
     {
         "merged": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_baseline_phonelink_ring_black_48.png.flat",
@@ -32,12 +32,12 @@
         "source": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\src\\main\\res\\drawable-xxhdpi\\baseline_wifi_off_black_18.png"
     },
     {
-        "merged": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_baseline_play_arrow_black_36.png.flat",
-        "source": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\src\\main\\res\\drawable-xxxhdpi\\baseline_play_arrow_black_36.png"
-    },
-    {
         "merged": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_baseline_search_black_18.png.flat",
         "source": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\src\\main\\res\\drawable-xxxhdpi\\baseline_search_black_18.png"
+    },
+    {
+        "merged": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_baseline_play_arrow_black_36.png.flat",
+        "source": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\src\\main\\res\\drawable-xxxhdpi\\baseline_play_arrow_black_36.png"
     },
     {
         "merged": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_sharp_library_music_black_36.png.flat",
@@ -72,12 +72,12 @@
         "source": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\src\\main\\res\\drawable-mdpi\\baseline_music_note_black_48.png"
     },
     {
-        "merged": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable_baseline_skip_previous_24.xml.flat",
-        "source": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\src\\main\\res\\drawable\\baseline_skip_previous_24.xml"
-    },
-    {
         "merged": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable_baseline_search_24.xml.flat",
         "source": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\src\\main\\res\\drawable\\baseline_search_24.xml"
+    },
+    {
+        "merged": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable_baseline_skip_previous_24.xml.flat",
+        "source": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\src\\main\\res\\drawable\\baseline_skip_previous_24.xml"
     },
     {
         "merged": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_baseline_wifi_black_24.png.flat",
@@ -88,20 +88,20 @@
         "source": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\src\\main\\res\\drawable-mdpi\\baseline_wifi_off_black_48.png"
     },
     {
-        "merged": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_baseline_skip_previous_black_24.png.flat",
-        "source": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\src\\main\\res\\drawable-mdpi\\baseline_skip_previous_black_24.png"
-    },
-    {
-        "merged": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_baseline_phonelink_ring_black_48.png.flat",
-        "source": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\src\\main\\res\\drawable-xxxhdpi\\baseline_phonelink_ring_black_48.png"
+        "merged": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_sharp_library_music_black_36.png.flat",
+        "source": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\src\\main\\res\\drawable-hdpi\\sharp_library_music_black_36.png"
     },
     {
         "merged": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_acticity_setting.xml.flat",
         "source": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\src\\main\\res\\layout\\activity_acticity_setting.xml"
     },
     {
-        "merged": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_sharp_library_music_black_36.png.flat",
-        "source": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\src\\main\\res\\drawable-hdpi\\sharp_library_music_black_36.png"
+        "merged": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_baseline_phonelink_ring_black_48.png.flat",
+        "source": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\src\\main\\res\\drawable-xxxhdpi\\baseline_phonelink_ring_black_48.png"
+    },
+    {
+        "merged": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_baseline_skip_previous_black_24.png.flat",
+        "source": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\src\\main\\res\\drawable-mdpi\\baseline_skip_previous_black_24.png"
     },
     {
         "merged": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_baseline_arrow_back_ios_white_24.png.flat",
@@ -136,16 +136,16 @@
         "source": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\src\\main\\res\\drawable-hdpi\\baseline_skip_next_black_36.png"
     },
     {
-        "merged": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_baseline_music_note_black_48.png.flat",
-        "source": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\src\\main\\res\\drawable-xhdpi\\baseline_music_note_black_48.png"
+        "merged": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_baseline_phonelink_ring_black_24.png.flat",
+        "source": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\src\\main\\res\\drawable-xhdpi\\baseline_phonelink_ring_black_24.png"
     },
     {
         "merged": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_baseline_pause_black_48.png.flat",
         "source": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\src\\main\\res\\drawable-mdpi\\baseline_pause_black_48.png"
     },
     {
-        "merged": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_baseline_phonelink_ring_black_24.png.flat",
-        "source": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\src\\main\\res\\drawable-xhdpi\\baseline_phonelink_ring_black_24.png"
+        "merged": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_baseline_music_note_black_48.png.flat",
+        "source": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\src\\main\\res\\drawable-xhdpi\\baseline_music_note_black_48.png"
     },
     {
         "merged": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_baseline_pause_black_36.png.flat",
@@ -168,16 +168,16 @@
         "source": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\src\\main\\res\\drawable-xxhdpi\\baseline_wifi_off_black_24.png"
     },
     {
-        "merged": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_baseline_skip_next_black_48.png.flat",
-        "source": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\src\\main\\res\\drawable-xhdpi\\baseline_skip_next_black_48.png"
+        "merged": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_baseline_phonelink_ring_black_18.png.flat",
+        "source": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\src\\main\\res\\drawable-xhdpi\\baseline_phonelink_ring_black_18.png"
     },
     {
         "merged": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_baseline_settings_white_36.png.flat",
         "source": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\src\\main\\res\\drawable-xxxhdpi\\baseline_settings_white_36.png"
     },
     {
-        "merged": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_baseline_phonelink_ring_black_18.png.flat",
-        "source": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\src\\main\\res\\drawable-xhdpi\\baseline_phonelink_ring_black_18.png"
+        "merged": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_baseline_skip_next_black_48.png.flat",
+        "source": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\src\\main\\res\\drawable-xhdpi\\baseline_skip_next_black_48.png"
     },
     {
         "merged": "C:\\GitHubProjects\\Summer_Player\\SummerPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_ic_play.png.flat",
