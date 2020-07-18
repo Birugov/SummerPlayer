@@ -9,7 +9,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Handler;
 import android.os.IBinder;
-import android.widget.Toast;
+import com.example.testsummer.activity_main;
 
 public class ShakeService extends Service implements SensorEventListener {
 
@@ -49,10 +49,9 @@ public class ShakeService extends Service implements SensorEventListener {
         mAccel = mAccel * 0.9f + delta; // perform low-cut filter
 
         if (mAccel > 11) {
-            Toast toast = Toast.makeText(getApplicationContext(),
-                    "ДУДЛИК С БЫРКОЙ!",
-                    Toast.LENGTH_SHORT);
-            toast.show();
+            if(activity_main.activityPlay != null) {
+                activity_main.activityPlay.pausePlay();
+            }
         }
     }
 

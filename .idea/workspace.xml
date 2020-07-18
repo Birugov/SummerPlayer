@@ -26,20 +26,42 @@
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/classAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/testsummer/acticity_setting.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/testsummer/acticity_setting.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/testsummer/activity_main.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/testsummer/activity_main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/multi-v2/debug.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/multi-v2/debug.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/debug.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/debug.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/compile_and_runtime_not_namespaced_r_class_jar/debug/R.jar" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/compile_and_runtime_not_namespaced_r_class_jar/debug/R.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/dex/debug/mergeProjectDexDebug/classes.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/dex/debug/mergeProjectDexDebug/classes.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/dex_archive_input_jar_hashes/debug/out" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/dex_archive_input_jar_hashes/debug/out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/merger.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/merger.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/tmp/debug/zip-cache/androidResources" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/tmp/debug/zip-cache/androidResources" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/example/testsummer/ServiceActivity.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/example/testsummer/Services/ShakeService.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/example/testsummer/Services/ShakeService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/example/testsummer/wifip2p/activity_p2p.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/example/testsummer/wifip2p/activity_p2p.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/processed_res/debug/out/resources-debug.ap_" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/processed_res/debug/out/resources-debug.ap_" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/a65a749ca1c2448b471099899b2f2599a34e873376ad164816e6fa5b86be9775_0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/a65a749ca1c2448b471099899b2f2599a34e873376ad164816e6fa5b86be9775_1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/a65a749ca1c2448b471099899b2f2599a34e873376ad164816e6fa5b86be9775_2.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/a65a749ca1c2448b471099899b2f2599a34e873376ad164816e6fa5b86be9775_3.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/example/testsummer/ServiceActivity.dex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/example/testsummer/Services/ShakeService.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/example/testsummer/Services/ShakeService.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/example/testsummer/wifip2p/activity_p2p.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/example/testsummer/wifip2p/activity_p2p.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout_activity_service.xml.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/runtime_symbol_list/debug/R.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/runtime_symbol_list/debug/R.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/symbol_list_with_package_name/debug/package-aware-r.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/symbol_list_with_package_name/debug/package-aware-r.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/outputs/apk/debug/app-debug.apk" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/outputs/apk/debug/app-debug.apk" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/testsummer/ServiceActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/testsummer/Services/ShakeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/testsummer/Services/ShakeService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="8AHX0T94P" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_2_API_28" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -82,8 +104,8 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="8AHX0T94P" />
-    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-07-18T01:03:40.402Z" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="Pixel_2_API_28" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-07-18T02:49:10.752Z" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="android.sdk.path" value="C:/AndroidSstudio" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable" />
@@ -497,7 +519,14 @@
       <option name="project" value="LOCAL" />
       <updated>1594960759196</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="- rebuild shake_fun version 2.0 (beta)">
+      <created>1595038327675</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1595038327676</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -514,8 +543,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="init" />
-    <MESSAGE value="for Leha" />
     <MESSAGE value="// list of songs ready" />
     <MESSAGE value="// some part of playing songs" />
     <MESSAGE value="// Songs are playing from the list. Ready" />
@@ -539,7 +566,9 @@
     <MESSAGE value="- rebuild black_list version 3.1 (R)" />
     <MESSAGE value="- add about (R)" />
     <MESSAGE value="- add shake_fun version 1.0 (alpha)" />
-    <option name="LAST_COMMIT_MESSAGE" value="- add shake_fun version 1.0 (alpha)" />
+    <MESSAGE value="- add shake_fun version 2.0 (beta)" />
+    <MESSAGE value="- rebuild shake_fun version 2.0 (beta)" />
+    <option name="LAST_COMMIT_MESSAGE" value="- rebuild shake_fun version 2.0 (beta)" />
   </component>
   <component name="WindowStateProjectService">
     <state x="361" y="71" key="#Notifications" timestamp="1595038259939">
@@ -585,11 +614,11 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="349" y="167" key="AndroidCreateResourceFileDialog/0.0.1536.824@0.0.1536.824" timestamp="1595025162677" />
-    <state x="434" y="13" key="CommitChangelistDialog2" timestamp="1595038210939">
+    <state x="434" y="13" key="CommitChangelistDialog2" timestamp="1595038324677">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="80" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1594571041315" />
-    <state x="434" y="13" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1595038210939" />
+    <state x="434" y="13" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1595038324677" />
     <state x="147" y="65" key="DiffContextDialog" timestamp="1594826189576">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -599,30 +628,30 @@
     </state>
     <state x="421" y="96" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1594394388974" />
     <state x="505" y="116" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1594838149194" />
-    <state width="1491" height="199" key="GridCell.Tab.0.bottom" timestamp="1595037923247">
+    <state width="1491" height="199" key="GridCell.Tab.0.bottom" timestamp="1595043377381">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1236" height="153" key="GridCell.Tab.0.bottom/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1594274602296" />
     <state width="1236" height="320" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1594885614489" />
-    <state width="1491" height="199" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1595037923247" />
-    <state width="1491" height="199" key="GridCell.Tab.0.center" timestamp="1595037923246">
+    <state width="1491" height="199" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1595043377381" />
+    <state width="1491" height="199" key="GridCell.Tab.0.center" timestamp="1595043377381">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1236" height="153" key="GridCell.Tab.0.center/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1594274602296" />
     <state width="1236" height="320" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1594885614488" />
-    <state width="1491" height="199" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1595037923246" />
-    <state width="1491" height="199" key="GridCell.Tab.0.left" timestamp="1595037923246">
+    <state width="1491" height="199" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1595043377381" />
+    <state width="1491" height="199" key="GridCell.Tab.0.left" timestamp="1595043377381">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1236" height="153" key="GridCell.Tab.0.left/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1594274602296" />
     <state width="1236" height="320" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1594885614487" />
-    <state width="1491" height="199" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1595037923246" />
-    <state width="1491" height="199" key="GridCell.Tab.0.right" timestamp="1595037923247">
+    <state width="1491" height="199" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1595043377381" />
+    <state width="1491" height="199" key="GridCell.Tab.0.right" timestamp="1595043377381">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1236" height="153" key="GridCell.Tab.0.right/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1594274602296" />
     <state width="1236" height="320" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1594885614489" />
-    <state width="1491" height="199" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1595037923247" />
+    <state width="1491" height="199" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1595043377381" />
     <state x="146" y="70" key="MergeDialog" timestamp="1594827145028">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -637,11 +666,11 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="142" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1594293065480" />
-    <state x="280" y="90" key="Vcs.Push.Dialog.v2" timestamp="1595038289060">
+    <state x="280" y="90" key="Vcs.Push.Dialog.v2" timestamp="1595038341975">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="233" y="74" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1594568047849" />
-    <state x="280" y="90" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1595038289060" />
+    <state x="280" y="90" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1595038341975" />
     <state x="584" y="190" key="chooseDestDirectoryDialog" timestamp="1594921692007">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

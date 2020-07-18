@@ -1778,7 +1778,6 @@ id transition_layout_save
 id transition_position
 id transition_scene_layoutid_cache
 id transition_transform
-id tvShakeService
 id unchecked
 id uniform
 id unlabeled
@@ -1855,7 +1854,6 @@ layout activity_acticity_setting
 layout activity_main
 layout activity_p2p
 layout activity_play
-layout activity_service
 layout custom_dialog
 layout design_bottom_navigation_item
 layout design_bottom_sheet_dialog
